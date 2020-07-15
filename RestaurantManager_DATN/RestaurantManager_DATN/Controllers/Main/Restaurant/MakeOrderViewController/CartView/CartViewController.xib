@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartViewController" customModule="RestaurantManager_DATN" customModuleProvider="target">
+            <connections>
+                <outlet property="btnMakeOrder" destination="nbI-AN-5Zg" id="zKi-Dp-wut"/>
+                <outlet property="cartTableView" destination="KBC-6f-EnI" id="DL3-vE-96u"/>
+                <outlet property="handleArea" destination="av0-U2-AfK" id="Cwh-1y-YPZ"/>
+                <outlet property="totalPaymentLabel" destination="XaI-pf-8Tg" id="Yvd-v7-cFF"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="418" height="590"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="av0-U2-AfK" userLabel="Handle Area">
+                    <rect key="frame" x="0.0" y="0.0" width="418" height="65.5"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nbI-AN-5Zg" customClass="RaisedButton" customModule="Material">
+                            <rect key="frame" x="282" y="10" width="121" height="45.5"/>
+                            <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                            <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                            <state key="normal" title="Đặt món">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="handleOrderTapped:" destination="-1" eventType="touchUpInside" id="745-cg-XaY"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500.000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaI-pf-8Tg">
+                            <rect key="frame" x="10" y="5" width="209" height="55.5"/>
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstItem="nbI-AN-5Zg" firstAttribute="top" secondItem="av0-U2-AfK" secondAttribute="top" constant="10" id="ElB-qk-qFY"/>
+                        <constraint firstItem="XaI-pf-8Tg" firstAttribute="width" secondItem="av0-U2-AfK" secondAttribute="width" multiplier="1:2" id="Lqf-jX-PRk"/>
+                        <constraint firstAttribute="trailing" secondItem="nbI-AN-5Zg" secondAttribute="trailing" constant="15" id="Vme-cy-k2X"/>
+                        <constraint firstItem="XaI-pf-8Tg" firstAttribute="top" secondItem="av0-U2-AfK" secondAttribute="top" constant="5" id="bvW-ys-1we"/>
+                        <constraint firstAttribute="bottom" secondItem="XaI-pf-8Tg" secondAttribute="bottom" constant="5" id="f2H-Ss-ZaU"/>
+                        <constraint firstAttribute="bottom" secondItem="nbI-AN-5Zg" secondAttribute="bottom" constant="10" id="w7J-8e-FDa"/>
+                        <constraint firstItem="XaI-pf-8Tg" firstAttribute="leading" secondItem="av0-U2-AfK" secondAttribute="leading" constant="10" id="zYC-wf-qVh"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KBC-6f-EnI">
+                    <rect key="frame" x="0.0" y="65.5" width="418" height="490.5"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="av0-U2-AfK" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9X6-Jv-4HF"/>
+                <constraint firstItem="KBC-6f-EnI" firstAttribute="top" secondItem="av0-U2-AfK" secondAttribute="bottom" id="AkO-Ha-xiD"/>
+                <constraint firstItem="av0-U2-AfK" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="1:9" id="Pb4-oV-nPx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="KBC-6f-EnI" secondAttribute="bottom" id="Ysd-zt-mVv"/>
+                <constraint firstItem="KBC-6f-EnI" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="nkE-3T-f2B"/>
+                <constraint firstItem="av0-U2-AfK" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="pQK-CB-t5H"/>
+                <constraint firstItem="av0-U2-AfK" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="qpj-Hg-ZRY"/>
+                <constraint firstItem="KBC-6f-EnI" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="t5j-Li-lnX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="60.869565217391312" y="177.45535714285714"/>
+        </view>
+    </objects>
+</document>

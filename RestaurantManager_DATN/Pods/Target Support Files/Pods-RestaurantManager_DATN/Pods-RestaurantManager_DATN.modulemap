@@ -1,0 +1,6 @@
+framework module Pods_RestaurantManager_DATN {
+  umbrella header "Pods-RestaurantManager_DATN-umbrella.h"
+
+  export *
+  module * { export * }
+}

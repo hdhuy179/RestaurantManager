@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="99" id="gbC-TR-WJp" customClass="DishTableViewCell" customModule="RestaurantManager_DATN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gbC-TR-WJp" id="UWk-IK-Prg">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="THj-dj-dMk">
+                        <rect key="frame" x="2" y="2" width="95" height="95"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="THj-dj-dMk" secondAttribute="height" multiplier="1:1" id="HVu-WH-huW"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tên món" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O89-wu-wlb">
+                        <rect key="frame" x="107" y="10" width="67.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đơn vị" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CTf-l9-8Jq">
+                        <rect key="frame" x="107" y="42.5" width="37" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đơn giá" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sZb-ld-It4">
+                        <rect key="frame" x="107" y="73" width="47.5" height="16"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Z3d-Z5-zJZ">
+                        <rect key="frame" x="331.5" y="39.5" width="72.5" height="20.5"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="efJ-Av-v6n">
+                                <rect key="frame" x="0.0" y="0.0" width="21" height="20.5"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="3"/>
+                                <state key="normal" image="minus.circle" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="handleMinusButtonTapped:" destination="gbC-TR-WJp" eventType="touchUpInside" id="1QI-Mv-h0C"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vP2-vT-d4u">
+                                <rect key="frame" x="31" y="0.0" width="10.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TPh-P1-r32">
+                                <rect key="frame" x="51.5" y="0.0" width="21" height="20.5"/>
+                                <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" image="plus.circle.fill" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="handlePlusButtonTapped:" destination="gbC-TR-WJp" eventType="touchUpInside" id="b2A-85-kjg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="THj-dj-dMk" firstAttribute="leading" secondItem="UWk-IK-Prg" secondAttribute="leading" constant="2" id="F5B-wN-sBH"/>
+                    <constraint firstItem="CTf-l9-8Jq" firstAttribute="centerY" secondItem="UWk-IK-Prg" secondAttribute="centerY" id="IlW-dt-hv3"/>
+                    <constraint firstItem="CTf-l9-8Jq" firstAttribute="leading" secondItem="THj-dj-dMk" secondAttribute="trailing" constant="10" id="LLY-jF-OAB"/>
+                    <constraint firstAttribute="trailing" secondItem="Z3d-Z5-zJZ" secondAttribute="trailing" constant="10" id="Qbo-nP-w4e"/>
+                    <constraint firstAttribute="bottom" secondItem="THj-dj-dMk" secondAttribute="bottom" constant="2" id="Rlj-Cm-SOF"/>
+                    <constraint firstItem="O89-wu-wlb" firstAttribute="leading" secondItem="THj-dj-dMk" secondAttribute="trailing" constant="10" id="ahf-Qg-uHJ"/>
+                    <constraint firstAttribute="bottom" secondItem="sZb-ld-It4" secondAttribute="bottom" constant="10" id="j76-Q1-InI"/>
+                    <constraint firstItem="O89-wu-wlb" firstAttribute="top" secondItem="UWk-IK-Prg" secondAttribute="top" constant="10" id="lW8-UZ-AR9"/>
+                    <constraint firstItem="THj-dj-dMk" firstAttribute="top" secondItem="UWk-IK-Prg" secondAttribute="top" constant="2" id="m0Y-FS-ZFS"/>
+                    <constraint firstItem="Z3d-Z5-zJZ" firstAttribute="centerY" secondItem="UWk-IK-Prg" secondAttribute="centerY" id="nUb-Pq-4bO"/>
+                    <constraint firstItem="sZb-ld-It4" firstAttribute="leading" secondItem="THj-dj-dMk" secondAttribute="trailing" constant="10" id="nsH-nx-zbW"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="dishAmountLabel" destination="vP2-vT-d4u" id="0BV-Y0-Omy"/>
+                <outlet property="dishNameLabel" destination="O89-wu-wlb" id="P9c-yZ-b3k"/>
+                <outlet property="dishPriceLabel" destination="sZb-ld-It4" id="4SQ-cN-Fla"/>
+                <outlet property="dishProfileImage" destination="THj-dj-dMk" id="AJy-9f-N0z"/>
+                <outlet property="dishUnitLabel" destination="CTf-l9-8Jq" id="muA-qO-Zcq"/>
+                <outlet property="minusButton" destination="efJ-Av-v6n" id="Gga-bU-LyM"/>
+                <outlet property="plusButton" destination="TPh-P1-r32" id="yLt-KK-XHO"/>
+            </connections>
+            <point key="canvasLocation" x="-114.49275362318842" y="142.29910714285714"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Logo" width="111" height="104"/>
+        <image name="minus.circle" catalog="system" width="64" height="60"/>
+        <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
+    </resources>
+</document>
