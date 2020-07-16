@@ -39,7 +39,10 @@ class StaffManagerViewController: UIViewController {
         addEndEditingTapGuesture()
         if let staff = staff {
             lbTitle.text = "Thay thay đổi nhân viên"
-            btnDelete.setTitle("Khôi phục", for: .normal)
+            if staff.daxoa == 1 {
+                btnDelete.setTitle("Khôi phục", for: .normal)
+            }
+            
             txtStaffName.text = staff.tennhanvien
             switch staff.quyen {
             case 0:

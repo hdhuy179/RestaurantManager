@@ -18,24 +18,36 @@ class ManagerFeatureMenuViewController: UIViewController {
     @IBOutlet weak var btn5: RaisedButton!
     @IBOutlet weak var btn6: RaisedButton!
     @IBOutlet weak var btn7: RaisedButton!
+    @IBOutlet weak var btn8: RaisedButton!
+    
+    @IBOutlet weak var img1: UIImageView!
+    @IBOutlet weak var img2: UIImageView!
+    @IBOutlet weak var img3: UIImageView!
+    @IBOutlet weak var img4: UIImageView!
+    @IBOutlet weak var img5: UIImageView!
+    @IBOutlet weak var img6: UIImageView!
+    @IBOutlet weak var img7: UIImageView!
+    @IBOutlet weak var img8: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         btn1.pulseColor = .white
-        btn1.backgroundColor = Color.blue.base
+        img1.tintColor = Color.blue.base
         btn2.pulseColor = .white
-        btn2.backgroundColor = Color.blue.base
+        img2.tintColor = Color.blue.base
         btn3.pulseColor = .white
-        btn3.backgroundColor = Color.blue.base
+        img3.tintColor = Color.blue.base
         btn4.pulseColor = .white
-        btn4.backgroundColor = Color.blue.base
+        img4.tintColor = Color.blue.base
         btn5.pulseColor = .white
-        btn5.backgroundColor = Color.blue.base
+        img5.tintColor = Color.blue.base
         btn6.pulseColor = .white
-        btn6.backgroundColor = Color.blue.base
+        img6.tintColor = Color.blue.base
         btn7.pulseColor = .white
-        btn7.backgroundColor = Color.blue.base
+        img7.tintColor = Color.blue.base
+        btn8.pulseColor = .white
+        img8.tintColor = Color.blue.base
         // Do any additional setup after loading the view.
     }
     
@@ -65,6 +77,10 @@ class ManagerFeatureMenuViewController: UIViewController {
     
     @IBAction func btnExportBillManagerWasTapped(_ sender: Any) {
         presentManagerDataVC(for: .exportBill)
+    }
+    
+    @IBAction func btnReportManagerWasTapped(_ sender: Any) {
+        
     }
     
     func presentManagerDataVC(for type: ManageType) {

@@ -101,6 +101,7 @@ class ManagerDataViewController: UIViewController {
         case .dishCategory:
             title += "thể loại món ăn"
             lb1.text = "Tên thể loại"
+            lb3.text = "Trạng thái"
         case .dish:
             title += "món ăn"
             vColumnTitleHeight.constant = 0
@@ -506,6 +507,7 @@ extension ManagerDataViewController: UITableViewDataSource {
         case .dishCategory:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ManagerDataTableViewCell", for: indexPath) as? ManagerDataTableViewCell else { fatalError("") }
             cell.lb1.text = currentDishCategoryData[indexPath.item].tentheloaimonan
+            cell.lb2.text = currentDishCategoryData[indexPath.item].daxoa == 0 ? "Khả dụng" : "Đã xoá"
             return cell
         case .dish:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "MenuDishTableViewCell", for: indexPath) as? MenuDishTableViewCell else { fatalError("") }
@@ -563,9 +565,9 @@ extension ManagerDataViewController: UITableViewDelegate  {
                 let listDish = currentDishData.filter { $0.idtheloaimonan == currentDishCategoryData[indexPath.section].idtheloaimonan }
                 pickedData = listDish[indexPath.item]
             case .importBill:
-                break
+                pickedData = currentImportBillData[indexPath.section][indexPath.item]
             case .exportBill:
-                break
+                pickedData = currentExportBillData[indexPath.section][indexPath.item]
             default: return
             }
             if let pickedData = pickedData {

@@ -13,7 +13,7 @@ class DishManagerViewController : UIViewController {
     @IBOutlet weak var txtDishName: UITextField!
     @IBOutlet weak var txtDishPrice: UITextField!
     @IBOutlet weak var txtDishUnit: UITextField!
-    @IBOutlet weak var txtDishDescription: UITextField!
+    @IBOutlet weak var txtDishDescription: TextView!
     @IBOutlet weak var txtDishCategory: UITextField!
     @IBOutlet weak var swIsInMenu: UISwitch!
     @IBOutlet weak var btnDelete: UIButton!

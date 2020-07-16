@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thịt lợn" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USe-pf-7ns">
-                        <rect key="frame" x="10" y="5" width="119.5" height="56"/>
+                        <rect key="frame" x="10" y="10" width="119.5" height="46"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -43,12 +43,12 @@
                     <constraint firstItem="5uP-3H-XlI" firstAttribute="leading" secondItem="USe-pf-7ns" secondAttribute="trailing" id="8AT-Qb-Qb9"/>
                     <constraint firstItem="USe-pf-7ns" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Auz-6u-gcO"/>
                     <constraint firstItem="Pc2-dg-R1M" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="G5z-RY-9hK"/>
-                    <constraint firstItem="USe-pf-7ns" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="IOd-lD-QBb"/>
+                    <constraint firstItem="USe-pf-7ns" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="IOd-lD-QBb"/>
                     <constraint firstAttribute="trailing" secondItem="Pc2-dg-R1M" secondAttribute="trailing" constant="10" id="NIC-4l-rpN"/>
                     <constraint firstItem="5uP-3H-XlI" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="UUq-9w-Nak"/>
                     <constraint firstItem="Pc2-dg-R1M" firstAttribute="leading" secondItem="5uP-3H-XlI" secondAttribute="trailing" constant="5" id="WaM-BQ-TOB"/>
                     <constraint firstItem="USe-pf-7ns" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="YKR-ct-FYd"/>
-                    <constraint firstAttribute="bottom" secondItem="USe-pf-7ns" secondAttribute="bottom" constant="5" id="cwS-tR-0iB"/>
+                    <constraint firstAttribute="bottom" secondItem="USe-pf-7ns" secondAttribute="bottom" constant="10" id="cwS-tR-0iB"/>
                     <constraint firstItem="5uP-3H-XlI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="eKv-LY-kaM"/>
                     <constraint firstAttribute="bottom" secondItem="Pc2-dg-R1M" secondAttribute="bottom" constant="5" id="sdJ-95-4Bu"/>
                     <constraint firstItem="Pc2-dg-R1M" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="zKd-dC-xZM"/>

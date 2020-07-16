@@ -29,6 +29,7 @@ class LoginViewController: UIViewController {
         passwordTextField.delegate = self
         passwordTextField.isVisibilityIconButtonEnabled = true
         
+        btnLogin.layer.cornerRadius = 5
         btnLogin.pulseColor = .white
         btnLogin.backgroundColor = Color.blue.base
         
@@ -43,7 +44,9 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func LoginButtonTapped(_ sender: Any) {
+        btnLogin.isEnabled = false
         Auth.auth().signIn(withEmail: usernameTextField.text!, password: passwordTextField.text!) { (result, error) in
+            self.btnLogin.isEnabled = true
             if error != nil {
                 self.showErrorLabel.alpha = 1
                 self.showErrorLabel.text = error?.localizedDescription

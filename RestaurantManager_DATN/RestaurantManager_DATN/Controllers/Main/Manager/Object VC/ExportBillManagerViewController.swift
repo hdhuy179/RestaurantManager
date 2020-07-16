@@ -20,8 +20,21 @@ class ExportBillManagerViewController: UIViewController {
     @IBOutlet weak var swIsExported: UISwitch!
     @IBOutlet weak var btnDelete: UIButton!
     
+    private var isForExporter = false
+    
     var exportBill: PhieuXuat?
     var importBill: PhieuNhap?
+    
+    var staffExport: NhanVien? {
+        didSet {
+            txtStaffExportor.text = staffExport?.tennhanvien
+        }
+    }
+    var staffCreate: NhanVien? {
+        didSet {
+            txtStaffCreator.text = staffCreate?.tennhanvien
+        }
+    }
     
     weak var delegate: ManagerDataViewController?
     
@@ -40,14 +53,20 @@ class ExportBillManagerViewController: UIViewController {
     
     func setupView() {
         
+        txtBillCreatedDate.isDatePickerTextField(maximumDate: Date(), dateFormat: "dd-MM-yyyy hh:MM:ss")
+        
         if exportBill != nil {
-            lbTitle.text = "Thay đổi bàn ăn"
+            staffCreate = exportBill?.creatorStaff
+            staffExport = exportBill?.exportStaff
+            
+            txtBillCreatedDate.isDatePickerTextField(minimumDate: importBill?.ngaytao,maximumDate: Date(), dateFormat: "dd-MM-yyyy hh:MM:ss")
+            
+            lbTitle.text = "Thay đổi phiếu xuất"
             txtImportBill.text = importBill?.maphieu
             txtStuffName.text = importBill?.tenvatpham
             txtStuffAmount.text = String(exportBill?.soluong ?? 0)
             txtBillCreatedDate.text = exportBill?.ngaytao?.convertToString()
-            txtStaffCreator.text = exportBill?.creatorStaff?.tennhanvien
-            txtStaffExportor.text = exportBill?.exportStaff?.tennhanvien
+            
             swIsExported.isOn = exportBill?.trangthai == 1
             if exportBill?.daxoa == 1 {
                 btnDelete.setTitle("Khôi phục", for: .normal)
@@ -56,29 +75,65 @@ class ExportBillManagerViewController: UIViewController {
             //            btnDelete.backgroundColor = .gray
             btnDelete.setTitle("Hủy", for: .normal)
         }
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(txtCreatorTapped))
+        txtStaffCreator.addGestureRecognizer(tapGesture)
+        
+        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(txtExporterTapped))
+        txtStaffExportor.addGestureRecognizer(tapGesture2)
+        
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(txtImportBillTapped))
+        txtImportBill.addGestureRecognizer(tapGesture3)
         
     }
     
+    @objc private func txtImportBillTapped() {
+        let presentHandler = PresentHandler()
+        presentHandler.presentManagerDataVC(self, manageType: .importBill, isForPickData: true)
+    }
+    
+    @objc private func txtCreatorTapped() {
+        isForExporter = false
+        let presentHandler = PresentHandler()
+        presentHandler.presentManagerDataVC(self, manageType: .staff, isForPickData: true)
+    }
+    
+    @objc private func txtExporterTapped() {
+        isForExporter = true
+        let presentHandler = PresentHandler()
+        presentHandler.presentManagerDataVC(self, manageType: .staff, isForPickData: true)
+    }
+    
     @IBAction func btnConfirmWasTapped(_ sender: Any) {
-        
-//        let number = txtTableNumber.text ?? ""
-//        let size = ((txtTableSize.text ?? "") as NSString).intValue
-//
-//        let db = Firestore.firestore()
-//
-//        if table == nil {
-//            table = BanAn()
-//        }
-//
-//        db.collection("BanAn").document(table!.idbanan!).setData([
-//            "idbanan": table!.idbanan!,
-//            "sobanan": number,
-//            "soluongghe": size,
-//            "daxoa": 0
-//        ]) { err in
-//        }
-//
-//        self.dismiss(animated: true)
+
+        let idCreator = staffCreate?.idnhanvien ?? ""
+        let idExportor = staffExport?.idnhanvien ?? ""
+        let idImportBill = importBill?.idnhieunhap ?? ""
+        let createdDate =  Date.getDate(fromString: txtBillCreatedDate.text ?? "", withDateFormat: "dd-MM-yyyy hh:MM:ss")
+        let amount = ((txtStuffAmount.text ?? "") as NSString).floatValue
+        let state = swIsExported.isOn == true ? 1 : 0
+
+        //        let billNo = txtBillCreatedDate.text
+
+        let db = Firestore.firestore()
+
+        if exportBill == nil {
+            exportBill = PhieuXuat()
+        }
+
+        db.collection("PhieuXuat").document(exportBill!.idphieuxuat).setData([
+            
+            "idphieuxuat": exportBill!.idphieuxuat!,
+            "idnhanvientaophieu": idCreator,
+            "idnhanvienxuatphieu": idExportor,
+            "idphieunhap": idImportBill,
+            "ngaytao": createdDate,
+            "soluong": amount,
+            "trangthai": state,
+            "daxoa": importBill?.daxoa ?? 0
+        ]) { err in
+        }
+
+        self.dismiss(animated: true)
     }
     
     @IBAction func btnDeleteTapped(_ sender: Any) {
@@ -102,6 +157,27 @@ class ExportBillManagerViewController: UIViewController {
     
     @IBAction func btnBackTapped(_ sender: Any) {
         self.dismiss(animated: true)
+    }
+    
+}
+extension ExportBillManagerViewController: ManagerPickedData {
+    func dataWasPicked(data: Any) {
+        if let data = data as? NhanVien {
+            if isForExporter {
+                staffExport = data
+            } else {
+                staffCreate = data
+            }
+        }
+        if let data = data as? PhieuNhap {
+            importBill = data
+            txtImportBill.text = data.maphieu
+            txtStuffName.text = data.tenvatpham
+            
+            txtBillCreatedDate.text = ""
+            txtStuffAmount.text = ""
+            txtBillCreatedDate.isDatePickerTextField(minimumDate: importBill?.ngaytao,maximumDate: Date(), dateFormat: "dd-MM-yyyy hh:MM:ss")
+        }
     }
     
 }

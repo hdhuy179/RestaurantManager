@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -72,6 +72,7 @@
             <size key="customSize" width="256" height="281"/>
             <connections>
                 <outlet property="imvState" destination="5oc-1w-D9l" id="tqK-jU-fbv"/>
+                <outlet property="imvTable" destination="9Lf-7Q-nGk" id="v0a-Rj-xI5"/>
                 <outlet property="numberLabel" destination="OjB-YT-2rb" id="6da-To-GIX"/>
                 <outlet property="sizeLabel" destination="tPM-SC-OMh" id="sn5-DV-VGC"/>
                 <outlet property="vState" destination="8Gp-SZ-Ldl" id="2su-hO-p8g"/>
