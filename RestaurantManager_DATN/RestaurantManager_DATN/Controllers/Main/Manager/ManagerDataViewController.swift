@@ -9,7 +9,7 @@
 import UIKit
 
 enum ManageType: Int {
-    case table = 0, bill, staff, dishCategory, dish, importBill, exportBill
+    case table = 0, bill, staff, dishCategory, dish, importBill, exportBill, report
 }
 
 protocol ManagerPickedData: class {
@@ -48,6 +48,7 @@ class ManagerDataViewController: UIViewController {
     private var staffData: [NhanVien] = []
     private var importBillData: [[PhieuNhap]] = []
     private var exportBillData: [[PhieuXuat]] = []
+    private var reportData :[[BaoCao]] = []
     
     private var currentTableData: [BanAn] = []
     private var currentBillData: [[HoaDon]] = []
@@ -57,6 +58,7 @@ class ManagerDataViewController: UIViewController {
     private var currentStaffData: [NhanVien] = []
     private var currentImportBillData: [[PhieuNhap]] = []
     private var currentExportBillData: [[PhieuXuat]] = []
+    private var currentReportData :[[BaoCao]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +121,9 @@ class ManagerDataViewController: UIViewController {
             lb2.text = "Số lượng"
             lb2.textAlignment = .center
             lb3.text = "Người tạo"
+        case .report:
+            title += "báo cáo"
+            vColumnTitleHeight.constant = 0
         default: break
         }
         
@@ -139,6 +144,7 @@ class ManagerDataViewController: UIViewController {
         dataTableView.register(UINib(nibName: "DishHeaderTableViewCell", bundle: nil), forCellReuseIdentifier: "DishHeaderTableViewCell")
 //        dataTableView.register(UITableViewHeaderFooterView.self, forCellReuseIdentifier: "header")
         dataTableView.register(UINib(nibName: "BillTableViewCell", bundle: nil), forCellReuseIdentifier: "BillTableViewCell")
+        dataTableView.register(TableViewCell.self, forCellReuseIdentifier: "TableViewCell")
         
     }
     
@@ -160,6 +166,8 @@ class ManagerDataViewController: UIViewController {
         case .exportBill:
             fetchImportBillData()
             fetchExportBillData()
+        case .report:
+            fetchReportData()
         default: break
             
         }
@@ -169,10 +177,11 @@ class ManagerDataViewController: UIViewController {
     
     private func fetchStaffData() {
         NhanVien.fetchAllData { [weak self] (data, error) in
-            self?.staffData.removeAll()
+            
             if error != nil {
                 print(error.debugDescription)
             } else if let data = data {
+                self?.staffData.removeAll()
                 self?.staffData = data
             }
             self?.setupData()
@@ -181,10 +190,11 @@ class ManagerDataViewController: UIViewController {
     
     private func fetchBillData() {
         HoaDon.fetchAllData { [weak self] (data, error) in
-            self?.billData.removeAll()
+            
             if error != nil {
                 print(error.debugDescription)
             } else if let data = data {
+                self?.billData.removeAll()
                 var date: String?
                 var tempArray: [HoaDon] = []
                 for item in data {
@@ -208,10 +218,11 @@ class ManagerDataViewController: UIViewController {
     
     private func fetchDishData() {
         MonAn.fetchAllData { [weak self] (data, error) in
-            self?.dishData.removeAll()
+            
             if error != nil {
                 print(error.debugDescription)
             } else if let data = data {
+                self?.dishData.removeAll()
                 self?.dishData = data
             }
             self?.setupData()
@@ -220,10 +231,11 @@ class ManagerDataViewController: UIViewController {
     
     private func fetchDishCategoryData() {
         TheLoaiMonAn.fetchAllData{ [weak self] (data, error) in
-            self?.dishCategoryData.removeAll()
+            
             if error != nil {
                 print(error.debugDescription)
             } else if let data = data {
+                self?.dishCategoryData.removeAll()
                 self?.dishCategoryData = data
             }
             self?.setupData()
@@ -232,10 +244,11 @@ class ManagerDataViewController: UIViewController {
     
     private func fetchTableData() {
         BanAn.fetchAllData { [weak self] (data, error) in
-            self?.tableData.removeAll()
+            
             if error != nil {
                 print(error.debugDescription)
             } else if let data = data {
+                self?.tableData.removeAll()
                 self?.tableData = data
             }
             self?.setupData()
@@ -297,6 +310,33 @@ class ManagerDataViewController: UIViewController {
                     }
                 }
                 self?.exportBillData.append(tempArray)
+            }
+            self?.setupData()
+        }
+    }
+    
+    func fetchReportData() {
+        BaoCao.fetchAllData { [weak self] (data, error) in
+            if error != nil {
+                print(error.debugDescription)
+            } else if let data = data {
+                self?.reportData.removeAll()
+                var date: String?
+                var tempArray: [BaoCao] = []
+                for item in data {
+                    let itemDate = String(item.ngaytao?.convertToString().dropLast(9) ?? "")
+                    if date != itemDate {
+                        if tempArray.isEmpty == false {
+                            self?.reportData.append(tempArray)
+                        }
+                        tempArray.removeAll()
+                        date = itemDate
+                        tempArray.append(item)
+                    } else {
+                        tempArray.append(item)
+                    }
+                }
+                self?.reportData.append(tempArray)
             }
             self?.setupData()
         }
@@ -375,6 +415,15 @@ class ManagerDataViewController: UIViewController {
                     currentImportBillData.append( item.filter { $0.daxoa == 1 })
                 }
             }
+        case .report:
+            self.currentReportData.removeAll()
+            for item in reportData {
+                if swShowDeletedData.selectedSegmentIndex == 0 {
+                    currentReportData.append( item.filter { $0.daxoa == 0 })
+                } else {
+                    currentReportData.append( item.filter { $0.daxoa == 1 })
+                }
+            }
         default: break
         }
         dataTableView.reloadData()
@@ -435,6 +484,9 @@ extension ManagerDataViewController: UITableViewDataSource {
         if managerType == .dish {
             return currentDishCategoryData.count
         }
+        if managerType == .report {
+            return currentReportData.count
+        }
         return 1
     }
     
@@ -455,19 +507,28 @@ extension ManagerDataViewController: UITableViewDataSource {
             return currentImportBillData[section].count
         case .exportBill:
             return currentExportBillData[section].count
+        case .report:
+            return currentReportData[section].count
         default: return 0
         }
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if managerType == .bill {
-            return "    " + String(currentBillData[section].first?.ngaytao.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            let title = String(currentBillData[section].first?.ngaytao.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            return title.isEmpty ? nil : "   Ngày " + title
         }
         if managerType == .importBill {
-            return "    " + String(currentImportBillData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            let title = String(currentImportBillData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            return title.isEmpty ? nil : "   Ngày " + title
         }
         if managerType == .exportBill {
-            return "    " + String(currentExportBillData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            let title = String(currentExportBillData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            return title.isEmpty ? nil : "   Ngày " + title
+        }
+        if managerType == .report {
+            let title = String(currentReportData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            return title.isEmpty ? nil : "     Ngày " + title
         }
         if managerType == .dish {
             return "    " + currentDishCategoryData[section].tentheloaimonan
@@ -475,6 +536,17 @@ extension ManagerDataViewController: UITableViewDataSource {
         return nil
     }
     
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        if tableView.numberOfSections <= 1 {
+//            return 0
+//        }
+//        return 50
+//    }
+    
+//    func tableView(_ tableView: UITableView, estimatedHeightForHeaderInSection section: Int) -> CGFloat {
+//        return 0
+//    }
+//
 //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        if managerType == .dish {
 //            guard let headerCell = tableView.dequeueReusableCell(withIdentifier: "DishHeaderTableViewCell") as? DishHeaderViewCell else {
@@ -530,6 +602,11 @@ extension ManagerDataViewController: UITableViewDataSource {
                 }
             }
             cell.configView(data: currentExportBillData[indexPath.section][indexPath.item], of: importBill)
+            return cell
+        case .report:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") else { fatalError("") }
+            cell.textLabel?.text = currentReportData[indexPath.section][indexPath.item].tieude
+            
             return cell
         default: break
         }

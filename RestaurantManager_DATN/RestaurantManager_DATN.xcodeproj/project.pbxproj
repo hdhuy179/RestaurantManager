@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		1DB322C9892E3319899CB158 /* Pods_RestaurantManager_DATN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89FA3BDFFFCFB7812D2DDFF /* Pods_RestaurantManager_DATN.framework */; };
+		5628023524C15019007F5431 /* CreateReportManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023424C15019007F5431 /* CreateReportManagerViewController.swift */; };
+		5628023724C15039007F5431 /* ReportMenuFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023624C15039007F5431 /* ReportMenuFeatureViewController.swift */; };
+		5628023F24C1A16C007F5431 /* BaoCao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023E24C1A16C007F5431 /* BaoCao.swift */; };
+		5628024324C1BCB9007F5431 /* ReportDetailsManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628024224C1BCB9007F5431 /* ReportDetailsManagerViewController.swift */; };
 		F72806C524A253280016083D /* PhieuXuat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72806C424A253280016083D /* PhieuXuat.swift */; };
 		F738CFC524894E1B003F8295 /* TableBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738CFC424894E1B003F8295 /* TableBillDetailViewController.swift */; };
 		F73D0E4C23E2D1D6006D8A30 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73D0E4B23E2D1D6006D8A30 /* UIViewController+.swift */; };
@@ -79,6 +83,10 @@
 
 /* Begin PBXFileReference section */
 		531EBF3A93F23315527B2376 /* Pods-RestaurantManager_DATN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantManager_DATN.release.xcconfig"; path = "Target Support Files/Pods-RestaurantManager_DATN/Pods-RestaurantManager_DATN.release.xcconfig"; sourceTree = "<group>"; };
+		5628023424C15019007F5431 /* CreateReportManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportManagerViewController.swift; sourceTree = "<group>"; };
+		5628023624C15039007F5431 /* ReportMenuFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenuFeatureViewController.swift; sourceTree = "<group>"; };
+		5628023E24C1A16C007F5431 /* BaoCao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoCao.swift; sourceTree = "<group>"; };
+		5628024224C1BCB9007F5431 /* ReportDetailsManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailsManagerViewController.swift; sourceTree = "<group>"; };
 		7E3E9228B1AABE7F753B9E11 /* Pods-RestaurantManager_DATN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantManager_DATN.debug.xcconfig"; path = "Target Support Files/Pods-RestaurantManager_DATN/Pods-RestaurantManager_DATN.debug.xcconfig"; sourceTree = "<group>"; };
 		E89FA3BDFFFCFB7812D2DDFF /* Pods_RestaurantManager_DATN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantManager_DATN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F72806C424A253280016083D /* PhieuXuat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhieuXuat.swift; sourceTree = "<group>"; };
@@ -296,6 +304,7 @@
 				F747BDF0248400CE0029B7CC /* NhanVien.swift */,
 				F74D3425249C5B740085CDB8 /* PhieuNhap.swift */,
 				F72806C424A253280016083D /* PhieuXuat.swift */,
+				5628023E24C1A16C007F5431 /* BaoCao.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -332,6 +341,9 @@
 				F74A0CD024B4C79A0071BA27 /* SearchBillMangerViewController.swift */,
 				F797881B24BB4C1E006FE58A /* ImportBillManagerViewController.swift */,
 				F797881D24BB4C2B006FE58A /* ExportBillManagerViewController.swift */,
+				5628023624C15039007F5431 /* ReportMenuFeatureViewController.swift */,
+				5628023424C15019007F5431 /* CreateReportManagerViewController.swift */,
+				5628024224C1BCB9007F5431 /* ReportDetailsManagerViewController.swift */,
 			);
 			path = "Object VC";
 			sourceTree = "<group>";
@@ -604,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7E2A20E23EC11F200EB89D8 /* KitchenViewController.swift in Sources */,
+				5628023524C15019007F5431 /* CreateReportManagerViewController.swift in Sources */,
 				F750F611249120F5008C5604 /* MenuViewController.swift in Sources */,
 				F73F011123EDA5AF000CF829 /* RestaurantViewController.swift in Sources */,
 				F73E2DFE23EAC7B500D7E02B /* TableCollectionViewCell.swift in Sources */,
@@ -617,6 +630,7 @@
 				F7409C6023E187100037652A /* LoginViewController.swift in Sources */,
 				F7409C5C23E187100037652A /* AppDelegate.swift in Sources */,
 				F747F9B1249BBA8400B82307 /* UITextfield+.swift in Sources */,
+				5628024324C1BCB9007F5431 /* ReportDetailsManagerViewController.swift in Sources */,
 				F776C49623E5A3E7005901CC /* FeatureMenuViewController.swift in Sources */,
 				F7A682E824711A0E006D8058 /* MonAn.swift in Sources */,
 				F744DFD22470EB6E0086753F /* BanAn.swift in Sources */,
@@ -626,6 +640,7 @@
 				F74D3428249C601D0085CDB8 /* StaffManagerViewController.swift in Sources */,
 				F747BDE124836D4D0029B7CC /* PresentHandler.swift in Sources */,
 				F75287A223EE9157007A9621 /* StorageViewController.swift in Sources */,
+				5628023724C15039007F5431 /* ReportMenuFeatureViewController.swift in Sources */,
 				F7BD2D7324869A3400FC4F28 /* CartViewController.swift in Sources */,
 				F747BDDC2483614E0029B7CC /* ManagerFeatureMenuViewController.swift in Sources */,
 				F747BDEA24839B040029B7CC /* ManagerDataTableViewCell.swift in Sources */,
@@ -652,6 +667,7 @@
 				F73D0E5023E2E51A006D8A30 /* App.swift in Sources */,
 				F74724D024853C6E00BC97EB /* DishCategoryManagerViewController.swift in Sources */,
 				F741307223EFDEC300032E13 /* BillTableViewCell.swift in Sources */,
+				5628023F24C1A16C007F5431 /* BaoCao.swift in Sources */,
 				F738CFC524894E1B003F8295 /* TableBillDetailViewController.swift in Sources */,
 				F7409C5E23E187100037652A /* SceneDelegate.swift in Sources */,
 				F747BDEF2483D0730029B7CC /* DishManagerViewController.swift in Sources */,

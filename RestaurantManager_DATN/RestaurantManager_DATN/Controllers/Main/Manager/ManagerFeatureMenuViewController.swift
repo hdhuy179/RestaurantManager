@@ -32,22 +32,25 @@ class ManagerFeatureMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+//        img1.tintColor = Color.blue.base
+//        img2.tintColor = Color.blue.base
+//        img3.tintColor = Color.blue.base
+//        img4.tintColor = Color.blue.base
+//        img5.tintColor = Color.blue.base
+//        img6.tintColor = Color.blue.base
+//        img7.tintColor = Color.blue.base
+//        img8.tintColor = Color.blue.base
+//        
         btn1.pulseColor = .white
-        img1.tintColor = Color.blue.base
         btn2.pulseColor = .white
-        img2.tintColor = Color.blue.base
         btn3.pulseColor = .white
-        img3.tintColor = Color.blue.base
         btn4.pulseColor = .white
-        img4.tintColor = Color.blue.base
         btn5.pulseColor = .white
-        img5.tintColor = Color.blue.base
         btn6.pulseColor = .white
-        img6.tintColor = Color.blue.base
         btn7.pulseColor = .white
-        img7.tintColor = Color.blue.base
         btn8.pulseColor = .white
-        img8.tintColor = Color.blue.base
         // Do any additional setup after loading the view.
     }
     
@@ -79,9 +82,9 @@ class ManagerFeatureMenuViewController: UIViewController {
         presentManagerDataVC(for: .exportBill)
     }
     
-    @IBAction func btnReportManagerWasTapped(_ sender: Any) {
-        
-    }
+//    @IBAction func btnReportManagerWasTapped(_ sender: Any) {
+//
+//    }
     
     func presentManagerDataVC(for type: ManageType) {
         let presentHandler = PresentHandler()

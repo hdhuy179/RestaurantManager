@@ -131,4 +131,10 @@ class PresentHandler {
         vc.importBill = imp
         rootVC.presentInFullScreen(vc, animated: true)
     }
+    
+    func presentCreateReportVC(_ rootVC: UIViewController, type: ReportType) {
+        let vc = storyboard.instantiateViewController(withIdentifier: "CreateReportManagerViewController") as! CreateReportManagerViewController
+        vc.reportType = type
+        rootVC.presentInFullScreen(vc, animated: true)
+    }
 }
