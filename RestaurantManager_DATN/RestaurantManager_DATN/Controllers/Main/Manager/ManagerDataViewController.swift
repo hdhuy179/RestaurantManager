@@ -645,6 +645,8 @@ extension ManagerDataViewController: UITableViewDelegate  {
                 pickedData = currentImportBillData[indexPath.section][indexPath.item]
             case .exportBill:
                 pickedData = currentExportBillData[indexPath.section][indexPath.item]
+            case .report:
+                pickedData = currentReportData[indexPath.section][indexPath.item]
             default: return
             }
             if let pickedData = pickedData {
@@ -679,6 +681,8 @@ extension ManagerDataViewController: UITableViewDelegate  {
                 }
             }
             presentHandler.presentExportBillManagerVC(self, data: currentExportBillData[indexPath.section][indexPath.item], imp: importBill)
+        case .report:
+            presentHandler.presentReportDetailsVC(self, data: currentReportData[indexPath.section][indexPath.item])
         default: break
         }
     }

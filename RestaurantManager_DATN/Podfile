@@ -14,4 +14,5 @@ target 'RestaurantManager_DATN' do
 	pod 'Material'
 	pod 'ObjectMapper'
 	pod 'Kingfisher'
+	pod 'SpreadsheetView'
 end

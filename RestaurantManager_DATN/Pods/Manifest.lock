@@ -346,6 +346,7 @@ PODS:
   - nanopb/encode (1.30905.0)
   - ObjectMapper (4.2.0)
   - PromisesObjC (1.2.9)
+  - SpreadsheetView (0.8.4)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -356,6 +357,7 @@ DEPENDENCIES:
   - Kingfisher
   - Material
   - ObjectMapper
+  - SpreadsheetView
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
@@ -383,6 +385,8 @@ SPEC REPOS:
     - nanopb
     - ObjectMapper
     - PromisesObjC
+  trunk:
+    - SpreadsheetView
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -409,7 +413,8 @@ SPEC CHECKSUMS:
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
   PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  SpreadsheetView: 17c55b6dc82099993cc2ceb818248d19f3220998
 
-PODFILE CHECKSUM: ce942bc5e9dcef727932cce7a19ff266f02d0c38
+PODFILE CHECKSUM: 980499198c15e5cf1cd74fbd905fc0a609e99ed9
 
 COCOAPODS: 1.9.1

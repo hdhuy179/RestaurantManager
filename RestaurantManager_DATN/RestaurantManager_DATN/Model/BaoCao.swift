@@ -15,6 +15,7 @@ struct BaoCao: Decodable {
     var tieude: String = ""
     var noidung: String = ""
     var ngaytao: Date?
+    var loaibaocao: Int = 0
     var daxoa: Int = 0
     
     var staff: NhanVien?
@@ -68,6 +69,7 @@ extension BaoCao: Mappable {
         timestamp <- map["ngaytao"]
         ngaytao = timestamp?.dateValue().getDateFormatted() ?? Date()
         noidung <- map["noidung"]
+        loaibaocao <- map["loaibaocao"]
         daxoa <- map["daxoa"]
     }
 }

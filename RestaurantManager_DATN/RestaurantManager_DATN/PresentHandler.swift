@@ -121,6 +121,9 @@ class PresentHandler {
         let vc = storyboard.instantiateViewController(withIdentifier: "ImportBillManagerViewController") as! ImportBillManagerViewController
         
         vc.importBill = data
+        if let rootVC = rootVC as? ManagerDataViewController {
+            vc.delegate = rootVC
+        }
         rootVC.presentInFullScreen(vc, animated: true)
     }
     
@@ -129,12 +132,27 @@ class PresentHandler {
         
         vc.exportBill = data
         vc.importBill = imp
+        if let rootVC = rootVC as? ManagerDataViewController {
+            vc.delegate = rootVC
+        }
         rootVC.presentInFullScreen(vc, animated: true)
     }
     
     func presentCreateReportVC(_ rootVC: UIViewController, type: ReportType) {
         let vc = storyboard.instantiateViewController(withIdentifier: "CreateReportManagerViewController") as! CreateReportManagerViewController
         vc.reportType = type
+        if let rootVC = rootVC as? ManagerDataViewController {
+            vc.delegate = rootVC
+        }
+        rootVC.presentInFullScreen(vc, animated: true)
+    }
+    
+    func presentReportDetailsVC(_ rootVC: UIViewController, data: BaoCao) {
+        let vc = storyboard.instantiateViewController(withIdentifier: "ReportDetailsManagerViewController") as! ReportDetailsManagerViewController
+        vc.report = data
+        if let rootVC = rootVC as? ManagerDataViewController {
+            vc.delegate = rootVC
+        }
         rootVC.presentInFullScreen(vc, animated: true)
     }
 }

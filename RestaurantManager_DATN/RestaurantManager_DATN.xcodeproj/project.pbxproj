@@ -12,6 +12,7 @@
 		5628023724C15039007F5431 /* ReportMenuFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023624C15039007F5431 /* ReportMenuFeatureViewController.swift */; };
 		5628023F24C1A16C007F5431 /* BaoCao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023E24C1A16C007F5431 /* BaoCao.swift */; };
 		5628024324C1BCB9007F5431 /* ReportDetailsManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628024224C1BCB9007F5431 /* ReportDetailsManagerViewController.swift */; };
+		5629C4A224C29E5000006F4D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629C4A124C29E5000006F4D /* Cell.swift */; };
 		F72806C524A253280016083D /* PhieuXuat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72806C424A253280016083D /* PhieuXuat.swift */; };
 		F738CFC524894E1B003F8295 /* TableBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738CFC424894E1B003F8295 /* TableBillDetailViewController.swift */; };
 		F73D0E4C23E2D1D6006D8A30 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73D0E4B23E2D1D6006D8A30 /* UIViewController+.swift */; };
@@ -87,6 +88,7 @@
 		5628023624C15039007F5431 /* ReportMenuFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenuFeatureViewController.swift; sourceTree = "<group>"; };
 		5628023E24C1A16C007F5431 /* BaoCao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoCao.swift; sourceTree = "<group>"; };
 		5628024224C1BCB9007F5431 /* ReportDetailsManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailsManagerViewController.swift; sourceTree = "<group>"; };
+		5629C4A124C29E5000006F4D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		7E3E9228B1AABE7F753B9E11 /* Pods-RestaurantManager_DATN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantManager_DATN.debug.xcconfig"; path = "Target Support Files/Pods-RestaurantManager_DATN/Pods-RestaurantManager_DATN.debug.xcconfig"; sourceTree = "<group>"; };
 		E89FA3BDFFFCFB7812D2DDFF /* Pods_RestaurantManager_DATN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantManager_DATN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F72806C424A253280016083D /* PhieuXuat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhieuXuat.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				F747BDDD2483617C0029B7CC /* ManagerDataViewController.swift */,
 				F749AD2A24A85DEE006C2318 /* Object VC */,
 				F747BDED24839B110029B7CC /* ManagerDataTableViewCell */,
+				5629C4A124C29E5000006F4D /* Cell.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -671,6 +674,7 @@
 				F738CFC524894E1B003F8295 /* TableBillDetailViewController.swift in Sources */,
 				F7409C5E23E187100037652A /* SceneDelegate.swift in Sources */,
 				F747BDEF2483D0730029B7CC /* DishManagerViewController.swift in Sources */,
+				5629C4A224C29E5000006F4D /* Cell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -3683,22 +3683,19 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="1. Cơm cá kho tộ - 45 đĩa" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="zis-tb-SRY">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VHc-Hl-hcf" customClass="SpreadsheetView" customModule="SpreadsheetView">
                                                 <rect key="frame" x="10" y="69" width="371" height="554"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="zis-tb-SRY" secondAttribute="bottom" constant="20" symbolic="YES" id="WeE-MA-wzH"/>
+                                            <constraint firstItem="VHc-Hl-hcf" firstAttribute="top" secondItem="ESh-dq-thq" secondAttribute="bottom" constant="25" id="D0o-ER-9AO"/>
+                                            <constraint firstAttribute="bottom" secondItem="VHc-Hl-hcf" secondAttribute="bottom" constant="20" symbolic="YES" id="Dzd-9O-Snz"/>
+                                            <constraint firstAttribute="trailing" secondItem="VHc-Hl-hcf" secondAttribute="trailing" constant="10" id="F3E-N4-Jkm"/>
                                             <constraint firstItem="ESh-dq-thq" firstAttribute="top" secondItem="8Wf-if-HPs" secondAttribute="top" constant="20" id="agR-Qn-vQg"/>
-                                            <constraint firstItem="zis-tb-SRY" firstAttribute="top" secondItem="ESh-dq-thq" secondAttribute="bottom" constant="25" id="jp2-B1-mE7"/>
+                                            <constraint firstItem="VHc-Hl-hcf" firstAttribute="leading" secondItem="8Wf-if-HPs" secondAttribute="leading" constant="10" id="amx-S7-ifF"/>
                                             <constraint firstItem="ESh-dq-thq" firstAttribute="leading" secondItem="8Wf-if-HPs" secondAttribute="leading" constant="10" id="khh-p4-LRO"/>
-                                            <constraint firstItem="zis-tb-SRY" firstAttribute="leading" secondItem="8Wf-if-HPs" secondAttribute="leading" constant="10" id="o1z-3Z-CgW"/>
-                                            <constraint firstAttribute="trailing" secondItem="zis-tb-SRY" secondAttribute="trailing" constant="10" id="pcb-tb-mKq"/>
                                             <constraint firstAttribute="trailing" secondItem="ESh-dq-thq" secondAttribute="trailing" constant="10" id="wmv-qf-lZn"/>
                                         </constraints>
                                     </view>
@@ -3742,7 +3739,7 @@
                         <outlet property="heightConstant" destination="MzL-n0-mDg" id="ucW-ou-4gV"/>
                         <outlet property="lbTitle" destination="6V2-cA-sUm" id="V8R-Ys-aPs"/>
                         <outlet property="lbTitleReport" destination="ESh-dq-thq" id="nv7-uW-BHJ"/>
-                        <outlet property="tvReportContent" destination="zis-tb-SRY" id="c3u-tv-O5Q"/>
+                        <outlet property="ssvReportContent" destination="VHc-Hl-hcf" id="ElR-tc-eQa"/>
                         <outlet property="txtEndDate" destination="Zou-2G-bxJ" id="xEs-19-C8t"/>
                         <outlet property="txtStartDate" destination="f2E-Md-C3r" id="wiW-BJ-FfV"/>
                         <outlet property="vSearch" destination="STL-Vk-vT3" id="KH3-r6-IxK"/>
@@ -3779,7 +3776,7 @@
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
-                                            <action selector="btnBackWasTapped:" destination="AFu-wn-nbw" eventType="touchUpInside" id="f0R-SA-hTT"/>
+                                            <action selector="btnBackTapped:" destination="AFu-wn-nbw" eventType="touchUpInside" id="neU-CX-12q"/>
                                         </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qCv-X5-THM">
@@ -3801,6 +3798,9 @@
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnNAVWasTapped:" destination="AFu-wn-nbw" eventType="touchUpInside" id="4PQ-la-ILH"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -3818,35 +3818,32 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cLa-R5-lgX">
-                                <rect key="frame" x="20" y="108" width="374" height="734"/>
+                                <rect key="frame" x="10" y="108" width="394" height="734"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="960-BK-u6T">
-                                        <rect key="frame" x="1.5" y="1.5" width="371" height="731"/>
+                                        <rect key="frame" x="1.5" y="1.5" width="391" height="731"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15/4-12/5: TK_Món bán chạy nhất" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbf-hn-0NJ">
-                                                <rect key="frame" x="10" y="20" width="351" height="24"/>
+                                                <rect key="frame" x="10" y="20" width="371" height="24"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="1. Cơm cá kho tộ - 45 đĩa" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNd-0p-WIE">
-                                                <rect key="frame" x="10" y="69" width="351" height="642"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ImS-ZP-LH1" customClass="SpreadsheetView" customModule="SpreadsheetView">
+                                                <rect key="frame" x="10" y="69" width="371" height="642"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="hNd-0p-WIE" firstAttribute="leading" secondItem="960-BK-u6T" secondAttribute="leading" constant="10" id="DBG-fn-Ove"/>
+                                            <constraint firstItem="ImS-ZP-LH1" firstAttribute="leading" secondItem="960-BK-u6T" secondAttribute="leading" constant="10" id="4HW-gf-5X6"/>
                                             <constraint firstAttribute="trailing" secondItem="pbf-hn-0NJ" secondAttribute="trailing" constant="10" id="IYp-NA-94W"/>
-                                            <constraint firstItem="hNd-0p-WIE" firstAttribute="top" secondItem="pbf-hn-0NJ" secondAttribute="bottom" constant="25" id="KKG-Lu-st8"/>
-                                            <constraint firstAttribute="trailing" secondItem="hNd-0p-WIE" secondAttribute="trailing" constant="10" id="NsL-L6-ySU"/>
+                                            <constraint firstAttribute="trailing" secondItem="ImS-ZP-LH1" secondAttribute="trailing" constant="10" id="MKU-gi-Mhs"/>
                                             <constraint firstItem="pbf-hn-0NJ" firstAttribute="leading" secondItem="960-BK-u6T" secondAttribute="leading" constant="10" id="SWa-oF-Rtc"/>
-                                            <constraint firstAttribute="bottom" secondItem="hNd-0p-WIE" secondAttribute="bottom" constant="20" symbolic="YES" id="TaO-qg-m1h"/>
+                                            <constraint firstItem="ImS-ZP-LH1" firstAttribute="top" secondItem="pbf-hn-0NJ" secondAttribute="bottom" constant="25" id="aQd-Uc-bx1"/>
                                             <constraint firstItem="pbf-hn-0NJ" firstAttribute="top" secondItem="960-BK-u6T" secondAttribute="top" constant="20" id="dmY-Zk-YL9"/>
+                                            <constraint firstAttribute="bottom" secondItem="ImS-ZP-LH1" secondAttribute="bottom" constant="20" symbolic="YES" id="tfF-y1-vqq"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -3863,11 +3860,11 @@
                         <constraints>
                             <constraint firstItem="5Fa-IF-EwF" firstAttribute="leading" secondItem="E0W-aZ-CFG" secondAttribute="leading" id="Kfl-A4-eHG"/>
                             <constraint firstItem="cLa-R5-lgX" firstAttribute="top" secondItem="5Fa-IF-EwF" secondAttribute="bottom" constant="20" id="MPW-Cw-kbo"/>
-                            <constraint firstItem="E0W-aZ-CFG" firstAttribute="trailing" secondItem="cLa-R5-lgX" secondAttribute="trailing" constant="20" id="Ps6-r1-TZL"/>
+                            <constraint firstItem="E0W-aZ-CFG" firstAttribute="trailing" secondItem="cLa-R5-lgX" secondAttribute="trailing" constant="10" id="Ps6-r1-TZL"/>
                             <constraint firstItem="5Fa-IF-EwF" firstAttribute="top" secondItem="E0W-aZ-CFG" secondAttribute="top" id="YpH-R6-pj3"/>
                             <constraint firstItem="5Fa-IF-EwF" firstAttribute="trailing" secondItem="E0W-aZ-CFG" secondAttribute="trailing" id="Z08-oB-4IG"/>
                             <constraint firstItem="E0W-aZ-CFG" firstAttribute="bottom" secondItem="cLa-R5-lgX" secondAttribute="bottom" constant="20" id="fFf-5p-vxg"/>
-                            <constraint firstItem="cLa-R5-lgX" firstAttribute="leading" secondItem="E0W-aZ-CFG" secondAttribute="leading" constant="20" id="nPh-wI-P7n"/>
+                            <constraint firstItem="cLa-R5-lgX" firstAttribute="leading" secondItem="E0W-aZ-CFG" secondAttribute="leading" constant="10" id="nPh-wI-P7n"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="E0W-aZ-CFG"/>
                     </view>
@@ -3881,10 +3878,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="btnSaveReport" destination="ESz-Cz-atl" id="qEV-dO-CMp"/>
-                        <outlet property="lbTitle" destination="CYN-sW-jxw" id="5lb-Om-2cf"/>
-                        <outlet property="lbTitleReport" destination="pbf-hn-0NJ" id="NXX-bN-uCI"/>
-                        <outlet property="tvReportContent" destination="hNd-0p-WIE" id="1KR-CL-kyf"/>
+                        <outlet property="btnNAV" destination="ESz-Cz-atl" id="t40-dF-ZZL"/>
+                        <outlet property="lbReportTitle" destination="pbf-hn-0NJ" id="8g7-eN-ebk"/>
+                        <outlet property="ssvReportContent" destination="ImS-ZP-LH1" id="bzm-S7-htz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yV2-IY-rBG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
