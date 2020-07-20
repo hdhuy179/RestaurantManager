@@ -8,7 +8,7 @@
 import ObjectMapper
 
 struct PhieuNhap: Decodable {
-    var idnhieunhap: String! = UUID().uuidString
+    var idphieunhap: String! = UUID().uuidString
     var idnhanvien: String = ""
     var maphieu: String = ""
     var ngaytao: Date?
@@ -74,6 +74,17 @@ struct PhieuNhap: Decodable {
             }
         }
     }
+    
+    static func deleteExportBill(data: PhieuNhap, completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("PhieuNhap").document(data.idphieunhap).updateData([
+            
+            "daxoa": 1
+        ]) { err in
+            completion(err)
+        }
+    }
 }
 
 extension PhieuNhap: Mappable {
@@ -82,7 +93,7 @@ extension PhieuNhap: Mappable {
     }
     
     mutating func mapping(map: Map) {
-        idnhieunhap <- map["idphieunhap"]
+        idphieunhap <- map["idphieunhap"]
         idnhanvien <- map["idnhanvien"]
         maphieu <- map["maphieu"]
         var timestamp: Timestamp?

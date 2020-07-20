@@ -323,6 +323,9 @@ class ManagerDataViewController: UIViewController {
                 self?.reportData.removeAll()
                 var date: String?
                 var tempArray: [BaoCao] = []
+                let data = data.sorted {
+                    $0.ngaytao ?? Date() > $1.ngaytao ?? Date()
+                }
                 for item in data {
                     let itemDate = String(item.ngaytao?.convertToString().dropLast(9) ?? "")
                     if date != itemDate {
@@ -596,7 +599,7 @@ extension ManagerDataViewController: UITableViewDataSource {
             var importBill: PhieuNhap? = nil
             
             for list in importBillData {
-                importBill = list.filter {$0.idnhieunhap == currentExportBillData[indexPath.section][indexPath.item].idphieunhap }.first
+                importBill = list.filter {$0.idphieunhap == currentExportBillData[indexPath.section][indexPath.item].idphieunhap }.first
                 if importBill != nil {
                     break
                 }
@@ -674,8 +677,8 @@ extension ManagerDataViewController: UITableViewDelegate  {
         case .exportBill:
             var importBill: PhieuNhap? = nil
             
-            for list in currentImportBillData {
-                importBill = list.filter {$0.idnhieunhap == currentExportBillData[indexPath.section][indexPath.item].idphieunhap }.first
+            for list in importBillData {
+                importBill = list.filter {$0.idphieunhap == currentExportBillData[indexPath.section][indexPath.item].idphieunhap }.first
                 if importBill != nil {
                     break
                 }

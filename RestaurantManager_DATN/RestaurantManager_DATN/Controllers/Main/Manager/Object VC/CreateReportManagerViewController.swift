@@ -55,6 +55,7 @@ class CreateReportManagerViewController: UIViewController {
             break
         }
         
+        lbTitleReport.text = ""
 //        tvReportContent.text = "1. Cơm cá kho tộ - 63 niêu \n2. Cơm gà chua ngọt - 53 đĩa \n3. Cơm trắng - 40 tô \n4. Cơm thịt rang cháy cạnh - 39 đĩa\n5. Gà Rang muối ớt - 33 con\n6. Cá thu rán - 29 khúc\n7. Cá thu sốt chua ngọt - 28 đĩa\n8. Rau muốn xào tỏi - 28 đĩa\n9. Gà không lối thoát - 26 con\n10. Thịt lợn mường - 25 đĩa\n11. Thịt nguội - 22 đĩa\n12. Rau cần xào thịt bò - 10 đĩa"
         
         addEndEditingTapGuesture()

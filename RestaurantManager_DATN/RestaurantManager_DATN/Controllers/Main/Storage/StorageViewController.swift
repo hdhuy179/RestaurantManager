@@ -131,13 +131,19 @@ class StorageViewController: UIViewController {
             for (index, imp) in importList.enumerated() {
                 for exportList in exportBill {
                     for exp in exportList {
-                        if imp.idnhieunhap == exp.idphieunhap && exp.trangthai == 1 {
+                        if imp.idphieunhap == exp.idphieunhap && exp.trangthai == 1 {
                             temp[index].soluong -= exp.soluong
+                        }
+                        if temp[index].soluong == 0 {
+                            temp.remove(at: index)
                         }
                     }
                 }
             }
-            currentStuff.append(temp)
+            if temp.isEmpty != true {
+                currentStuff.append(temp)
+            }
+            
         }
         
         storageTableView.reloadData()
@@ -212,7 +218,7 @@ extension StorageViewController: UITableViewDataSource {
             
             var imp: PhieuNhap?
             for item in importBill {
-                imp = item.first { $0.idnhieunhap == exportBill[indexPath.section][indexPath.item].idphieunhap}
+                imp = item.first { $0.idphieunhap == exportBill[indexPath.section][indexPath.item].idphieunhap}
                 if imp != nil {
                     break
                 }
@@ -230,6 +236,14 @@ extension StorageViewController: UITableViewDataSource {
 extension StorageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableViewProperties.rowHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if storageSegmentedControl.selectedSegmentIndex == 2 {
+            let presentHandler = PresentHandler()
+            presentHandler.presentImportBillManagerVC(self, data: self.importBill[indexPath.section][indexPath.item], forDetail: true)
+        }
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -252,7 +266,11 @@ extension StorageViewController: UITableViewDelegate {
                 alert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action) in
                     guard let text = alert.textFields?.first?.text else { return }
                     if let soluong = Float(text), soluong > 0, soluong <= self.currentStuff[indexPath.section][indexPath.item].soluong {
-                        
+                        let impData = self.currentStuff[indexPath.section][indexPath.item]
+                        let exportData = PhieuXuat(idphieunhap: impData.idphieunhap, ngaytao: Date(), soluong: soluong, trangthai: 0, daxoa: 0)
+                        PhieuXuat.createBill(data: exportData) { [weak self](err) in
+                            self?.fetchData()
+                        }
                     } else {
                         let subAlert = UIAlertController(title: "Lỗi", message: "Hãy kiểm tra lại số lượng", preferredStyle: .alert)
                         subAlert.addAction(UIAlertAction(title: "Oke", style: .destructive, handler: nil))
@@ -268,10 +286,14 @@ extension StorageViewController: UITableViewDelegate {
             let lbHuy = exportBill[indexPath.section][indexPath.item].trangthai == 1 ? "Xóa" : "Hủy"
             
             let huy = UITableViewRowAction(style: .default, title: lbHuy) {(_, index) in
-                 
+                PhieuXuat.deleteExportBill(data: self.exportBill[indexPath.section][indexPath.item]) { [weak self](err) in
+                    self?.fetchData()
+                }
             }
             let xacnhan = UITableViewRowAction(style: .normal, title: "Xác nhận") { (_, index) in
-               
+                PhieuXuat.confirmExportBill(data: self.exportBill[indexPath.section][indexPath.item]) { [weak self](err) in
+                    self?.fetchData()
+                }
             }
             xacnhan.backgroundColor = .systemGreen
             
@@ -281,10 +303,13 @@ extension StorageViewController: UITableViewDelegate {
             return [huy, xacnhan]
         case 2:
             let xoa = UITableViewRowAction(style: .default, title: "Xóa") {(_, index) in
-                 
+                PhieuNhap.deleteExportBill(data: self.importBill[indexPath.section][indexPath.item]) { [weak self](err) in
+                    self?.fetchData()
+                }
             }
             let sua = UITableViewRowAction(style: .normal, title: "Sửa") { (_, index) in
-               
+               let presentHandler = PresentHandler()
+                presentHandler.presentImportBillManagerVC(self, data: self.importBill[indexPath.section][indexPath.item], forDetail: false)
             }
             return [xoa, sua]
         default:

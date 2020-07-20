@@ -18,9 +18,12 @@ class ImportBillManagerViewController: UIViewController {
     @IBOutlet weak var txtBillCreatedDate: TextField!
     @IBOutlet weak var txtBillCreator: TextField!
     @IBOutlet weak var swOutOfDate: UISwitch!
-    @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var btnDelete: RaisedButton!
+    @IBOutlet weak var btnConfirm: RaisedButton!
     
     var importBill: PhieuNhap?
+    
+    var forDetail: Bool = false
     
     var staff: NhanVien? {
         didSet {
@@ -61,6 +64,18 @@ class ImportBillManagerViewController: UIViewController {
             btnDelete.setTitle("Hủy", for: .normal)
         }
         
+        if forDetail {
+            lbTitle.text = "Chi tiết phiếu nhập"
+            txtBillNo.isEnabled = false
+            txtStuffName.isEnabled = false
+            txtStuffUnit.isEnabled = false
+            txtStuffAmount.isEnabled = false
+            txtBillCreator.isEnabled = false
+            swOutOfDate.isEnabled = false
+            btnDelete.isHidden = true
+            btnConfirm.isHidden = true
+        }
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(txtCategoryTapped))
         txtBillCreator.addGestureRecognizer(tapGesture)
     }
@@ -87,8 +102,8 @@ class ImportBillManagerViewController: UIViewController {
             importBill = PhieuNhap()
         }
 
-        db.collection("PhieuNhap").document(importBill!.idnhieunhap).setData([
-            "idphieunhap": importBill?.idnhieunhap ?? "",
+        db.collection("PhieuNhap").document(importBill!.idphieunhap).setData([
+            "idphieunhap": importBill?.idphieunhap ?? "",
             "idnhanvien": staff?.idnhanvien ?? "",
             "maphieu": billNo,
             "ngaytao": createdDate,
@@ -104,22 +119,22 @@ class ImportBillManagerViewController: UIViewController {
     }
     
     @IBAction func btnDeleteTapped(_ sender: Any) {
-//        if btnDelete.titleLabel?.text == "Hủy" {
-//            self.dismiss(animated: true)
-//            return
-//        }
-//        let db = Firestore.firestore()
-//        let will = table?.daxoa == 0 ? 1 : 0
-//        let message = will == 0 ? "Bạn có chắc chắn muốn khôi phục dữ liệu không" : "Bạn có chắc chắn muốn xóa dữ liệu không"
-//        let alert = UIAlertController(title: "Thông báo", message: message, preferredStyle: .alert)
-//        let xacnhan = UIAlertAction(title: "Xác nhận", style: .default) { (_) in
-//            db.collection("BanAn").document(self.table!.idbanan!).updateData(["daxoa": will])
-//            self.dismiss(animated: true)
-//        }
-//        let huy = UIAlertAction(title: "Hủy", style: .cancel)
-//        alert.addAction(xacnhan)
-//        alert.addAction(huy)
-//        self.present(alert, animated: true)
+        if btnDelete.titleLabel?.text == "Hủy" {
+            self.dismiss(animated: true)
+            return
+        }
+        let db = Firestore.firestore()
+        let will = importBill?.daxoa == 0 ? 1 : 0
+        let message = will == 0 ? "Bạn có chắc chắn muốn khôi phục dữ liệu không" : "Bạn có chắc chắn muốn xóa dữ liệu không"
+        let alert = UIAlertController(title: "Thông báo", message: message, preferredStyle: .alert)
+        let xacnhan = UIAlertAction(title: "Xác nhận", style: .default) { (_) in
+            db.collection("PhieuNhap").document(self.importBill!.idphieunhap).updateData(["daxoa": will])
+            self.dismiss(animated: true)
+        }
+        let huy = UIAlertAction(title: "Hủy", style: .cancel)
+        alert.addAction(xacnhan)
+        alert.addAction(huy)
+        self.present(alert, animated: true)
     }
     
     @IBAction func btnBackTapped(_ sender: Any) {

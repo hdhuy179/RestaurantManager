@@ -103,6 +103,46 @@ struct PhieuXuat: Decodable {
             }
         }
     }
+    
+    static func createBill(data: PhieuXuat, completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("PhieuXuat").document(data.idphieuxuat).setData([
+            
+            "idphieuxuat": data.idphieuxuat!,
+            "idnhanvientaophieu": App.shared.staffInfo?.idnhanvien ?? "",
+            "idnhanvienxuatphieu": "",
+            "idphieunhap": data.idphieunhap,
+            "ngaytao": data.ngaytao,
+            "soluong": data.soluong,
+            "trangthai": data.trangthai,
+            "daxoa": data.daxoa
+        ]) { err in
+            completion(err)
+        }
+    }
+    
+    static func confirmExportBill(data: PhieuXuat, completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("PhieuXuat").document(data.idphieuxuat).updateData([
+            "idnhanvienxuatphieu": App.shared.staffInfo?.idnhanvien ?? "",
+            "trangthai": 1,
+        ]) { err in
+            completion(err)
+        }
+    }
+    
+    static func deleteExportBill(data: PhieuXuat, completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("PhieuXuat").document(data.idphieuxuat).updateData([
+            
+            "daxoa": 1
+        ]) { err in
+            completion(err)
+        }
+    }
 }
 
 extension PhieuXuat: Mappable {

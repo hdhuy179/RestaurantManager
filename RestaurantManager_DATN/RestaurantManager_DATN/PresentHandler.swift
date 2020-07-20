@@ -117,10 +117,11 @@ class PresentHandler {
         rootVC.presentInFullScreen(vc, animated: true)
     }
     
-    func presentImportBillManagerVC(_ rootVC: UIViewController, data: PhieuNhap? = nil) {
+    func presentImportBillManagerVC(_ rootVC: UIViewController, data: PhieuNhap? = nil, forDetail: Bool = false) {
         let vc = storyboard.instantiateViewController(withIdentifier: "ImportBillManagerViewController") as! ImportBillManagerViewController
         
         vc.importBill = data
+        vc.forDetail = forDetail
         if let rootVC = rootVC as? ManagerDataViewController {
             vc.delegate = rootVC
         }

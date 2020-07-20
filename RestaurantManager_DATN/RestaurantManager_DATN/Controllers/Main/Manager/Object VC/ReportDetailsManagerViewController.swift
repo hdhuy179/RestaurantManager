@@ -16,6 +16,8 @@ class ReportDetailsManagerViewController: UIViewController {
     
     weak var delegate: ManagerDataViewController?
     
+    var reportType: ReportType?
+    
     var report: BaoCao!
     
     var reportDatas: [[String]] = []
@@ -26,7 +28,7 @@ class ReportDetailsManagerViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setupView()
-        splitData()
+        setupData()
     }
     
     func setupView() {
@@ -37,8 +39,24 @@ class ReportDetailsManagerViewController: UIViewController {
         ssvReportContent.register(TextCell.self, forCellWithReuseIdentifier: String(describing: TextCell.self))
     }
     
-    func splitData() {
-        
+    func setupData() {
+        switch report.loaibaocao {
+        case 1:
+            reportType = .income
+        case 2:
+            reportType = .bestSeller
+        case 3:
+            reportType = .stuffUsed
+        default:
+            return
+        }
+        let reportContent = report.noidung.replacingOccurrences(of: "\\n", with: "\n").replacingOccurrences(of: "\\t", with: "\t")
+        let splited = reportContent.split { $0 == "\n"}
+        for item in splited {
+            let item = String(item)
+            reportDatas.append(item.split { $0 == "\t"}.map(String.init))
+        }
+        ssvReportContent.reloadData()
     }
     
     @IBAction func btnNAVWasTapped(_ sender: Any) {
@@ -54,14 +72,11 @@ extension ReportDetailsManagerViewController: SpreadsheetViewDataSource {
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, widthForColumn column: Int) -> CGFloat {
-        return 100
+        return UIScreen.main.bounds.width - 30//400
     }
     
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
-//        if vertically {
-//            return checkInList.count + 1
-//        }
-        return 20
+        return 1
     }
     
     func numberOfRows(in spreadsheetView: SpreadsheetView) -> Int {
@@ -69,49 +84,23 @@ extension ReportDetailsManagerViewController: SpreadsheetViewDataSource {
 //            return Constants.recordXMLParserProperties.allCases.count
 //        }
 //        return checkInList.count + 1
-        return 20
+        return reportDatas.count + 1
     }
     
     func spreadsheetView(_ spreadsheetView: SpreadsheetView, cellForItemAt indexPath: IndexPath) -> Cell? {
 //        if vertically {
-//            if indexPath.column == 0 {
+            if indexPath.row == 0 {
                 let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
-//                cell.label.text = Constants.recordXMLParserProperties.allCases[indexPath.row].rawValue
-//                cell.setNeedsLayout()
-//
+                cell.label.text = "Danh sách món bán chạy nhất:"
+                cell.setNeedsLayout()
+
                 return cell
-//            } else {
-//                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TextCell.self), for: indexPath) as! TextCell
-//                let data = checkInList[indexPath.column - 1]
-//
-//                if data.absent == true {
-//                    cell.backgroundColor = .red
-//                } else if data.late != nil {
-//                    cell.backgroundColor = .yellow
-//                } else {
-//                    cell.backgroundColor = .white
-//                }
-//
-//                switch Constants.recordXMLParserProperties.allCases[indexPath.row] {
-//                case .date:
-//                    cell.label.text = data.date?.toString()
-//                case .timetable:
-//                    cell.label.text = data.timeTable
-//                case .starttime:
-//                    cell.label.text = data.startTime
-//                case .endtime:
-//                    cell.label.text = data.endTime
-//                case .clockin:
-//                    cell.label.text = data.clockIn
-//                case .late:
-//                    cell.label.text = data.late?.toHoursString()
-//                case .absent:
-//                    cell.label.text = data.absent == true ? "True" : "False"
-//                case .normal:
-//                    cell.label.text = String(data.normal ?? 0)
-//                }
-//                return cell
-//            }
+            } else {
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TextCell.self), for: indexPath) as! TextCell
+                cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
+                
+                return cell
+            }
 //        }
 //        if indexPath.row == 0 {
 //            let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
