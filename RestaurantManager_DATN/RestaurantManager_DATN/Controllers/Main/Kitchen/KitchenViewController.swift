@@ -23,7 +23,7 @@ class KitchenViewController: UIViewController {
     
     private lazy var tableRefreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(fetchAllTodayOrder), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(fetchData), for: .valueChanged)
         return refresh
     } ()
     
@@ -36,15 +36,21 @@ class KitchenViewController: UIViewController {
     var cookedOder: [Order] = []
     var uncookedOrder: [Order] = []
     
+    var currentCookedOder: [Order] = []
+    var currentUncookedOrder: [Order] = []
+    
+    var tableData: [BanAn] = []
+    var billData: [HoaDon] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         setupViews()
-        fetchAllTodayOrder()
+        fetchData()
         
         Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {_ in
-            self.fetchAllTodayOrder()
+            self.fetchData()
         }
     }
     
@@ -52,7 +58,9 @@ class KitchenViewController: UIViewController {
         logger()
     }
     
-    @objc func fetchAllTodayOrder() {
+    @objc func fetchData() {
+        var counter = 0
+        let maxCounter = 3
         Order.fetchKitchenData { [weak self] orders, error in
             self?.cookedOder.removeAll()
             self?.uncookedOrder.removeAll()
@@ -64,24 +72,55 @@ class KitchenViewController: UIViewController {
                         self?.cookedOder.append(order)
                     }
                 }
-                self?.cookedOder.sort{ $0.ngaytao?.timeIntervalSince1970 ?? 0 < $1.ngaytao?.timeIntervalSince1970 ?? 0}
+                self?.cookedOder.sort{ $0.ngaytao?.timeIntervalSince1970 ?? 0 > $1.ngaytao?.timeIntervalSince1970 ?? 0}
                 self?.cookedOder.sort{ $0.trangthai < $1.trangthai}
                 self?.uncookedOrder.sort{ $0.ngaytao?.timeIntervalSince1970 ?? 0 < $1.ngaytao?.timeIntervalSince1970 ?? 0}
                 self?.uncookedOrder.sort{ $0.trangthai < $1.trangthai}
                 
+                self?.currentCookedOder = self?.cookedOder ?? []
+                self?.currentUncookedOrder = self?.uncookedOrder ?? []
             }
-            self?.tableRefreshControl.endRefreshing()
-            self?.orderTableView.reloadData()
+            counter += 1
+            if counter == maxCounter {
+                self?.setupData()
+            }
+        }
+        
+        BanAn.fetchAllData { [weak self] (datas, error) in
+            if let datas = datas  {
+                self?.tableData = datas
+            }
+            counter += 1
+            if counter == maxCounter {
+                self?.setupData()
+            }
+        }
+        
+        HoaDon.fetchTodayBill { [weak self] (datas, err) in
+            if let datas = datas {
+                self?.billData = datas
+            }
+            counter += 1
+            if counter == maxCounter {
+                self?.setupData()
+            }
         }
         
     }
     
+    func setupData() {
+        tableRefreshControl.endRefreshing()
+        orderTableView.reloadData()
+    }
+    
     private func setupViews() {
-//        checkStaffAuthorities()
-        navigationItem.hidesSearchBarWhenScrolling = true
+        
+        addEndEditingTapGuesture()
         tableSearchController.searchResultsUpdater = self
         tableSearchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = tableSearchController
+        
+        navigationItem.hidesSearchBarWhenScrolling = false
         
         orderTableView.refreshControl = tableRefreshControl
         orderTableView.dataSource = self
@@ -128,14 +167,14 @@ extension KitchenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if kitchenSegmentedControl.selectedSegmentIndex == 0 {
             if section == 0 {
-                return uncookedOrder.filter{ $0.trangthai == 0}.count
+                return currentUncookedOrder.filter{ $0.trangthai == 0}.count
             }
-            return uncookedOrder.filter{ $0.trangthai == 1}.count
+            return currentUncookedOrder.filter{ $0.trangthai == 1}.count
         }
         if section == 0 {
-            return cookedOder.filter{ $0.trangthai == 2}.count
+            return currentCookedOder.filter{ $0.trangthai == 2}.count
         }
-        return cookedOder.filter{ $0.trangthai == 3}.count
+        return currentCookedOder.filter{ $0.trangthai == 3}.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -147,13 +186,17 @@ extension KitchenViewController: UITableViewDataSource {
             if indexPath.section == 1 {
                 addition = tableView.numberOfRows(inSection: 0)
             }
-            cell.order = uncookedOrder[indexPath.item + addition]
+            let bill = billData.first(where: { $0.idhoadon == currentUncookedOrder[indexPath.item + addition].idhoadon})
+            let table = tableData.first(where: { $0.idbanan == bill?.idbanan})
+            cell.configView(order: currentUncookedOrder[indexPath.item + addition], table: table)
         } else if kitchenSegmentedControl.selectedSegmentIndex == 1 {
             var addition = 0
             if indexPath.section == 1 {
                 addition = tableView.numberOfRows(inSection: 0)
             }
-            cell.order = cookedOder[indexPath.item + addition]
+            let bill = billData.first(where: { $0.idhoadon == currentCookedOder[indexPath.item + addition].idhoadon})
+            let table = tableData.first(where: { $0.idbanan == bill?.idbanan})
+            cell.configView(order: currentCookedOder[indexPath.item + addition], table: table)
         }
         cell.delegate = self
         return cell
@@ -189,29 +232,88 @@ extension KitchenViewController: UITableViewDelegate {
                 if indexPath.section == 1 {
                     addition = tableView.numberOfRows(inSection: 0)
                 }
-                order = self.cookedOder[indexPath.item + addition]
+                order = self.currentCookedOder[indexPath.item + addition]
             } else {
                 if indexPath.section == 1 {
                     addition = tableView.numberOfRows(inSection: 0)
                 }
                 
-                order = self.uncookedOrder[indexPath.item + addition]
+                order = self.currentUncookedOrder[indexPath.item + addition]
             }
             if var order = order, order.trangthai >= 0{
                 order.trangthai = order.trangthai - 1
                 order.updateOrder(forOrder: order) { error in
                 }
             }
-            self.fetchAllTodayOrder()
+            self.fetchData()
         }
         return [hoantac]
     }
 }
 
 extension KitchenViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
     
+    func updateSearchResults(for searchController: UISearchController) {
+        guard var text = searchController.searchBar.text else { return }
+        
+        text = text.lowercased()
+        if let _ = text.lowercased().range(of: "bàn") {
+            text = text.replacingOccurrences(of: "bàn", with: "")
+        } else if let  _ = text.lowercased().range(of: "ban") {
+            text = text.replacingOccurrences(of: "ban", with: "")
+        }
+        text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty == false {
+//            currentTableData = tableData.filter { $0.sobanan?.range(of: text) != nil}
+            if kitchenSegmentedControl.selectedSegmentIndex == 0 {
+//                var tempArr = uncookedOrder
+                currentUncookedOrder.removeAll()
+                let list = tableData.filter({ $0.sobanan?.contains(text) ?? false })
+                if list.isEmpty == false {
+                    for tableItem in list {
+                        for item in uncookedOrder {
+                            let bill = billData.first(where: { $0.idhoadon == item.idhoadon})
+                            let table = tableData.first(where: { $0.idbanan == bill?.idbanan})
+                            if table?.idbanan == tableItem.idbanan {
+                                currentUncookedOrder.append(item)
+                            }
+                        }
+                    }
+                    
+                } else {
+                    for item in uncookedOrder {
+                        if item.dish?.tenmonan.lowercased().contains(text) ?? false {
+                            currentUncookedOrder.append(item)
+                        }
+                    }
+                }
+            } else if kitchenSegmentedControl.selectedSegmentIndex == 1 {
+                currentCookedOder.removeAll()
+                let list = tableData.filter({ $0.sobanan?.contains(text) ?? false })
+                if list.isEmpty == false {
+                    for tableItem in list {
+                        for item in cookedOder {
+                            let bill = billData.first(where: { $0.idhoadon == item.idhoadon})
+                            let table = tableData.first(where: { $0.idbanan == bill?.idbanan})
+                            if table?.idbanan == tableItem.idbanan {
+                                currentCookedOder.append(item)
+                            }
+                        }
+                    }
+                    
+                } else {
+                    for item in cookedOder {
+                        if item.dish?.tenmonan.lowercased().contains(text) ?? false {
+                            currentCookedOder.append(item)
+                        }
+                    }
+                }
+            }
+        } else {
+            currentUncookedOrder = uncookedOrder
+            currentCookedOder = cookedOder
+        }
+        orderTableView.reloadData()
+    }
     
 }

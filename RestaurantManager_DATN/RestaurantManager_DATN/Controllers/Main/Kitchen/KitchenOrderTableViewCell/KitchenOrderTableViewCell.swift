@@ -14,48 +14,31 @@ class KitchenOrderTableViewCell: UITableViewCell {
     @IBOutlet weak var lbWaitTime: UILabel!
     @IBOutlet weak var btnFinish: RaisedButton!
     
-    var order: Order? {
-        didSet {
-            setupView()
-            fetchBillData()
-        }
-    }
+    var order: Order?
+    
     weak var delegate: KitchenViewController?
     
-    func fetchBillData() {
-        btnFinish.layer.cornerRadius = 5
-        if let idhoadon = order?.idhoadon, let dish = order?.dish {
-            HoaDon.fetchData(ofBillID: idhoadon) { [weak self](data, error) in
-                if let idbanan = data?.idbanan {
-                    BanAn.fetchData(ofID: idbanan) { (banan, error) in
-                         self?.lbDishName.text = dish.tenmonan + " (Bàn " + (banan?.sobanan ?? "") + ")"
-                        
-                    }
-                }
-                
+    func configView(order: Order, table: BanAn?) {
+        
+        self.order = order
+        lbDishName.text = "\(order.dish?.tenmonan ?? "") (Bàn \(table?.sobanan ?? "nil") )"
+        lbOrderAmount.text = String(order.soluong)
+        lbWaitTime.text = ""
+        if let ngaytao = order.ngaytao {
+            let time = Int(Date().timeIntervalSince1970 - ngaytao.timeIntervalSince1970)
+            lbWaitTime.text = "\(time/60)p"
+            if time/60 >= 60 {
+                lbWaitTime.text = "\(time/3600)g \((time%3600)/60)p"
             }
         }
-    }
-    
-    func setupView() {
-        if let order = order, let dish = order.dish {
-            lbDishName.text = dish.tenmonan
-            lbOrderAmount.text = String(order.soluong)
-            lbWaitTime.text = ""
-            if let ngaytao = order.ngaytao, order.trangthai < 2 {
-                let time = Int(Date().timeIntervalSince1970 - ngaytao.timeIntervalSince1970)
-                lbWaitTime.text = "\(time/60)p"
-            }
-            if order.trangthai > 1 || order.trangthai < 0 {
-                btnFinish.isEnabled = false
-                btnFinish.backgroundColor = .systemGray
-                btnFinish.setTitle(order.getState(), for: .disabled)
-            } else if order.trangthai >= 0 && order.trangthai < 2 {
-                btnFinish.isEnabled = true
-                btnFinish.backgroundColor = .systemGreen
-                btnFinish.setTitle(order.getState(forNextState: true), for: .normal)
-            }
-            
+        if order.trangthai > 1 || order.trangthai < 0 {
+            btnFinish.isEnabled = false
+            btnFinish.backgroundColor = .systemGray
+            btnFinish.setTitle(order.getState(), for: .disabled)
+        } else if order.trangthai >= 0 && order.trangthai < 2 {
+            btnFinish.isEnabled = true
+            btnFinish.backgroundColor = .systemGreen
+            btnFinish.setTitle(order.getState(forNextState: true), for: .normal)
         }
     }
     
@@ -65,8 +48,16 @@ class KitchenOrderTableViewCell: UITableViewCell {
             order.trangthai = order.trangthai + 1
 //            order.ngaytao = Date()
             self.order = order
+             btnFinish.isEnabled = false
+            btnFinish.backgroundColor = .systemGray
+            
+            if order.trangthai > 1 || order.trangthai < 0 {
+                btnFinish.setTitle(order.getState(), for: .disabled)
+            } else if order.trangthai >= 0 && order.trangthai < 2 {
+                btnFinish.setTitle(order.getState(forNextState: true), for: .disabled)
+            }
             order.updateOrder(forOrder: order) { [weak self] error in
-                self?.delegate?.fetchAllTodayOrder()
+                self?.delegate?.fetchData()
             }
         }
     }

@@ -45,8 +45,8 @@ class BillHistoryViewController: UIViewController {
     }
     
     func fetchTodayBill() {
-        HoaDon.fetchTodayPaidBill { [weak self] hoadons, error in
-            if let hoadons = hoadons {
+        HoaDon.fetchTodayBill { [weak self] hoadons, error in
+            if let hoadons = hoadons?.filter({ $0.dathanhtoan == 1 }) {
                 self?.bills = hoadons
             }
             self?.bills.sort{ $0.ngaytao.timeIntervalSince1970 > $1.ngaytao.timeIntervalSince1970}

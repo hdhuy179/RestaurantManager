@@ -259,7 +259,7 @@ extension StorageViewController: UITableViewDelegate {
         switch state {
         case 0:
             let xuatKho = UITableViewRowAction(style: .normal, title: "Xuất kho") { (_, index) in
-                let alert = UIAlertController(title: self.currentStuff[indexPath.section][indexPath.item].tenvatpham, message: "Số lượng(\(self.currentStuff[indexPath.section][indexPath.item].donvi)): ", preferredStyle: .alert)
+                let alert = UIAlertController(title: self.currentStuff[indexPath.section][indexPath.item].tenvatpham, message: "Số lượng (\(self.currentStuff[indexPath.section][indexPath.item].donvi)): ", preferredStyle: .alert)
                 alert.addTextField { (textField) in
                     textField.keyboardType = .decimalPad
                 }

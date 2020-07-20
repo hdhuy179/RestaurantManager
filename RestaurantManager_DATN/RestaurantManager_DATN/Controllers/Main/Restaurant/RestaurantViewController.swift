@@ -52,7 +52,6 @@ class RestaurantViewController: UIViewController {
     }
     
     private func setupViews() {
-//        tableSearchController.delegate = self
         tableSearchController.searchResultsUpdater = self
         tableSearchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = tableSearchController
@@ -178,22 +177,24 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yTranslation = scrollView.panGestureRecognizer.translation(in: scrollView).y
-        if yTranslation >= 50 {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        } else if yTranslation <= -50 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        }
+//        let yTranslation = scrollView.panGestureRecognizer.translation(in: scrollView).y
+//        if yTranslation >= 50 {
+//            navigationController?.setNavigationBarHidden(false, animated: true)
+//        } else if yTranslation <= -50 {
+//            navigationController?.setNavigationBarHidden(true, animated: true)
+//        }
     }
 }
 
 extension RestaurantViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard var text = searchController.searchBar.text else { return }
-        if let range = text.lowercased().range(of: "bàn") {
-            text.removeSubrange(range)
-        } else if let  range = text.lowercased().range(of: "ban") {
-            text.removeSubrange(range)
+        
+        text = text.lowercased()
+        if let _ = text.lowercased().range(of: "bàn") {
+            text = text.replacingOccurrences(of: "bàn", with: "")
+        } else if let  _ = text.lowercased().range(of: "ban") {
+            text = text.replacingOccurrences(of: "ban", with: "")
         }
         text = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if text.isEmpty == false {

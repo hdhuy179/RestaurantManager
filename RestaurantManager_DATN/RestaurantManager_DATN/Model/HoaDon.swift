@@ -136,7 +136,7 @@ struct HoaDon: Decodable {
         }
     }
     
-    static func fetchTodayPaidBill(completion: @escaping ([HoaDon]?, Error?) -> Void) {
+    static func fetchTodayBill(completion: @escaping ([HoaDon]?, Error?) -> Void) {
         let db = Firestore.firestore()
         
         let calendar = Calendar.current
@@ -144,7 +144,7 @@ struct HoaDon: Decodable {
         let start = calendar.date(from: components)!
         let end = calendar.date(byAdding: .day, value: 1, to: start)!
         
-        db.collection("HoaDon").whereField("daxoa", isEqualTo: 0).whereField("ngaytao", isLessThan: end).whereField("ngaytao", isGreaterThan: start).whereField("dathanhtoan", isEqualTo: 1).order(by: "ngaytao").getDocuments { (snapshot, err) in
+        db.collection("HoaDon").whereField("daxoa", isEqualTo: 0).whereField("ngaytao", isLessThan: end).whereField("ngaytao", isGreaterThan: start).order(by: "ngaytao").getDocuments { (snapshot, err) in
             if err != nil {
                 
                 print("Error getting HoaDon Data: \(err!.localizedDescription)")
