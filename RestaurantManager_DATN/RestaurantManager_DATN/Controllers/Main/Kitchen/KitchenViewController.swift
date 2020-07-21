@@ -36,7 +36,7 @@ class KitchenViewController: UIViewController {
     var cookedOder: [Order] = []
     var uncookedOrder: [Order] = []
     
-    var currentCookedOder: [Order] = []
+    var currentCookedOrder: [Order] = []
     var currentUncookedOrder: [Order] = []
     
     var tableData: [BanAn] = []
@@ -58,6 +58,18 @@ class KitchenViewController: UIViewController {
         logger()
     }
     
+    var lastUpdateTimer: Timer?
+    
+    func orderStateUpdated() {
+        
+        lastUpdateTimer?.invalidate()
+        
+        lastUpdateTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) {_ in
+            self.fetchData()
+            self.lastUpdateTimer = nil
+        }
+    }
+    
     @objc func fetchData() {
         var counter = 0
         let maxCounter = 3
@@ -77,7 +89,7 @@ class KitchenViewController: UIViewController {
                 self?.uncookedOrder.sort{ $0.ngaytao?.timeIntervalSince1970 ?? 0 < $1.ngaytao?.timeIntervalSince1970 ?? 0}
                 self?.uncookedOrder.sort{ $0.trangthai < $1.trangthai}
                 
-                self?.currentCookedOder = self?.cookedOder ?? []
+                self?.currentCookedOrder = self?.cookedOder ?? []
                 self?.currentUncookedOrder = self?.uncookedOrder ?? []
             }
             counter += 1
@@ -155,12 +167,24 @@ extension KitchenViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if kitchenSegmentedControl.selectedSegmentIndex == 0 {
             if section == 0 {
+                if currentUncookedOrder.filter({ $0.trangthai == 0}).isEmpty == true {
+                    return nil
+                }
                 return "   " + "Đang đợi"
+            }
+            if currentUncookedOrder.filter({ $0.trangthai == 1}).isEmpty == true {
+                return nil
             }
             return "   " + "Đang nấu"
         }
         if section == 0 {
+            if currentCookedOrder.filter({ $0.trangthai == 2}).isEmpty == true {
+                return nil
+            }
             return "   " + "Đã nấu"
+        }
+        if currentCookedOrder.filter({ $0.trangthai == 3}).isEmpty == true {
+            return nil
         }
         return "   " + "Đã hoàn thành"
     }
@@ -172,9 +196,9 @@ extension KitchenViewController: UITableViewDataSource {
             return currentUncookedOrder.filter{ $0.trangthai == 1}.count
         }
         if section == 0 {
-            return currentCookedOder.filter{ $0.trangthai == 2}.count
+            return currentCookedOrder.filter{ $0.trangthai == 2}.count
         }
-        return currentCookedOder.filter{ $0.trangthai == 3}.count
+        return currentCookedOrder.filter{ $0.trangthai == 3}.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -194,9 +218,9 @@ extension KitchenViewController: UITableViewDataSource {
             if indexPath.section == 1 {
                 addition = tableView.numberOfRows(inSection: 0)
             }
-            let bill = billData.first(where: { $0.idhoadon == currentCookedOder[indexPath.item + addition].idhoadon})
+            let bill = billData.first(where: { $0.idhoadon == currentCookedOrder[indexPath.item + addition].idhoadon})
             let table = tableData.first(where: { $0.idbanan == bill?.idbanan})
-            cell.configView(order: currentCookedOder[indexPath.item + addition], table: table)
+            cell.configView(order: currentCookedOrder[indexPath.item + addition], table: table)
         }
         cell.delegate = self
         return cell
@@ -232,7 +256,7 @@ extension KitchenViewController: UITableViewDelegate {
                 if indexPath.section == 1 {
                     addition = tableView.numberOfRows(inSection: 0)
                 }
-                order = self.currentCookedOder[indexPath.item + addition]
+                order = self.currentCookedOrder[indexPath.item + addition]
             } else {
                 if indexPath.section == 1 {
                     addition = tableView.numberOfRows(inSection: 0)
@@ -263,7 +287,11 @@ extension KitchenViewController: UISearchResultsUpdating {
             text = text.replacingOccurrences(of: "ban", with: "")
         }
         text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty == true {
+            orderTableView.refreshControl = tableRefreshControl
+        }
         if text.isEmpty == false {
+            orderTableView.refreshControl = nil
 //            currentTableData = tableData.filter { $0.sobanan?.range(of: text) != nil}
             if kitchenSegmentedControl.selectedSegmentIndex == 0 {
 //                var tempArr = uncookedOrder
@@ -288,7 +316,7 @@ extension KitchenViewController: UISearchResultsUpdating {
                     }
                 }
             } else if kitchenSegmentedControl.selectedSegmentIndex == 1 {
-                currentCookedOder.removeAll()
+                currentCookedOrder.removeAll()
                 let list = tableData.filter({ $0.sobanan?.contains(text) ?? false })
                 if list.isEmpty == false {
                     for tableItem in list {
@@ -296,7 +324,7 @@ extension KitchenViewController: UISearchResultsUpdating {
                             let bill = billData.first(where: { $0.idhoadon == item.idhoadon})
                             let table = tableData.first(where: { $0.idbanan == bill?.idbanan})
                             if table?.idbanan == tableItem.idbanan {
-                                currentCookedOder.append(item)
+                                currentCookedOrder.append(item)
                             }
                         }
                     }
@@ -304,14 +332,14 @@ extension KitchenViewController: UISearchResultsUpdating {
                 } else {
                     for item in cookedOder {
                         if item.dish?.tenmonan.lowercased().contains(text) ?? false {
-                            currentCookedOder.append(item)
+                            currentCookedOrder.append(item)
                         }
                     }
                 }
             }
         } else {
             currentUncookedOrder = uncookedOrder
-            currentCookedOder = cookedOder
+            currentCookedOrder = cookedOder
         }
         orderTableView.reloadData()
     }

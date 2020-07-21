@@ -18,7 +18,10 @@ class ExportBillManagerViewController: UIViewController {
     @IBOutlet weak var txtStaffCreator: TextField!
     @IBOutlet weak var txtStaffExportor: TextField!
     @IBOutlet weak var swIsExported: UISwitch!
-    @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var btnDelete: RaisedButton!
+    @IBOutlet weak var btnConfirm: RaisedButton!
+    
+    var forShowDetails: Bool = false
     
     private var isForExporter = false
     
@@ -75,6 +78,29 @@ class ExportBillManagerViewController: UIViewController {
             //            btnDelete.backgroundColor = .gray
             btnDelete.setTitle("Hủy", for: .normal)
         }
+        
+        if forShowDetails {
+            txtBillCreatedDate.isEnabled = false
+            txtImportBill.isEnabled = false
+            txtStuffName.isEnabled = false
+            txtStuffAmount.isEnabled = false
+            txtBillCreatedDate.isEnabled = false
+            txtStaffCreator.isEnabled = false
+            txtStaffExportor.isEnabled = false
+            swIsExported.isEnabled = false
+            
+            btnDelete.isHidden = true
+            btnConfirm.isHidden = true
+            
+            txtBillCreatedDate.isDividerHidden = true
+            txtImportBill.isDividerHidden = true
+            txtStuffName.isDividerHidden = true
+            txtStuffAmount.isDividerHidden = true
+            txtBillCreatedDate.isDividerHidden = true
+            txtStaffCreator.isDividerHidden = true
+            txtStaffExportor.isDividerHidden = true
+        }
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(txtCreatorTapped))
         txtStaffCreator.addGestureRecognizer(tapGesture)
         

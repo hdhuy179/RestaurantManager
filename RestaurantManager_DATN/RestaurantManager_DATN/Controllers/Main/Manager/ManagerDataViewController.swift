@@ -177,7 +177,7 @@ class ManagerDataViewController: UIViewController {
     
     private func fetchStaffData() {
         NhanVien.fetchAllData { [weak self] (data, error) in
-            
+            let data = data?.filter({ $0.quyen > 0 })
             if error != nil {
                 print(error.debugDescription)
             } else if let data = data {
@@ -267,7 +267,7 @@ class ManagerDataViewController: UIViewController {
                 var date: String?
                 var tempArray: [PhieuNhap] = []
                 for item in data {
-                    let itemDate = String(item.ngaytao?.convertToString().dropLast(9) ?? "")
+                    let itemDate = String(item.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
                     if date != itemDate {
                         if tempArray.isEmpty == false {
                             self?.importBillData.append(tempArray)
@@ -297,7 +297,7 @@ class ManagerDataViewController: UIViewController {
                 var date: String?
                 var tempArray: [PhieuXuat] = []
                 for item in data {
-                    let itemDate = String(item.ngaytao?.convertToString().dropLast(9) ?? "")
+                    let itemDate = String(item.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
                     if date != itemDate {
                         if tempArray.isEmpty == false {
                             self?.exportBillData.append(tempArray)
@@ -327,7 +327,7 @@ class ManagerDataViewController: UIViewController {
                     $0.ngaytao ?? Date() > $1.ngaytao ?? Date()
                 }
                 for item in data {
-                    let itemDate = String(item.ngaytao?.convertToString().dropLast(9) ?? "")
+                    let itemDate = String(item.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
                     if date != itemDate {
                         if tempArray.isEmpty == false {
                             self?.reportData.append(tempArray)
@@ -464,6 +464,7 @@ class ManagerDataViewController: UIViewController {
             presentHandler.presentSearchBillManagerVC(self, bills: billData)
             return
         }
+        dataTableView.refreshControl = nil
         topConstaint.constant = 44
         searchBar.becomeFirstResponder()
     }
@@ -518,22 +519,37 @@ extension ManagerDataViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if managerType == .bill {
+            if currentBillData[section].isEmpty == true {
+                return nil
+            }
             let title = String(currentBillData[section].first?.ngaytao.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
             return title.isEmpty ? nil : "   Ngày " + title
         }
         if managerType == .importBill {
+            if currentImportBillData[section].isEmpty == true {
+                return nil
+            }
             let title = String(currentImportBillData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
             return title.isEmpty ? nil : "   Ngày " + title
         }
         if managerType == .exportBill {
+            if currentExportBillData[section].isEmpty == true {
+                return nil
+            }
             let title = String(currentExportBillData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
             return title.isEmpty ? nil : "   Ngày " + title
         }
         if managerType == .report {
+            if currentReportData[section].isEmpty == true {
+                return nil
+            }
             let title = String(currentReportData[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
             return title.isEmpty ? nil : "     Ngày " + title
         }
         if managerType == .dish {
+            if currentDishData.filter({ $0.idtheloaimonan == currentDishCategoryData[section].idtheloaimonan }).isEmpty == true {
+                return nil
+            }
             return "    " + currentDishCategoryData[section].tentheloaimonan
         }
         return nil
@@ -691,18 +707,118 @@ extension ManagerDataViewController: UITableViewDelegate  {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let yTranslation = scrollView.panGestureRecognizer.translation(in: scrollView).y
-        if yTranslation >= 50 {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        } else if yTranslation <= -50 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        }
+//        let yTranslation = scrollView.panGestureRecognizer.translation(in: scrollView).y
+//        if yTranslation >= 50 {
+//            navigationController?.setNavigationBarHidden(false, animated: true)
+//        } else if yTranslation <= -50 {
+//            navigationController?.setNavigationBarHidden(true, animated: true)
+//        }
     }
 }
 
 extension ManagerDataViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        dataTableView.refreshControl = tableRefreshControl
         searchBar.endEditing(true)
         topConstaint.constant = 0
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        var searchText = searchText.lowercased().trimmed
+        switch managerType {
+        case .bill:
+            break
+        case .table:
+            if let _ = searchText.lowercased().range(of: "bàn") {
+                searchText = searchText.replacingOccurrences(of: "bàn", with: "")
+            } else if let  _ = searchText.lowercased().range(of: "ban") {
+                searchText = searchText.replacingOccurrences(of: "ban", with: "")
+            }
+ 
+            if searchText.isEmpty == true {
+                currentTableData = tableData
+                break
+            }
+            let result = tableData.filter({ $0.sobanan?.contains(searchText) ?? false })
+            currentTableData = result
+        case .staff:
+            if searchText.isEmpty == true {
+                currentStaffData = staffData
+                break
+            }
+            let result = staffData.filter({ $0.tennhanvien.lowercased().contains(searchText) })
+            currentStaffData = result
+        case .dishCategory:
+            if searchText.isEmpty == true {
+                currentDishCategoryData = dishCategoryData
+                break
+            }
+            let result = dishCategoryData.filter({ $0.tentheloaimonan.lowercased().contains(searchText) })
+            currentDishCategoryData = result
+        case .dish:
+            if searchText.isEmpty == true {
+                currentDishData = dishData
+                break
+            }
+            let dishCategoryList = dishCategoryData.filter({ $0.tentheloaimonan.lowercased().contains(searchText)})
+            let result = dishData.filter({
+                let currentItem = $0
+                return ($0.tenmonan.lowercased().contains(searchText) || dishCategoryList.filter({ $0.idtheloaimonan == currentItem.idtheloaimonan }).isEmpty == false) })
+            currentDishData = result
+        case .importBill:
+            if searchText.isEmpty == true {
+                currentImportBillData = importBillData
+                break
+            }
+            let text = searchText
+            currentImportBillData.removeAll()
+            for item in importBillData {
+                let list = item.filter({$0.tenvatpham.lowercased().contains(text) || $0.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy").lowercased().contains(text) ?? false || $0.maphieu.lowercased().contains(text) || $0.creatorStaff?.tennhanvien.lowercased().contains(text) ?? false})
+                if list.isEmpty == false {
+                    currentImportBillData.append(list)
+                }
+            }
+        case .exportBill:
+            if searchText.isEmpty == true {
+                currentExportBillData = exportBillData
+                break
+            }
+            let text = searchText
+            currentExportBillData.removeAll()
+            for item in exportBillData {
+                
+                let list = item.filter({
+                    let currentItem = $0
+                    var imp: PhieuNhap?
+                    for item in currentImportBillData {
+                        imp = item.first { $0.idphieunhap == currentItem.idphieunhap}
+                        if imp != nil {
+                            break
+                        }
+                    }
+                    return (imp?.tenvatpham.lowercased().contains(text) ?? false || $0.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy").lowercased().contains(text) ?? false || imp?.maphieu.lowercased().contains(text) ?? false || $0.creatorStaff?.tennhanvien.lowercased().contains(text) ?? false)})
+                if list.isEmpty == false {
+                    currentExportBillData.append(list)
+                }
+            }
+        case .report:
+            if searchText.isEmpty == true {
+                currentReportData = reportData
+                break
+            }
+            currentReportData.removeAll()
+            for list in reportData {
+                let temp = list.filter({ $0.tieude.lowercased().contains(searchText)})
+                if temp.isEmpty == false {
+                    currentReportData.append(temp)
+                }
+            }
+        default: break
+        }
+        dataTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }

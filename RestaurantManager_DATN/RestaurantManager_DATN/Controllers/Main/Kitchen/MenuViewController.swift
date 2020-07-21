@@ -125,6 +125,7 @@ extension MenuViewController: UITableViewDataSource {
             fatalError("MenuViewController: Can't dequeue for DishTableViewCell")
         }
         cell.configView(data: dishData[indexPath.section][indexPath.item])
+        cell.delegate = self
         return cell
     }
     

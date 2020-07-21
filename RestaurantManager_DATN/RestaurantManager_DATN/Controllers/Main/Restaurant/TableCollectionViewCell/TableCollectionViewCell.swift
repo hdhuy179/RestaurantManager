@@ -47,14 +47,20 @@ final class TableCollectionViewCell: UICollectionViewCell {
 //            stateLabel.text = "Đang đợi món"
 //            stateLabel.backgroundColor = UIColor.orange
             imvState.image = UIImage(named: "wait")
-            imvState.tintColor = .systemYellow
-            vState.backgroundColor = .systemYellow
+            imvState.tintColor = .systemRed
+            vState.backgroundColor = .systemRed
+//            for item in data.bill?.orderList ?? [] {
+//                if item.trangthai == 2 {
+//                    imvState.tintColor = .systemOrange
+//                    vState.backgroundColor = .systemOrange
+//                }
+//            }
         case .inUsed:
 //            stateLabel.text = "Đang sử dụng"
 //            stateLabel.backgroundColor = UIColor.yellow
             imvState.image = UIImage(named: "used")
-            imvState.tintColor = .systemRed
-            vState.backgroundColor = .systemRed
+            imvState.tintColor = .systemYellow
+            vState.backgroundColor = .systemYellow
         }
         
     }

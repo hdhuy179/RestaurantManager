@@ -22,7 +22,9 @@ class MakeOrderViewController: UIViewController {
 
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var dishTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var bottomConstraintDishTableView: NSLayoutConstraint!
+    @IBOutlet weak var topConstantTableView: NSLayoutConstraint!
     
     private struct tableViewProperties {
         static let headerNibName = "DishHeaderTableViewCell"
@@ -38,6 +40,7 @@ class MakeOrderViewController: UIViewController {
     
     var table: BanAn?
     var dishData: [[MonAn]] = []
+    var currentDishData: [[MonAn]] = []
     var dishCategoryData: [TheLoaiMonAn] = []
     
     var cartVisible = false
@@ -87,11 +90,19 @@ class MakeOrderViewController: UIViewController {
             lbTitle.text = "Bàn " + sobanan
         }
         
+        searchBar.showsCancelButton = true
+        searchBar.delegate = self
+        
         dishTableView.dataSource = self
         dishTableView.delegate = self
         
         dishTableView.register(UINib(nibName: tableViewProperties.headerNibName, bundle: nil), forCellReuseIdentifier: tableViewProperties.headerID)
         dishTableView.register(UINib(nibName: tableViewProperties.rowNibName, bundle: nil), forCellReuseIdentifier: tableViewProperties.rowID)
+    }
+    
+    @IBAction func btnSearchTapped(_ sender: Any) {
+        searchBar.becomeFirstResponder()
+        topConstantTableView.constant = 53
     }
     
     func setupCart() {
@@ -227,8 +238,7 @@ class MakeOrderViewController: UIViewController {
             if error != nil {
                 
             } else if let data = data {
-                
-                self?.dishData.append(data)
+                self?.dishData = [data]
                 if !(self?.dishCategoryData.isEmpty ?? true) {
                     self?.setupData()
                 }
@@ -239,7 +249,7 @@ class MakeOrderViewController: UIViewController {
                 
             } else if let data = data {
                 self?.dishCategoryData = data
-                if !(self?.dishData.isEmpty ?? true) {
+                if !(self?.currentDishData.isEmpty ?? true) {
                     self?.setupData()
                 }
             }
@@ -263,6 +273,7 @@ class MakeOrderViewController: UIViewController {
                 }
             }
         }
+        currentDishData = dishData
         if table?.bill != nil {
             cartViewController.bill = table?.bill
 //            cartViewController.view.isHidden = false
@@ -280,10 +291,13 @@ extension MakeOrderViewController: UITableViewDataSource {
         return dishCategoryData.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dishData[section].count
+        return currentDishData[section].count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if currentDishData[section].isEmpty == true {
+            return nil
+        }
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: tableViewProperties.headerID) as? DishHeaderViewCell else {
             fatalError("MakeOrderViewController: Can't dequeue for DishHeaderViewCell")
         }
@@ -297,11 +311,11 @@ extension MakeOrderViewController: UITableViewDataSource {
         }
         var amount = 0
         for order in table?.bill?.orderList ?? [] {
-            if order.idmonan == dishData[indexPath.section][indexPath.item].idmonan {
+            if order.idmonan == currentDishData[indexPath.section][indexPath.item].idmonan {
                 amount = order.soluong
             }
         }
-        cell.configView(data: dishData[indexPath.section][indexPath.item], amount: amount)
+        cell.configView(data: currentDishData[indexPath.section][indexPath.item], amount: amount)
         cell.delegate = self
         return cell
     }
@@ -315,6 +329,9 @@ extension MakeOrderViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if currentDishData[section].isEmpty == true {
+            return 0
+        }
         return tableViewProperties.headerHeight
     }
 }
@@ -325,6 +342,7 @@ extension MakeOrderViewController: OrderViewControllerDelegate {
         cartViewController.bill = table?.bill
         if let _ = table?.bill?.orderList {
             if table!.bill!.orderList!.isEmpty {
+                animateTransitionIfNeeded(state: .collapsed, duration: 0)
                 cartViewController.view.isHidden = true
                 bottomConstraintDishTableView.constant = 0
             } else {
@@ -333,5 +351,34 @@ extension MakeOrderViewController: OrderViewControllerDelegate {
             }
         }
         dishTableView.reloadData()
+    }
+}
+
+extension MakeOrderViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        topConstantTableView.constant = 0
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty == true {
+            currentDishData = dishData
+            dishTableView.reloadData()
+            return
+        }
+        let searchText = searchText.lowercased()
+        let dishCategoryList = dishCategoryData.filter({ $0.tentheloaimonan.lowercased().contains(searchText)})
+        currentDishData.removeAll()
+        for list in dishData {
+            let result = list.filter({
+                let currentItem = $0
+                return ($0.tenmonan.lowercased().contains(searchText) || dishCategoryList.filter({ $0.idtheloaimonan == currentItem.idtheloaimonan }).isEmpty == false) })
+            currentDishData.append(result)
+        }
+        
+        dishTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }

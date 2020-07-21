@@ -33,6 +33,19 @@ extension UIViewController {
         alert.addAction(okeAction)
         present(alert, animated: true, completion: nil)
     }
+    
+    func showConfirmAlert(title: String, message: String, completion: (() -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okeAction = UIAlertAction(title: "Xác nhận", style: .cancel) { _ in
+            completion?()
+        }
+        let cancelAction = UIAlertAction(title: "Huỷ", style: .default) { _ in
+            
+        }
+        alert.addAction(okeAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension UIViewController {

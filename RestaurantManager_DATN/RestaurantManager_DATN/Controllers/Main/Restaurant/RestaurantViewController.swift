@@ -117,8 +117,19 @@ class RestaurantViewController: UIViewController {
         }
         currentTableData = tableData
         self.tableCollectionView.reloadData()
-//        self.hideActivityIndicatorView()
+        
+//        sendCoockedAlert()
     }
+    
+//    func sendCoockedAlert() {
+//        for table in tableData {
+//            if let cookedList = table.bill?.orderList?.filter({ $0.trangthai == 2}) {
+//                for order in cookedList {
+//                    self.showAlert(title: "Thông báo", message: "Order \(order.dish?.tenmonan ?? "") của Bàn \(table.sobanan ?? "") đã nấu xong")
+//                }
+//            }
+//        }
+//    }
     
     @IBAction func billHistoryButtonTapped(_ sender: Any) {
 //        self.performSegue(withIdentifier: segueProperties.toTakeawayVCSegue.rawValue, sender: self)
@@ -189,7 +200,7 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
 extension RestaurantViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard var text = searchController.searchBar.text else { return }
-        
+        tableCollectionView.refreshControl = tableRefreshControl
         text = text.lowercased()
         if let _ = text.lowercased().range(of: "bàn") {
             text = text.replacingOccurrences(of: "bàn", with: "")
@@ -198,6 +209,7 @@ extension RestaurantViewController: UISearchResultsUpdating {
         }
         text = text.trimmingCharacters(in: .whitespacesAndNewlines)
         if text.isEmpty == false {
+            tableCollectionView.refreshControl = nil
             currentTableData = tableData.filter { $0.sobanan?.range(of: text) != nil}
         } else {
             currentTableData = tableData

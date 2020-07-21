@@ -114,25 +114,29 @@ class PresentHandler {
         let vc = storyboard.instantiateViewController(withIdentifier: "SearchBillMangerViewController") as! SearchBillMangerViewController
         
         vc.billData = bills
-        rootVC.presentInFullScreen(vc, animated: true)
+        rootVC.presentInFullScreen(vc, animated: false)
     }
     
-    func presentImportBillManagerVC(_ rootVC: UIViewController, data: PhieuNhap? = nil, forDetail: Bool = false) {
+    func presentImportBillManagerVC(_ rootVC: UIViewController, data: PhieuNhap? = nil, forDetail: Bool = false, forStorager: Bool = false) {
         let vc = storyboard.instantiateViewController(withIdentifier: "ImportBillManagerViewController") as! ImportBillManagerViewController
         
         vc.importBill = data
         vc.forDetail = forDetail
+        vc.forStorager = forStorager
         if let rootVC = rootVC as? ManagerDataViewController {
             vc.delegate = rootVC
         }
         rootVC.presentInFullScreen(vc, animated: true)
     }
     
-    func presentExportBillManagerVC(_ rootVC: UIViewController, data: PhieuXuat? = nil, imp: PhieuNhap? = nil) {
+    func presentExportBillManagerVC(_ rootVC: UIViewController, data: PhieuXuat? = nil, imp: PhieuNhap? = nil, forShowDetails: Bool = false) {
         let vc = storyboard.instantiateViewController(withIdentifier: "ExportBillManagerViewController") as! ExportBillManagerViewController
         
         vc.exportBill = data
         vc.importBill = imp
+        
+        vc.forShowDetails = forShowDetails
+        
         if let rootVC = rootVC as? ManagerDataViewController {
             vc.delegate = rootVC
         }

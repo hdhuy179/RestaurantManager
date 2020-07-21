@@ -22,7 +22,7 @@ class ImportBillManagerViewController: UIViewController {
     @IBOutlet weak var btnConfirm: RaisedButton!
     
     var importBill: PhieuNhap?
-    
+    var forStorager: Bool = false
     var forDetail: Bool = false
     
     var staff: NhanVien? {
@@ -72,8 +72,23 @@ class ImportBillManagerViewController: UIViewController {
             txtStuffAmount.isEnabled = false
             txtBillCreator.isEnabled = false
             swOutOfDate.isEnabled = false
+            txtBillCreatedDate.isEnabled = false
             btnDelete.isHidden = true
             btnConfirm.isHidden = true
+            
+            txtBillNo.isDividerHidden = true
+            txtStuffName.isDividerHidden = true
+            txtStuffUnit.isDividerHidden = true
+            txtStuffAmount.isDividerHidden = true
+            txtBillCreator.isDividerHidden = true
+            swOutOfDate.isDividerHidden = true
+            txtBillCreatedDate.isDividerHidden = true
+        }
+        
+        if forStorager {
+            txtBillCreator.isEnabled = false
+            txtBillCreator.isDividerHidden = true
+            staff = App.shared.staffInfo
         }
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(txtCategoryTapped))
@@ -93,8 +108,6 @@ class ImportBillManagerViewController: UIViewController {
         let stuffAmount = ((txtStuffAmount.text ?? "") as NSString).floatValue
         let createdDate =  Date.getDate(fromString: txtBillCreatedDate.text ?? "", withDateFormat: "dd-MM-yyyy hh:MM:ss")
         let outOfDate = swOutOfDate.isOn ? 1 : 0
-        
-//        let billNo = txtBillCreatedDate.text
 
         let db = Firestore.firestore()
 

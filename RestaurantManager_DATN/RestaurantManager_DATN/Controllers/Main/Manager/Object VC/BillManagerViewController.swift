@@ -59,6 +59,10 @@ class BillManagerViewController: UIViewController {
                 txtTable.isEnabled = false
                 txtCreatedDate.isEnabled = false
                 swPaid.isEnabled = false
+                
+                txtStaff.isDividerHidden = true
+                txtTable.isDividerHidden = true
+                txtCreatedDate.isDividerHidden = true
             }
             if bill?.daxoa == 1 {
                 btnDelete.setTitle("Khôi phục", for: .normal)

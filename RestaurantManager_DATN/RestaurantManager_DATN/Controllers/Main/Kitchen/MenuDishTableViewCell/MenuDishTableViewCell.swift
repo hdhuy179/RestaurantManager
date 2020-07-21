@@ -13,6 +13,9 @@ final class MenuDishTableViewCell: UITableViewCell {
     @IBOutlet weak var dishPriceLabel: UILabel!
     @IBOutlet weak var dishUnitLabel: UILabel!
     @IBOutlet weak var swInMenu: UISwitch!
+    
+    weak var delegate: MenuViewController?
+    
     var dish: MonAn!
     
     func configView(data: MonAn) {
@@ -29,8 +32,15 @@ final class MenuDishTableViewCell: UITableViewCell {
     }
     @IBAction func swInMenuChanged(_ sender: Any) {
         dish.trongthucdon = swInMenu.isOn ? 1 : 0
-        dish.updateInMenu(forDish: dish) { (err) in
+        dish.updateInMenu(forDish: dish) { [weak self] (err) in
             print(err ?? "")
+            if err == nil {
+                guard let strongSelf = self else { return }
+                if let indexpath = self?.delegate?.dishTableView.indexPath(for: strongSelf) {
+                    self?.delegate?.dishData[indexpath.section][indexpath.item] = strongSelf.dish
+                    self?.delegate?.dishTableView.reloadData()
+                }
+            }
         }
     }
 }

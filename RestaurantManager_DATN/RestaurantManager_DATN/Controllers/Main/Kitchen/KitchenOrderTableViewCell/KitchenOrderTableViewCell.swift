@@ -16,10 +16,12 @@ class KitchenOrderTableViewCell: UITableViewCell {
     
     var order: Order?
     
+    var table: BanAn?
+    
     weak var delegate: KitchenViewController?
     
     func configView(order: Order, table: BanAn?) {
-        
+        self.table = table
         self.order = order
         lbDishName.text = "\(order.dish?.tenmonan ?? "") (Bàn \(table?.sobanan ?? "nil") )"
         lbOrderAmount.text = String(order.soluong)
@@ -43,22 +45,24 @@ class KitchenOrderTableViewCell: UITableViewCell {
     }
     
     @IBAction func btnFinishWasTapped(_ sender: Any) {
-        
-        if var order = order, order.trangthai >= 0{
-            order.trangthai = order.trangthai + 1
-//            order.ngaytao = Date()
-            self.order = order
-             btnFinish.isEnabled = false
-            btnFinish.backgroundColor = .systemGray
-            
-            if order.trangthai > 1 || order.trangthai < 0 {
-                btnFinish.setTitle(order.getState(), for: .disabled)
-            } else if order.trangthai >= 0 && order.trangthai < 2 {
-                btnFinish.setTitle(order.getState(forNextState: true), for: .disabled)
-            }
-            order.updateOrder(forOrder: order) { [weak self] error in
-                self?.delegate?.fetchData()
+        delegate?.showConfirmAlert (title: "Xác nhận lại", message: "Xác nhận " + (order?.getState(forNextState: true).lowercased() ?? "") + " \(order?.dish?.tenmonan ?? "") (Bàn \(table?.sobanan ?? "nil") )") {
+            if var order = self.order, order.trangthai >= 0 {
+                order.trangthai = order.trangthai + 1
+                //            order.ngaytao = Date()
+                self.order = order
+                self.btnFinish.isEnabled = false
+                self.btnFinish.backgroundColor = .systemGray
+                
+                if order.trangthai > 1 || order.trangthai < 0 {
+                    self.btnFinish.setTitle(order.getState(), for: .disabled)
+                } else if order.trangthai >= 0 && order.trangthai < 2 {
+                    self.btnFinish.setTitle(order.getState(forNextState: true), for: .disabled)
+                }
+                order.updateOrder(forOrder: order) { [weak self] error in
+                    self?.delegate?.orderStateUpdated()
+                }
             }
         }
+        
     }
 }

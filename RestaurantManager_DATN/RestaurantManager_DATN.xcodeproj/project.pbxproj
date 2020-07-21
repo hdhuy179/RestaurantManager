@@ -49,7 +49,6 @@
 		F747F9B1249BBA8400B82307 /* UITextfield+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F747F9B0249BBA8400B82307 /* UITextfield+.swift */; };
 		F749AD2924A85DE2006C2318 /* AddStaffManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F749AD2824A85DE2006C2318 /* AddStaffManagerViewController.swift */; };
 		F74A0CD124B4C79A0071BA27 /* SearchBillMangerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74A0CD024B4C79A0071BA27 /* SearchBillMangerViewController.swift */; };
-		F74B696224ACD38E00E20914 /* CreateExportBillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74B696124ACD38E00E20914 /* CreateExportBillViewController.swift */; };
 		F74D3426249C5B740085CDB8 /* PhieuNhap.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74D3425249C5B740085CDB8 /* PhieuNhap.swift */; };
 		F74D3428249C601D0085CDB8 /* StaffManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F74D3427249C601D0085CDB8 /* StaffManagerViewController.swift */; };
 		F750F611249120F5008C5604 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F750F60B249120F4008C5604 /* MenuViewController.swift */; };
@@ -130,7 +129,6 @@
 		F747F9B0249BBA8400B82307 /* UITextfield+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextfield+.swift"; sourceTree = "<group>"; };
 		F749AD2824A85DE2006C2318 /* AddStaffManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStaffManagerViewController.swift; sourceTree = "<group>"; };
 		F74A0CD024B4C79A0071BA27 /* SearchBillMangerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBillMangerViewController.swift; sourceTree = "<group>"; };
-		F74B696124ACD38E00E20914 /* CreateExportBillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateExportBillViewController.swift; sourceTree = "<group>"; };
 		F74D3425249C5B740085CDB8 /* PhieuNhap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhieuNhap.swift; sourceTree = "<group>"; };
 		F74D3427249C601D0085CDB8 /* StaffManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffManagerViewController.swift; sourceTree = "<group>"; };
 		F750F60B249120F4008C5604 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 			children = (
 				F741308123EFFC4D00032E13 /* StorageItemsTableViewCell */,
 				F75287A123EE9157007A9621 /* StorageViewController.swift */,
-				F74B696124ACD38E00E20914 /* CreateExportBillViewController.swift */,
 			);
 			path = Storage;
 			sourceTree = "<group>";
@@ -625,7 +622,6 @@
 				F73E2DFE23EAC7B500D7E02B /* TableCollectionViewCell.swift in Sources */,
 				F741307923EFEE9B00032E13 /* DishHeaderTableViewCell.swift in Sources */,
 				F7B94B882496041D001A18FE /* BillManagerViewController.swift in Sources */,
-				F74B696224ACD38E00E20914 /* CreateExportBillViewController.swift in Sources */,
 				F72806C524A253280016083D /* PhieuXuat.swift in Sources */,
 				F7A682E2247114E9006D8058 /* HoaDon.swift in Sources */,
 				F7AD51D623E4158D008DFF3A /* LoginNavigationViewController.swift in Sources */,
