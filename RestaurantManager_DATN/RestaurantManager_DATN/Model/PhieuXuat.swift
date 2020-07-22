@@ -104,6 +104,32 @@ struct PhieuXuat: Decodable {
         }
     }
     
+    static func fetchData(from: Date, toDate: Date ,completion: @escaping ([PhieuXuat]?, Error?) -> Void) {
+        
+        let db = Firestore.firestore()
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: from)
+        let start = calendar.date(from: components)!
+        let toComponents = calendar.dateComponents([.year, .month, .day], from: calendar.date(byAdding: .day, value: 1, to: toDate)!)
+        let end = calendar.date(from: toComponents)!
+        
+        db.collection("PhieuXuat").whereField("daxoa", isEqualTo: 0).whereField("trangthai", isEqualTo: 1).whereField("ngaytao", isLessThanOrEqualTo: end).whereField("ngaytao", isGreaterThan: start).order(by: "ngaytao").getDocuments { (snapshot, err) in
+            if err != nil {
+                
+                print("Error getting HoaDon Data: \(err!.localizedDescription)")
+                completion(nil, err)
+                
+            } else if snapshot != nil, !snapshot!.documents.isEmpty {
+                
+                getAllReferanceData(of: snapshot!, completion: completion)
+                
+            } else {
+                completion(nil, nil)
+            }
+        }
+    }
+    
     static func createBill(data: PhieuXuat, completion: @escaping (Error?) -> Void) {
         let db = Firestore.firestore()
         

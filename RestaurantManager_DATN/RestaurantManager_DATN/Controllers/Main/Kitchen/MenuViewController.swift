@@ -12,6 +12,8 @@ class MenuViewController: UIViewController {
 
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var dishTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var topConstantTableView: NSLayoutConstraint!
     
     private struct tableViewProperties {
         static let headerNibName = "DishHeaderTableViewCell"
@@ -24,6 +26,7 @@ class MenuViewController: UIViewController {
     }
     
     var dishData: [[MonAn]] = []
+    var currentDishData: [[MonAn]] = []
     var dishCategoryData: [TheLoaiMonAn] = []
     
     override func viewDidLoad() {
@@ -52,6 +55,9 @@ class MenuViewController: UIViewController {
     }
     
     private func setupViews() {
+        searchBar.showsCancelButton = true
+        searchBar.delegate = self
+        
         dishTableView.dataSource = self
         dishTableView.delegate = self
         
@@ -65,7 +71,7 @@ class MenuViewController: UIViewController {
                 
             } else if let data = data {
                 
-                self?.dishData.append(data)
+                self?.dishData = [data]
                 if !(self?.dishCategoryData.isEmpty ?? true) {
                     self?.setupData()
                 }
@@ -76,7 +82,7 @@ class MenuViewController: UIViewController {
                 
             } else if let data = data {
                 self?.dishCategoryData = data
-                if !(self?.dishData.isEmpty ?? true) {
+                if !(self?.currentDishData.isEmpty ?? true) {
                     self?.setupData()
                 }
             }
@@ -84,6 +90,7 @@ class MenuViewController: UIViewController {
     }
     
     func setupData() {
+        
         if !self.dishData.isEmpty, !self.dishCategoryData.isEmpty {
             let dishDataEmp = self.dishData[0]
             dishData.removeAll()
@@ -96,9 +103,14 @@ class MenuViewController: UIViewController {
                 }
             }
         }
+        currentDishData = dishData
         dishTableView.reloadData()
     }
-
+    @IBAction func btnSearchTapped(_ sender: Any) {
+        searchBar.becomeFirstResponder()
+        topConstantTableView.constant = 53
+    }
+    
     @IBAction func btnBackWasTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -109,10 +121,13 @@ extension MenuViewController: UITableViewDataSource {
         return dishCategoryData.count
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dishData[section].count
+        return currentDishData[section].count
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if currentDishData[section].isEmpty == true {
+            return nil
+        }
         guard let headerCell = tableView.dequeueReusableCell(withIdentifier: tableViewProperties.headerID) as? DishHeaderViewCell else {
             fatalError("MenuViewController: Can't dequeue for DishHeaderViewCell")
         }
@@ -124,7 +139,7 @@ extension MenuViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: tableViewProperties.rowID, for: indexPath) as? MenuDishTableViewCell else {
             fatalError("MenuViewController: Can't dequeue for DishTableViewCell")
         }
-        cell.configView(data: dishData[indexPath.section][indexPath.item])
+        cell.configView(data: currentDishData[indexPath.section][indexPath.item])
         cell.delegate = self
         return cell
     }
@@ -138,6 +153,38 @@ extension MenuViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if currentDishData[section].isEmpty == true {
+            return 0
+        }
         return tableViewProperties.headerHeight
+    }
+}
+
+extension MenuViewController: UISearchBarDelegate {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        topConstantTableView.constant = 0
+    }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty == true {
+            currentDishData = dishData
+            dishTableView.reloadData()
+            return
+        }
+        let searchText = searchText.lowercased()
+        let dishCategoryList = dishCategoryData.filter({ $0.tentheloaimonan.lowercased().contains(searchText)})
+        currentDishData.removeAll()
+        for list in dishData {
+            let result = list.filter({
+                let currentItem = $0
+                return ($0.tenmonan.lowercased().contains(searchText) || dishCategoryList.filter({ $0.idtheloaimonan == currentItem.idtheloaimonan }).isEmpty == false) })
+            currentDishData.append(result)
+        }
+        
+        dishTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }

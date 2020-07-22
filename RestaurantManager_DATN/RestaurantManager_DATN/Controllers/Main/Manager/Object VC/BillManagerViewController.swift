@@ -15,7 +15,7 @@ class BillManagerViewController: UIViewController {
     @IBOutlet weak var lbTotalBill: UILabel!
     @IBOutlet weak var txtStaff: UITextField!
     @IBOutlet weak var txtTable: UITextField!
-    @IBOutlet weak var txtCreatedDate: UITextField!
+    @IBOutlet weak var txtCreatedDate: DatePickerTextField!
     @IBOutlet weak var swPaid: UISwitch!
     @IBOutlet weak var btnDelete: UIButton!
     @IBOutlet weak var btnConfirm: UIButton!

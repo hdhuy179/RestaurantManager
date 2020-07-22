@@ -15,7 +15,7 @@ class ImportBillManagerViewController: UIViewController {
     @IBOutlet weak var txtStuffName: TextField!
     @IBOutlet weak var txtStuffUnit: TextField!
     @IBOutlet weak var txtStuffAmount: TextField!
-    @IBOutlet weak var txtBillCreatedDate: TextField!
+    @IBOutlet weak var txtBillCreatedDate: DatePickerTextField!
     @IBOutlet weak var txtBillCreator: TextField!
     @IBOutlet weak var swOutOfDate: UISwitch!
     @IBOutlet weak var btnDelete: RaisedButton!

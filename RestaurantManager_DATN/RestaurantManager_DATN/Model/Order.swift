@@ -144,6 +144,45 @@ struct Order: Decodable {
         }
     }
     
+    static func fetchData(from: Date, toDate: Date ,completion: @escaping ([Order]?, Error?) -> Void) {
+        
+        var datas = [Order]()
+        let db = Firestore.firestore()
+        
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day], from: from)
+        let start = calendar.date(from: components)!
+        let toComponents = calendar.dateComponents([.year, .month, .day], from: calendar.date(byAdding: .day, value: 1, to: toDate)!)
+        let end = calendar.date(from: toComponents)!
+        
+        db.collection("Order").whereField("daxoa", isEqualTo: 0).whereField("ngaytao", isLessThanOrEqualTo: end).whereField("ngaytao", isGreaterThan: start).order(by: "ngaytao").order(by: "trangthai").getDocuments { (snapshot, err) in
+            if err != nil {
+                
+                print("Error getting HoaDon Data: \(err!.localizedDescription)")
+                completion(nil, err)
+                
+            } else if snapshot != nil, !snapshot!.documents.isEmpty {
+                
+                snapshot!.documents.forEach({ (document) in
+                    if var order = Order(JSON: document.data()) {
+                        MonAn.fetchData(byOrder: order) { (dish, error) in
+                            if let dish = dish {
+                                order.dish = dish
+                            }
+                            datas.append(order)
+                            if datas.count == snapshot?.documents.count {
+                                completion(datas, nil)
+                            }
+                        }
+                    }
+                })
+                
+            } else {
+                completion(datas, nil)
+            }
+        }
+    }
+    
     func makeOrder(forOrder order: Order, completion: @escaping ( Error?) -> Void) {
         let db = Firestore.firestore()
         if order.soluong <= 0 {

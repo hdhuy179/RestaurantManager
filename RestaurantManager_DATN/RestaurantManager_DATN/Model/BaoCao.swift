@@ -54,6 +54,22 @@ struct BaoCao: Decodable {
             }
         }
     }
+    
+    static func saveReport(data: BaoCao ,completion: @escaping (Error?) -> Void) {
+        let db = Firestore.firestore()
+        
+        db.collection("BaoCao").document(data.idbaocao).setData([
+            "idbaocao": data.idbaocao,
+            "idnhanvien": data.idnhanvien,
+            "loaibaocao": data.loaibaocao,
+            "ngaytao": data.ngaytao,
+            "tieude": data.tieude,
+            "noidung": data.noidung,
+            "daxoa": data.daxoa
+        ]) { err in
+            completion(err)
+        }
+    }
 }
 
 extension BaoCao: Mappable {

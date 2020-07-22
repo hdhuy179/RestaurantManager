@@ -37,7 +37,7 @@ final class MenuDishTableViewCell: UITableViewCell {
             if err == nil {
                 guard let strongSelf = self else { return }
                 if let indexpath = self?.delegate?.dishTableView.indexPath(for: strongSelf) {
-                    self?.delegate?.dishData[indexpath.section][indexpath.item] = strongSelf.dish
+                    self?.delegate?.currentDishData[indexpath.section][indexpath.item] = strongSelf.dish
                     self?.delegate?.dishTableView.reloadData()
                 }
             }

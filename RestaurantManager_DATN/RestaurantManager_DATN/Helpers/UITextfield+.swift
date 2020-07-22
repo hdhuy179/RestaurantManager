@@ -8,13 +8,13 @@
 
 import UIKit
 
-var minimumDate: Date?
-var maximumDate: Date?
-var dateFormat: String?
+class DatePickerTextField: TextField {
+    
+    var minimumDate: Date?
+    var maximumDate: Date?
+    var dateFormat: String?
 
-var mode:UIDatePicker.Mode = .dateAndTime
-
-extension UITextField {
+    var mode:UIDatePicker.Mode = .dateAndTime
     
     func isDatePickerTextField(minimumDate min: Date? = nil, maximumDate max: Date? = Date(), dateFormat format: String? = "dd/MM/yyyy hh:mm:ss") {
     

@@ -126,7 +126,7 @@ class MakeOrderViewController: UIViewController {
         cartViewController.view.frame.size.height = endCartHeight
     
         startCartHeight = cartViewController.handleArea.frame.height +
-            (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 20)
+            (UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0)
         
         cartViewController.view.frame.origin.x = 0
         cartViewController.view.frame.origin.y = self.view.frame.height - startCartHeight
@@ -347,7 +347,7 @@ extension MakeOrderViewController: OrderViewControllerDelegate {
                 bottomConstraintDishTableView.constant = 0
             } else {
                 cartViewController.view.isHidden = false
-                bottomConstraintDishTableView.constant = cartViewController.handleArea.frame.height + 20
+                bottomConstraintDishTableView.constant = cartViewController.handleArea.frame.height
             }
         }
         dishTableView.reloadData()

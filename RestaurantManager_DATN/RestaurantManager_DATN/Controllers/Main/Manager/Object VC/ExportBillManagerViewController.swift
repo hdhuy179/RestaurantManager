@@ -14,7 +14,7 @@ class ExportBillManagerViewController: UIViewController {
     @IBOutlet weak var txtImportBill: TextField!
     @IBOutlet weak var txtStuffName: TextField!
     @IBOutlet weak var txtStuffAmount: TextField!
-    @IBOutlet weak var txtBillCreatedDate: TextField!
+    @IBOutlet weak var txtBillCreatedDate: DatePickerTextField!
     @IBOutlet weak var txtStaffCreator: TextField!
     @IBOutlet weak var txtStaffExportor: TextField!
     @IBOutlet weak var swIsExported: UISwitch!

@@ -224,12 +224,12 @@ extension StorageViewController: UITableViewDataSource {
             if section == 0 {
                 return currentExportBill[section].isEmpty == false ? "   Phiếu chưa xuất" : nil
             }
-            return "   " + String(currentExportBill[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            return "   Ngày " + String(currentExportBill[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
         }
         if storageSegmentedControl.selectedSegmentIndex == 2 {
-            return "   " + String(currentImportBill[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+            return "   Ngày " + String(currentImportBill[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
         }
-        return "   " + String(currentStuffLeft[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
+        return "   Ngày " + String(currentStuffLeft[section].first?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy") ?? "")
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -302,7 +302,7 @@ extension StorageViewController: UITableViewDelegate {
         switch state {
         case 0:
             let xuatKho = UITableViewRowAction(style: .normal, title: "Xuất kho") { (_, index) in
-                let alert = UIAlertController(title: self.currentStuffLeft[indexPath.section][indexPath.item].tenvatpham, message: "Số lượng (\(self.currentStuffLeft[indexPath.section][indexPath.item].donvi)): ", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Xuất " + self.currentStuffLeft[indexPath.section][indexPath.item].tenvatpham, message: "Số lượng (\(self.currentStuffLeft[indexPath.section][indexPath.item].donvi)): ", preferredStyle: .alert)
                 alert.addTextField { (textField) in
                     textField.keyboardType = .decimalPad
                 }
@@ -312,6 +312,9 @@ extension StorageViewController: UITableViewDelegate {
                         let impData = self.currentStuffLeft[indexPath.section][indexPath.item]
                         let exportData = PhieuXuat(idphieunhap: impData.idphieunhap, ngaytao: Date(), soluong: soluong, trangthai: 0, daxoa: 0)
                         PhieuXuat.createBill(data: exportData) { [weak self](err) in
+                            if err == nil {
+                                self?.showAlert(title: "Thông báo", message: "Tạo phiếu xuất \(soluong) \(self?.currentStuffLeft[indexPath.section][indexPath.item].donvi.lowercased() ?? "") \(self?.currentStuffLeft[indexPath.section][indexPath.item].tenvatpham.lowercased() ?? "") thành công.")
+                            }
                             self?.fetchData()
                         }
                     } else {
@@ -329,19 +332,49 @@ extension StorageViewController: UITableViewDelegate {
             let lbHuy = currentExportBill[indexPath.section][indexPath.item].trangthai == 1 ? "Xóa" : "Hủy"
             
             let huy = UITableViewRowAction(style: .default, title: lbHuy) {(_, index) in
-                PhieuXuat.deleteExportBill(data: self.currentExportBill[indexPath.section][indexPath.item]) { [weak self](err) in
+                PhieuXuat.deleteExportBill(data: self.currentExportBill[indexPath.section][indexPath.item]) { [weak self] (err) in
                     self?.fetchData()
                 }
             }
             let xacnhan = UITableViewRowAction(style: .normal, title: "Xác nhận") { (_, index) in
-                PhieuXuat.confirmExportBill(data: self.currentExportBill[indexPath.section][indexPath.item]) { [weak self](err) in
+                PhieuXuat.confirmExportBill(data: self.currentExportBill[indexPath.section][indexPath.item]) { [weak self] (err) in
                     self?.fetchData()
                 }
             }
             xacnhan.backgroundColor = .systemGreen
             
+            let traDu = UITableViewRowAction(style: .normal, title: "Trả dư") { (_, index) in
+                var imp: PhieuNhap?
+                for item in self.importBill {
+                    imp = item.first { $0.idphieunhap == self.currentExportBill[indexPath.section][indexPath.item].idphieunhap}
+                    if imp != nil {
+                        break
+                    }
+                }
+                let alert = UIAlertController(title: "Trả " + (imp?.tenvatpham ?? ""), message: "Số lượng (\(imp?.donvi ?? "")): ", preferredStyle: .alert)
+                alert.addTextField { (textField) in
+                    textField.keyboardType = .decimalPad
+                }
+                alert.addAction(UIAlertAction(title: "Xác nhận", style: .default, handler: { (action) in
+                    guard let text = alert.textFields?.first?.text else { return }
+                    if let soluong = Float(text), soluong > 0, soluong <= self.currentExportBill[indexPath.section][indexPath.item].soluong {
+                        var impData = self.currentExportBill[indexPath.section][indexPath.item]
+                        impData.soluong -= soluong
+                        PhieuXuat.createBill(data: impData) { [weak self](err) in
+                            self?.showAlert(title: "Thông báo", message: "Trả \(soluong) \(imp?.donvi.lowercased() ?? "") \(imp?.tenvatpham.lowercased() ?? "") thành công.")
+                            self?.fetchData()
+                        }
+                    } else {
+                        let subAlert = UIAlertController(title: "Lỗi", message: "Hãy kiểm tra lại số lượng", preferredStyle: .alert)
+                        subAlert.addAction(UIAlertAction(title: "Oke", style: .destructive, handler: nil))
+                        self.present(subAlert, animated: true, completion: nil)
+                    }
+                }))
+                self.present(alert, animated: true)
+            }
+            
             if currentExportBill[indexPath.section][indexPath.item].trangthai == 1 {
-                return [huy]
+                return [huy, traDu]
             }
             return [huy, xacnhan]
         case 2:

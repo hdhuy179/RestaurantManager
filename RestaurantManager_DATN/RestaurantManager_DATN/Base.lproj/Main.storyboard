@@ -214,6 +214,19 @@
                                             <constraint firstAttribute="height" constant="1" id="pmg-b5-n5o"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zry-b7-4pV">
+                                        <rect key="frame" x="379" y="11" width="20" height="22"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" image="magnifyingglass" catalog="system">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnAddNewDataWasTapped:" destination="t6f-tQ-cKU" eventType="touchUpInside" id="I7H-IF-YQt"/>
+                                            <action selector="btnOrderMoreWasTapped:" destination="ALt-Ya-gFI" eventType="touchUpInside" id="5fj-uM-uZH"/>
+                                            <action selector="btnSearchTapped:" destination="kJM-TP-S32" eventType="touchUpInside" id="4fu-LT-bqc"/>
+                                            <action selector="btnSearchTapped:" destination="wkX-qV-N8V" eventType="touchUpInside" id="mtx-uG-k8p"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
@@ -221,13 +234,23 @@
                                     <constraint firstItem="kJY-qv-gZH" firstAttribute="centerY" secondItem="dZz-e0-nuR" secondAttribute="centerY" id="8gU-Lx-Mtv"/>
                                     <constraint firstItem="kJY-qv-gZH" firstAttribute="leading" secondItem="dZz-e0-nuR" secondAttribute="leading" id="HNd-NU-NWG"/>
                                     <constraint firstAttribute="bottom" secondItem="VuZ-yN-nzS" secondAttribute="bottom" id="PE9-XK-b0g"/>
+                                    <constraint firstItem="Zry-b7-4pV" firstAttribute="centerY" secondItem="dZz-e0-nuR" secondAttribute="centerY" id="Tdf-42-bi7"/>
+                                    <constraint firstItem="IuJ-yF-GnK" firstAttribute="trailing" secondItem="Zry-b7-4pV" secondAttribute="trailing" constant="15" id="Vey-YP-cEu"/>
                                     <constraint firstItem="wBK-ds-FMy" firstAttribute="centerX" secondItem="dZz-e0-nuR" secondAttribute="centerX" id="YMO-IY-g49"/>
                                     <constraint firstAttribute="height" constant="44" id="eBb-Ds-srQ"/>
+                                    <constraint firstItem="Zry-b7-4pV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wBK-ds-FMy" secondAttribute="trailing" id="jed-aA-u46"/>
                                     <constraint firstItem="VuZ-yN-nzS" firstAttribute="leading" secondItem="dZz-e0-nuR" secondAttribute="leading" id="orC-Pe-Vd4"/>
                                     <constraint firstAttribute="trailing" secondItem="VuZ-yN-nzS" secondAttribute="trailing" id="suU-64-JiO"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="IuJ-yF-GnK"/>
                             </view>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Fll-LK-qIQ">
+                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="56" id="iEm-Co-a1b"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Mcg-o4-2xn">
                                 <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -236,12 +259,14 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="Fll-LK-qIQ" firstAttribute="leading" secondItem="kMA-Yx-KWe" secondAttribute="leading" id="5df-xz-NgP"/>
+                            <constraint firstItem="Fll-LK-qIQ" firstAttribute="trailing" secondItem="kMA-Yx-KWe" secondAttribute="trailing" id="AWA-mE-ch1"/>
                             <constraint firstItem="Mcg-o4-2xn" firstAttribute="top" secondItem="dZz-e0-nuR" secondAttribute="bottom" id="ByZ-a8-qi9"/>
                             <constraint firstAttribute="bottom" secondItem="Mcg-o4-2xn" secondAttribute="bottom" id="FOZ-PN-x7a"/>
                             <constraint firstItem="Mcg-o4-2xn" firstAttribute="leading" secondItem="kMA-Yx-KWe" secondAttribute="leading" id="VmX-os-y18"/>
-                            <constraint firstItem="Mcg-o4-2xn" firstAttribute="top" secondItem="dZz-e0-nuR" secondAttribute="bottom" id="Zwb-eg-er6"/>
                             <constraint firstItem="dZz-e0-nuR" firstAttribute="trailing" secondItem="kMA-Yx-KWe" secondAttribute="trailing" id="aKY-Zl-QBz"/>
                             <constraint firstItem="dZz-e0-nuR" firstAttribute="leading" secondItem="kMA-Yx-KWe" secondAttribute="leading" id="bpz-tA-WHP"/>
+                            <constraint firstItem="Fll-LK-qIQ" firstAttribute="top" secondItem="dZz-e0-nuR" secondAttribute="bottom" symbolic="YES" id="eOF-3E-TCv"/>
                             <constraint firstItem="Mcg-o4-2xn" firstAttribute="trailing" secondItem="kMA-Yx-KWe" secondAttribute="trailing" id="jMc-cJ-H1m"/>
                             <constraint firstItem="dZz-e0-nuR" firstAttribute="top" secondItem="kMA-Yx-KWe" secondAttribute="top" id="qbT-gG-5Vq"/>
                         </constraints>
@@ -251,11 +276,13 @@
                     <connections>
                         <outlet property="dishTableView" destination="Mcg-o4-2xn" id="peD-az-v6M"/>
                         <outlet property="lbTitle" destination="wBK-ds-FMy" id="99w-F8-fl5"/>
+                        <outlet property="searchBar" destination="Fll-LK-qIQ" id="6Sa-Hu-tmR"/>
+                        <outlet property="topConstantTableView" destination="ByZ-a8-qi9" id="kj6-fH-k8i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5pA-UE-zSH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3751" y="1398"/>
+            <point key="canvasLocation" x="3750.7246376811595" y="1397.5446428571429"/>
         </scene>
         <!--Nhà Kho-->
         <scene sceneID="ZXQ-Mh-zOw">
@@ -1290,8 +1317,11 @@
                                     <constraint firstAttribute="width" secondItem="sov-7M-yu1" secondAttribute="height" multiplier="1:1" id="f4v-4L-YQZ"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgK-lz-m3T">
-                                <rect key="frame" x="124" y="118" width="166" height="165.5"/>
+                            <button opaque="NO" alpha="0.34999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgK-lz-m3T">
+                                <rect key="frame" x="124" y="120" width="166" height="161.5"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" backgroundImage="plus" catalog="system"/>
                                 <connections>
                                     <action selector="imvDishImageWasTapped:" destination="Fck-l3-edj" eventType="touchUpInside" id="K9d-Fv-4Zc"/>
                                 </connections>
@@ -1312,7 +1342,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đơn giá" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-JM-szg">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đơn giá:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EYC-JM-szg">
                                                 <rect key="frame" x="0.0" y="45" width="71" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="8pH-A0-fop"/>
@@ -1515,6 +1545,7 @@
                         <viewLayoutGuide key="safeArea" id="2mY-ix-c2g"/>
                     </view>
                     <connections>
+                        <outlet property="btnAddImage" destination="LgK-lz-m3T" id="UOb-jV-uV8"/>
                         <outlet property="btnDelete" destination="EYY-Bz-JiH" id="aDk-Td-u3j"/>
                         <outlet property="imvDishImage" destination="sov-7M-yu1" id="SCi-ey-6KJ"/>
                         <outlet property="lbTitle" destination="KOL-n7-tfr" id="OXT-gD-ghk"/>
@@ -2861,7 +2892,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jvU-sn-dQf" customClass="TextField" customModule="Material">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jvU-sn-dQf" customClass="DatePickerTextField" customModule="RestaurantManager_DATN" customModuleProvider="target">
                                                 <rect key="frame" x="40" y="0.0" width="147" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -2878,7 +2909,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iXo-Gs-7ZF" customClass="TextField" customModule="Material">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iXo-Gs-7ZF" customClass="DatePickerTextField" customModule="RestaurantManager_DATN" customModuleProvider="target">
                                                 <rect key="frame" x="247" y="0.0" width="147" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -3098,7 +3129,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ngày tạo phiếu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HTK-fb-zWL" customClass="TextField" customModule="Material">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ngày tạo phiếu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HTK-fb-zWL" customClass="DatePickerTextField" customModule="RestaurantManager_DATN" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="180" width="299" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="07g-WP-VIA"/>
@@ -3342,7 +3373,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ngày tạo phiếu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hOA-wp-J7K" customClass="TextField" customModule="Material">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Ngày tạo phiếu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hOA-wp-J7K" customClass="DatePickerTextField" customModule="RestaurantManager_DATN" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="135" width="299" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="au2-nb-SYI"/>
@@ -3628,6 +3659,9 @@
                                                 <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="btnSaveWasTapped:" destination="IzA-l0-Nrj" eventType="touchUpInside" id="L62-lO-ipS"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -3659,7 +3693,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f2E-Md-C3r" customClass="TextField" customModule="Material">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f2E-Md-C3r" customClass="DatePickerTextField" customModule="RestaurantManager_DATN" customModuleProvider="target">
                                                 <rect key="frame" x="40" y="0.0" width="147" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -3676,7 +3710,7 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zou-2G-bxJ" customClass="TextField" customModule="Material">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zou-2G-bxJ" customClass="DatePickerTextField" customModule="RestaurantManager_DATN" customModuleProvider="target">
                                                 <rect key="frame" x="247" y="0.0" width="147" height="35"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -3869,7 +3903,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="960-BK-u6T">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15/4-12/5: TK_Món bán chạy nhất" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbf-hn-0NJ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pbf-hn-0NJ">
                                         <rect key="frame" x="10" y="20" width="394" height="24"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -3889,7 +3923,7 @@
                                     <constraint firstItem="pbf-hn-0NJ" firstAttribute="leading" secondItem="960-BK-u6T" secondAttribute="leading" constant="10" id="SWa-oF-Rtc"/>
                                     <constraint firstItem="ImS-ZP-LH1" firstAttribute="top" secondItem="pbf-hn-0NJ" secondAttribute="bottom" constant="25" id="aQd-Uc-bx1"/>
                                     <constraint firstItem="pbf-hn-0NJ" firstAttribute="top" secondItem="960-BK-u6T" secondAttribute="top" constant="20" id="dmY-Zk-YL9"/>
-                                    <constraint firstAttribute="bottom" secondItem="ImS-ZP-LH1" secondAttribute="bottom" constant="20" symbolic="YES" id="tfF-y1-vqq"/>
+                                    <constraint firstAttribute="bottom" secondItem="ImS-ZP-LH1" secondAttribute="bottom" constant="20" id="tfF-y1-vqq"/>
                                 </constraints>
                             </view>
                         </subviews>

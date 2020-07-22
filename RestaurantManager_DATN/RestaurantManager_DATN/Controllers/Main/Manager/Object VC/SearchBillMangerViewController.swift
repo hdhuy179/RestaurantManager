@@ -14,8 +14,8 @@ class SearchBillMangerViewController: UIViewController {
     @IBOutlet weak var btnAddNewData: UIButton!
     @IBOutlet weak var dataTableView: UITableView!
     @IBOutlet weak var swShowDeletedData: UISegmentedControl!
-    @IBOutlet weak var txtStartDate: TextField!
-    @IBOutlet weak var txtEndDate: TextField!
+    @IBOutlet weak var txtStartDate: DatePickerTextField!
+    @IBOutlet weak var txtEndDate: DatePickerTextField!
     @IBOutlet weak var vSearch: UIView!
     @IBOutlet weak var btnSearch: RaisedButton!
     @IBOutlet weak var heightConstant: NSLayoutConstraint!
@@ -80,7 +80,7 @@ class SearchBillMangerViewController: UIViewController {
     }
     
     @IBAction func endDateTextFieldEditingDidEnd(_ sender: Any) {
-        txtStartDate.isDatePickerTextField(maximumDate: Date.getDate(fromString: txtEndDate.text!, withDateFormat: "dd/MM/yyyy"))
+        txtStartDate.isDatePickerTextField(maximumDate: Date.getDate(fromString: txtEndDate.text!, withDateFormat: "dd/MM/yyyy"), dateFormat: "dd/MM/yyyy")
         if txtEndDate.text?.isEmpty == true {
             setupData(withList: billData)
         }
