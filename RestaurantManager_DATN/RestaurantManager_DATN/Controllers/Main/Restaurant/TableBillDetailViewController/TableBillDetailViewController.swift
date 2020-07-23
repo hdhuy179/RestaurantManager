@@ -17,6 +17,7 @@ class TableBillDetailViewController: UIViewController {
     @IBOutlet weak var excessCashLabel: UILabel!
     @IBOutlet weak var guestMoneyTextField: UITextField!
     @IBOutlet weak var paymentButton: RaisedButton!
+    @IBOutlet weak var btnOrderMore: RaisedButton!
     
     weak var delegate: RestaurantViewController?
     
@@ -44,6 +45,13 @@ class TableBillDetailViewController: UIViewController {
         paymentButton.pulseColor = .white
         
         fetchBillData()
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 && App.shared.staffInfo?.quyen != 3 {
+            btnOrderMore.isEnabled = false
+            btnOrderMore.setTitleColor(.lightGray, for: .normal)
+        }
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 {
+            guestMoneyTextField.isEnabled = false
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -175,6 +183,9 @@ extension TableBillDetailViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 && App.shared.staffInfo?.quyen != 3 {
+            return nil
+        }
         let xoa = UITableViewRowAction(style: .default, title: "Xóa") { (_, index) in
             if let order = self.table?.bill?.orderList?[index.item] {
                 let db = Firestore.firestore()

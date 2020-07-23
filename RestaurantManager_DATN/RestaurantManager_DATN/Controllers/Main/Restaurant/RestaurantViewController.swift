@@ -11,6 +11,7 @@ import UIKit
 class RestaurantViewController: UIViewController {
 
     @IBOutlet weak var tableCollectionView: UICollectionView!
+    @IBOutlet weak var btnBillHistory: UIBarButtonItem!
     
     private lazy var tableRefreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
@@ -38,6 +39,17 @@ class RestaurantViewController: UIViewController {
     
     var currentBillData: [HoaDon] = []
     
+    var isNotAuthored = true
+    
+    func checkAuthor() {
+        if App.shared.staffInfo?.quyen == 1 || App.shared.staffInfo?.quyen == 2 || App.shared.staffInfo?.quyen == 3 {
+            isNotAuthored = false
+        }
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 {
+            btnBillHistory.isEnabled = false
+            btnBillHistory.tintColor = .lightGray
+        }
+    }
     deinit {
         logger()
     }
@@ -52,6 +64,7 @@ class RestaurantViewController: UIViewController {
     }
     
     private func setupViews() {
+        checkAuthor()
         tableSearchController.searchResultsUpdater = self
         tableSearchController.obscuresBackgroundDuringPresentation = false
         navigationItem.searchController = tableSearchController
@@ -133,6 +146,9 @@ class RestaurantViewController: UIViewController {
     
     @IBAction func billHistoryButtonTapped(_ sender: Any) {
 //        self.performSegue(withIdentifier: segueProperties.toTakeawayVCSegue.rawValue, sender: self)
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 {
+            return
+        }
         let presenter = PresentHandler()
         presenter.presentBillHistoryVC(self)
     }
@@ -178,6 +194,9 @@ extension RestaurantViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if isNotAuthored {
+            return
+        }
         let presentHandler = PresentHandler()
         guard let cell = collectionView.cellForItem(at: indexPath) as? TableCollectionViewCell else { return }
         if cell.state == .empty {

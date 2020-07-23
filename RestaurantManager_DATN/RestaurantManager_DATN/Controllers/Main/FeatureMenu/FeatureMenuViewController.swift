@@ -41,8 +41,31 @@ final class FeatureMenuViewController: UIViewController {
         }
     }
     
+    @IBAction func btnStaffInfoTapped(_ sender: Any) {
+        let present = PresentHandler()
+        if let staff = App.shared.staffInfo {
+            present.presentStaffManagerVC(self, staff: staff, forStaffDetail: true)
+        }
+        
+    }
+    
+    @IBAction func btnCallManagerTapped(_ sender: Any) {
+        self.showAlert(title: "Thông báo", message: "Chức năng đang được xây dựng. Vui lòng thử lại sau.")
+    }
+    
+    @IBAction func btnSupportTapped(_ sender: Any) {
+        self.showAlert(title: "Mọi yêu cầu hỗ trợ", message: "Xin vui lòng liên hệ: Hoàng Đình Huy\n SĐT: 0339519315\nEmail: vn01639519315@gmail.com")
+    }
+    
+    @IBAction func btnPrinterSettingTapped(_ sender: Any) {
+        self.showAlert(title: "Thông báo", message: "Chức năng đang được xây dựng. Vui lòng thử lại sau.")
+    }
+    
     @IBAction func signOutButtonTapped(_ sender: Any) {
-        App.shared.transitionToLoginView()
+        self.showConfirmAlert(title: "Đăng xuất", message: "Bạn có chắc muốn đăng xuất khỏi ứng dụng không?") {
+            App.shared.transitionToLoginView()
+        }
+        
     }
     
 

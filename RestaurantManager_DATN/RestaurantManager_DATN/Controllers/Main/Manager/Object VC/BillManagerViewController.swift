@@ -26,14 +26,23 @@ class BillManagerViewController: UIViewController {
     var forBillHistory: Bool = false
     
     var bill: HoaDon?
-    var table: BanAn?
+    var table: BanAn? {
+        didSet {
+            if table != nil {
+                btnAddNew.isEnabled = true
+            } else {
+                btnAddNew.isEnabled = false
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         addEndEditingTapGuesture()
-        txtCreatedDate.isDatePickerTextField(maximumDate: Date())
+        btnAddNew.setTitleColor(.lightGray, for: .disabled)
+        txtCreatedDate.isDatePickerTextField(maximumDate: Date(), dateFormat: "dd-MM-yyyy hh:MM:ss")
         
         orderTableView.delegate = self
         orderTableView.dataSource = self
@@ -48,6 +57,9 @@ class BillManagerViewController: UIViewController {
     }
     
     func fetchTableData() {
+        if bill?.idbanan?.isEmpty ?? true {
+            btnAddNew.isEnabled = false
+        }
         if bill != nil {
             lbTitle.text = "Thay đổi hóa đơn"
             if forBillHistory {
@@ -69,9 +81,10 @@ class BillManagerViewController: UIViewController {
             }
         } else {
 //            btnDelete.backgroundColor = .gray
+            bill = HoaDon()
             btnDelete.setTitle("Hủy", for: .normal)
         }
-        if let id = bill?.idbanan {
+        if let id = bill?.idbanan, id.isEmpty == false {
             BanAn.fetchData(ofID: id) { [weak self] banan, error in
                 if let banan = banan {
                     self?.table = banan
@@ -100,7 +113,7 @@ class BillManagerViewController: UIViewController {
         
         lbTotalBill.text = "Tổng hóa đơn: " + (bill?.getTotalPayment().splittedByThousandUnits() ?? "0")
         txtStaff.text = bill?.staff?.tennhanvien
-        txtCreatedDate.text = bill?.ngaytao.convertToString()
+        txtCreatedDate.text = bill?.ngaytao.convertToString(withDateFormat: "dd-MM-yyyy hh:MM:ss")
         swPaid.isOn = bill?.dathanhtoan == 1 ? true : false
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(txtTableTapped))
@@ -129,6 +142,19 @@ class BillManagerViewController: UIViewController {
         if sender.isOn == false {
             txtStaff.text = ""
             bill?.idnhanvien = ""
+            if bill?.orderList?.isEmpty == false {
+                for index in 0..<(bill?.orderList?.count ?? 1) {
+                    bill?.orderList?[index].trangthai = 0
+                }
+                orderTableView.reloadData()
+            }
+        } else {
+            if bill?.orderList?.isEmpty == false {
+                for index in 0..<(bill?.orderList?.count ?? 1) {
+                    bill?.orderList?[index].trangthai = 3
+                }
+                orderTableView.reloadData()
+            }
         }
     }
     
@@ -148,11 +174,19 @@ class BillManagerViewController: UIViewController {
             }
             return
         }
+        if let text = txtCreatedDate.text, let date = Date.getDate(fromString: text, withDateFormat: "dd-MM-yyyy hh:MM:ss") {
+            bill?.ngaytao = date
+            if bill?.orderList?.isEmpty == false {
+                for index in 0..<(bill?.orderList?.count ?? 1) {
+                    bill?.orderList?[index].ngaytao = date
+                }
+            }
+        }
         let db = Firestore.firestore()
         
         if let bill = bill {
             Order.fetchAllData(ofBill: bill) { [weak self] (datas, error) in
-                if let datas = datas {
+                if let datas = datas, datas.isEmpty == false {
                     for item in datas {
                         db.collection("Order").document(item.idorder).delete()
                         
@@ -167,6 +201,19 @@ class BillManagerViewController: UIViewController {
                                 }
                                 self?.dismiss(animated: true)
                             }
+                        }
+                    }
+                } else {
+                    self?.table?.bill = bill
+                    
+                    if let table = self?.table {
+                        
+                        HoaDon.checkOutBill(forTable: table) { [weak self] err in
+                            guard let strongSelf = self else { return }
+                            if err != nil {
+                                print("CartViewController: Error Checking out Bill \(String(describing: strongSelf.bill?.idhoadon)) \(err!.localizedDescription)")
+                            }
+                            self?.dismiss(animated: true)
                         }
                     }
                 }

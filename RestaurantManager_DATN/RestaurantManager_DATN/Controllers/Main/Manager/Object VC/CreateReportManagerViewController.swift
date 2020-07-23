@@ -26,6 +26,8 @@ class CreateReportManagerViewController: UIViewController {
     
     weak var delegate: ManagerDataViewController?
     
+    var startHeaderRow: Int?
+    
     var reportType: ReportType!
     
     var report: BaoCao? {
@@ -197,8 +199,10 @@ class CreateReportManagerViewController: UIViewController {
         case .stuffUsed:
             var orderList: [Order] = []
             var exportList: [PhieuXuat] = []
+            var importList: [PhieuNhap] = []
             var counter = 0
-            var maxCounter = 2
+            var maxCounter = 3
+            
             Order.fetchData(from: from, toDate: toDate) { (datas, err) in
                 let datas = datas?.sorted(by: { $0.ngaytao?.timeIntervalSince1970 ?? 0 > $1.ngaytao?.timeIntervalSince1970 ?? 0})
                 counter += 1
@@ -215,37 +219,154 @@ class CreateReportManagerViewController: UIViewController {
                     setupData()
                 }
             }
-            
+            PhieuNhap.fetchAllDataAvailable { (datas, err) in
+                counter += 1
+                importList = datas ?? []
+                if counter == maxCounter {
+                    setupData()
+                }
+            }
             func setupData() {
+                var reportContent = ""
+                
                 var dateDict: [String: Bool] = [:]
-                var orderDict: [String: [Order]] = [:]
-                var exportDict: [String: [PhieuXuat]] = [:]
+                var orderDict: [String: [String]] = [:]
+                var exportDict: [String: [String]] = [:]
+                
+                var dishDict: [MonAn: Int] = [:]
+                var stuffDict: [PhieuNhap: Float] = [:]
+                var currentSetDate: String = ""
+                
+                var allDishDict: [MonAn: Int] = [:]
+                var allStuffDict: [PhieuNhap: Float] = [:]
                 
                 for item in orderList {
+                    if let dish = item.dish {
+                        allDishDict[dish] = allDishDict[dish] == nil ? item.soluong : allDishDict[dish]! + item.soluong
+                    }
                     if let dateStr = item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") {
                         dateDict[dateStr] = true
-                        if orderDict[dateStr] == nil {
-                            orderDict[dateStr] = [item]
+                        if currentSetDate != dateStr && dishDict.isEmpty == false {
+                            for (key, value) in dishDict {
+                                if orderDict[currentSetDate] == nil {
+                                    orderDict[currentSetDate] = ["\(key.tenmonan) - \(value) \(key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed)"]
+                                } else {
+                                    orderDict[currentSetDate]?.append("\(key.tenmonan) - \(value) \(key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed)")
+                                }
+                            }
+                            dishDict.removeAll()
+                            if let dish = item.dish {
+                                dishDict[dish] = item.soluong
+                            }
+                            currentSetDate = dateStr
+                        } else if currentSetDate == dateStr, let dish = item.dish {
+                            dishDict[dish] = dishDict[dish] == nil ? item.soluong : dishDict[dish]! + item.soluong
                         } else {
-                            orderDict[dateStr]?.append(item)
+                            currentSetDate = dateStr
+                            if let dish = item.dish {
+                                dishDict[dish] = item.soluong
+                            }
                         }
                     }
                 }
-                
+                for (key, value) in dishDict {
+                    if orderDict[currentSetDate] == nil {
+                        orderDict[currentSetDate] = ["\(key.tenmonan) - \(value) \(key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed)"]
+                    } else {
+                        orderDict[currentSetDate]?.append("\(key.tenmonan) - \(value) \(key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed)")
+                    }
+                }
+                currentSetDate = ""
                 for item in exportList {
+                    if let imp = importList.first(where: { $0.idphieunhap == item.idphieunhap }) {
+                        allStuffDict[imp] = allStuffDict[imp] == nil ? item.soluong : allStuffDict[imp]! + item.soluong
+                    }
                     if let dateStr = item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") {
                         dateDict[dateStr] = true
-                        if exportDict[dateStr] == nil {
-                            exportDict[dateStr] = [item]
+                        if currentSetDate != dateStr && stuffDict.isEmpty == false {
+                            for (key, value) in stuffDict {
+                                if exportDict[currentSetDate] == nil {
+                                    exportDict[currentSetDate] = ["\(key.tenvatpham) - \(value) \(key.donvi)"]
+                                } else {
+                                    exportDict[currentSetDate]?.append("\(key.tenvatpham) - \(value) \(key.donvi)")
+                                }
+                            }
+                            stuffDict.removeAll()
+                            if let imp = importList.first(where: { $0.idphieunhap == item.idphieunhap }) {
+                                stuffDict[imp] = item.soluong
+                            }
+                            currentSetDate = dateStr
+                        } else if currentSetDate == dateStr, let imp = importList.first(where: { $0.idphieunhap == item.idphieunhap }) {
+                            stuffDict[imp] = stuffDict[imp] == nil ? item.soluong : stuffDict[imp]! + item.soluong
                         } else {
-                            exportDict[dateStr]?.append(item)
+                            currentSetDate = dateStr
+                            if let imp = importList.first(where: { $0.idphieunhap == item.idphieunhap }) {
+                                stuffDict[imp] = item.soluong
+                            }
+                        }
+                    }
+                }
+                for (key, value) in stuffDict {
+                    if exportDict[currentSetDate] == nil {
+                        exportDict[currentSetDate] = ["\(key.tenvatpham) - \(value) \(key.donvi)"]
+                    } else {
+                        exportDict[currentSetDate]?.append("\(key.tenvatpham) - \(value) \(key.donvi)")
+                    }
+                }
+                for (key, _) in dateDict {
+                    reportContent += "\(key)\t\(orderDict[key]?.first ?? " ")\t\(exportDict[key]?.first ?? " ")\n"
+                    if orderDict[key]?.isEmpty == false {
+                        orderDict[key]?.removeFirst()
+                    }
+                    if exportDict[key]?.isEmpty == false {
+                        exportDict[key]?.removeFirst()
+                    }
+                    for _ in 1..<(max(orderDict[key]?.count ?? 2, exportDict[key]?.count ?? 2)) {
+                        if orderDict[key]?.first == nil && exportDict[key]?.first == nil {
+                            break
+                        }
+                        reportContent += " \t\(orderDict[key]?.first ?? " ")\t\(exportDict[key]?.first ?? " ")\n"
+                        if orderDict[key]?.isEmpty == false {
+                            orderDict[key]?.removeFirst()
+                        }
+                        if exportDict[key]?.isEmpty == false {
+                            exportDict[key]?.removeFirst()
                         }
                     }
                 }
                 
-                for (key, _) in dateDict {
-                    
+                let currentDishItem = allDishDict.first
+                let currentStuffItem = allStuffDict.first
+                reportContent += "Tổng\t\(currentDishItem?.key.tenmonan ?? " ") - \(currentDishItem?.value ?? 0) \(currentDishItem?.key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed ?? " ")\t\(currentStuffItem?.key.tenvatpham ?? " ") - \(currentStuffItem?.value ?? 0) \(currentStuffItem?.key.donvi ?? " ")\n"
+                if allDishDict.isEmpty == false, let currentDishItem = currentDishItem {
+                    allDishDict.removeValue(forKey: currentDishItem.key)
                 }
+                if allStuffDict.isEmpty == false, let currentStuffItem = currentStuffItem {
+                    allStuffDict.removeValue(forKey: currentStuffItem.key)
+                }
+                for _ in 1..<(max(allDishDict.count, allStuffDict.count, 2)) {
+                    if allDishDict.first == nil && allStuffDict.first == nil {
+                        break
+                    }
+                    if let currentDishItem = allDishDict.first {
+                        reportContent += " \t\(currentDishItem.key.tenmonan ) - \(currentDishItem.value ) \(currentDishItem.key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed )"
+                        allDishDict.removeValue(forKey: currentDishItem.key)
+                    } else {
+                        reportContent += " \t "
+                    }
+                    if let currentStuffItem = allStuffDict.first {
+                        reportContent += "\t\(currentStuffItem.key.tenvatpham ) - \(currentStuffItem.value ) \(currentStuffItem.key.donvi )\n"
+                        allStuffDict.removeValue(forKey: currentStuffItem.key)
+                    } else {
+                        reportContent += "\t \n"
+                    }
+                }
+                reportContent.removeLast()
+                
+                let title = "\(from.convertToString(withDateFormat: "dd/MM/yy"))-\(toDate.convertToString(withDateFormat: "dd/MM/yy")): TK_Vật phẩm sử dụng"
+                
+                let staffData = App.shared.staffInfo
+                report = BaoCao(idnhanvien: staffData?.idnhanvien ?? "", tieude: title, noidung: reportContent, ngaytao: Date(), loaibaocao: 3, daxoa: 0, staff: staffData)
             }
         default:
             break
@@ -290,11 +411,20 @@ extension CreateReportManagerViewController: SpreadsheetViewDataSource {
             }
             return UIScreen.main.bounds.width - 50 - 45 - 90 - 5
         case .stuffUsed:
-            break
+            if column == 0 {
+                return 120
+            } else if column == 1 {
+                return 250
+            }
+            return 200
         default:
             break
         }
         return 0
+    }
+    
+    func frozenRows(in spreadsheetView: SpreadsheetView) -> Int {
+        return 1
     }
     
     func numberOfColumns(in spreadsheetView: SpreadsheetView) -> Int {
@@ -304,7 +434,7 @@ extension CreateReportManagerViewController: SpreadsheetViewDataSource {
         case .bestSeller:
             return 3
         case .stuffUsed:
-            break
+            return 3
         default:
             break
         }
@@ -318,7 +448,7 @@ extension CreateReportManagerViewController: SpreadsheetViewDataSource {
         case .bestSeller:
             return reportDatas.count + 1
         case .stuffUsed:
-            break
+            return reportDatas.count + 1
         default:
             break
         }
@@ -379,7 +509,36 @@ extension CreateReportManagerViewController: SpreadsheetViewDataSource {
                 return cell
             }
         case .stuffUsed:
-            break
+            if indexPath.row > 0, reportDatas[indexPath.row - 1][indexPath.column].lowercased() == "tổng" {
+                startHeaderRow = indexPath.row
+            }
+            if indexPath.row == 0 {
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
+                if indexPath.column == 0 {
+                    cell.label.text = "Ngày"
+                } else if indexPath.column == 1 {
+                    cell.label.text = "Danh sách order"
+                } else if indexPath.column == 2 {
+                    cell.label.text = "Danh sách vật phẩm"
+                }
+                cell.label.textAlignment = .center
+                cell.setNeedsLayout()
+
+                return cell
+            }  else if indexPath.row >= startHeaderRow ?? reportDatas.count + 1 {
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
+                cell.label.textAlignment = .center
+                cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
+                
+                return cell
+            } else {
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TextCell.self), for: indexPath) as! TextCell
+                cell.label.textAlignment = .center
+                cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
+                
+                return cell
+            }
+            
         default:
             break
         }

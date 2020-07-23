@@ -20,6 +20,8 @@ class StaffManagerViewController: UIViewController {
     @IBOutlet weak var btnDelete: UIButton!
     
     var staff: NhanVien?
+    var forStaffDetail = false
+    
     weak var delegate: ManagerDataViewController?
     
     override func viewDidLoad() {
@@ -61,6 +63,14 @@ class StaffManagerViewController: UIViewController {
             }
             txtStaffPhone.text = staff.sodienthoai
             txtStaffAddress.text = staff.diachi
+        }
+        if forStaffDetail {
+            lbTitle.text = "Thông tin cá nhân"
+            txtStaffName.isEnabled = false
+            txtStaffName.isDividerHidden = true
+            swStaffAuthority.isEnabled = false
+            swStaffAuthority2.isEnabled = false
+            btnDelete.setTitle("Huỷ", for: .normal)
         }
     }
     
@@ -118,6 +128,10 @@ class StaffManagerViewController: UIViewController {
                     if let supervc = self?.presentingViewController as? ManagerDataViewController {
                         supervc.fetchData()
                     }
+                    if self?.forStaffDetail ?? false {
+                        App.shared.staffInfo?.diachi = staffAddress
+                        App.shared.staffInfo?.sodienthoai = staffPhone
+                    }
                     self?.dismiss(animated: true)
                 }
             }
@@ -128,6 +142,10 @@ class StaffManagerViewController: UIViewController {
     }
     
     @IBAction func btnDeleteTapped(_ sender: Any) {
+        if btnDelete.titleLabel?.text == "Huỷ" {
+            self.dismiss(animated: true)
+            return
+        }
         let db = Firestore.firestore()
         let will = staff?.daxoa == 0 ? 1 : 0
         let message = will == 0 ? "Bạn có chắc chắn muốn khôi phục dữ liệu không" : "Bạn có chắc chắn muốn xóa dữ liệu không"

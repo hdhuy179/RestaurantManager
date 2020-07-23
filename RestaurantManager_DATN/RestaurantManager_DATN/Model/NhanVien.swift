@@ -110,6 +110,32 @@ struct NhanVien: Decodable {
             }
         }
     }
+    
+    static func fetchData(forAccountID id: String, completion: @escaping (NhanVien?, Error?) -> Void) {
+        if id == "" {
+            completion(nil,nil)
+            return
+        }
+        var result = NhanVien()
+        let db = Firestore.firestore()
+
+        db.collection("NhanVien").whereField("idtaikhoandangnhap", isEqualTo: id).getDocuments { (snapshot, err) in
+            if err != nil {
+                
+                print("Error getting BanAn Data: \(err!.localizedDescription)")
+                completion(nil, err)
+                
+            } else if let data = snapshot?.documents.first?.data() {
+                
+                if let data = NhanVien(JSON: data) {
+                    result = data
+                }
+                completion(result, nil)
+            } else {
+                completion(nil, nil)
+            }
+        }
+    }
 }
 
 extension NhanVien: Mappable {

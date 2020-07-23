@@ -16,6 +16,8 @@ class ReportDetailsManagerViewController: UIViewController {
     
     weak var delegate: ManagerDataViewController?
     
+    var startHeaderRow: Int?
+    
     var reportType: ReportType?
     
     var report: BaoCao!
@@ -148,7 +150,12 @@ extension ReportDetailsManagerViewController: SpreadsheetViewDataSource {
             }
             return UIScreen.main.bounds.width - 50 - 45 - 90 - 5 + 20
         case .stuffUsed:
-            break
+            if column == 0 {
+                return 120
+            } else if column == 1 {
+                return 250
+            }
+            return 200
         default:
             break
         }
@@ -162,7 +169,7 @@ extension ReportDetailsManagerViewController: SpreadsheetViewDataSource {
         case .bestSeller:
             return 3
         case .stuffUsed:
-            break
+            return 3
         default:
             break
         }
@@ -176,7 +183,7 @@ extension ReportDetailsManagerViewController: SpreadsheetViewDataSource {
         case .bestSeller:
             return reportDatas.count + 1
         case .stuffUsed:
-            break
+            return reportDatas.count + 1
         default:
             break
         }
@@ -237,7 +244,44 @@ extension ReportDetailsManagerViewController: SpreadsheetViewDataSource {
                 return cell
             }
         case .stuffUsed:
-            break
+            if indexPath.row > 0, reportDatas[indexPath.row - 1][indexPath.column].lowercased() == "tổng" {
+                startHeaderRow = indexPath.row
+            }
+            if indexPath.row == 0 {
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
+                if indexPath.column == 0 {
+                    cell.label.text = "Ngày"
+                } else if indexPath.column == 1 {
+                    cell.label.text = "Danh sách order"
+                } else if indexPath.column == 2 {
+                    cell.label.text = "Danh sách vật phẩm"
+                }
+                cell.label.textAlignment = .center
+                cell.setNeedsLayout()
+
+                return cell
+            } else if indexPath.row >= startHeaderRow ?? reportDatas.count + 1 {
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
+                cell.label.textAlignment = .center
+                cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
+                
+                return cell
+            } else {
+                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TextCell.self), for: indexPath) as! TextCell
+                cell.label.textAlignment = .center
+                cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
+                
+                return cell
+            }
+            
+//            else if indexPath.row == reportDatas.count {
+//                let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: HeaderCell.self), for: indexPath) as! HeaderCell
+//                cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
+//                cell.label.textAlignment = .center
+//                cell.setNeedsLayout()
+//
+//                return cell
+//            }
         default:
             break
         }

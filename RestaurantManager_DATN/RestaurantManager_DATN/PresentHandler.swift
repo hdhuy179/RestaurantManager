@@ -92,9 +92,10 @@ class PresentHandler {
         rootVC.presentInFullScreen(vc, animated: true)
     }
     
-    func presentStaffManagerVC(_ rootVC: UIViewController, staff: NhanVien? = nil) {
+    func presentStaffManagerVC(_ rootVC: UIViewController, staff: NhanVien? = nil, forStaffDetail: Bool = false) {
         let vc = storyboard.instantiateViewController(withIdentifier: "StaffManagerViewController") as! StaffManagerViewController
         vc.staff = staff
+        vc.forStaffDetail = forStaffDetail
         if let rootVC = rootVC as? ManagerDataViewController {
             vc.delegate = rootVC
         }

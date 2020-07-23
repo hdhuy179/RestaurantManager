@@ -170,7 +170,15 @@ struct PhieuXuat: Decodable {
         }
     }
 }
-
+extension PhieuXuat: Hashable {
+    static func == (lhs: PhieuXuat, rhs: PhieuXuat) -> Bool {
+        return lhs.idphieuxuat == rhs.idphieuxuat
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(idphieuxuat)
+    }
+}
 extension PhieuXuat: Mappable {
     init?(map: Map) {
         mapping(map: map)

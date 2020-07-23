@@ -42,6 +42,12 @@ class KitchenOrderTableViewCell: UITableViewCell {
             btnFinish.backgroundColor = .systemGreen
             btnFinish.setTitle(order.getState(forNextState: true), for: .normal)
         }
+        
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 4 {
+            btnFinish.setTitle(order.getState(), for: .disabled)
+            btnFinish.isEnabled = false
+            btnFinish.backgroundColor = .systemGray
+        }
     }
     
     @IBAction func btnFinishWasTapped(_ sender: Any) {

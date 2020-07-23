@@ -234,12 +234,15 @@ class MakeOrderViewController: UIViewController {
         }
     
     func fetchData() {
+        var counter = 0
+        let maxCounter = 2
         MonAn.fetchMenuData { [weak self](data, error) in
             if error != nil {
                 
             } else if let data = data {
                 self?.dishData = [data]
-                if !(self?.dishCategoryData.isEmpty ?? true) {
+                counter += 1
+                if counter == maxCounter {
                     self?.setupData()
                 }
             }
@@ -249,7 +252,8 @@ class MakeOrderViewController: UIViewController {
                 
             } else if let data = data {
                 self?.dishCategoryData = data
-                if !(self?.currentDishData.isEmpty ?? true) {
+                counter += 1
+                if counter == maxCounter {
                     self?.setupData()
                 }
             }

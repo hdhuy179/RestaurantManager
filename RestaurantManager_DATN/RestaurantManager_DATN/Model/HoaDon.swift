@@ -258,7 +258,7 @@ struct HoaDon: Decodable {
     static func updateBill(forBill bill: HoaDon, completion: @escaping ( Error?) -> Void) {
         let db = Firestore.firestore()
         
-        if let _ = bill.idhoadon, let _ = bill.idbanan, let _ = bill.dathanhtoan, let _ = bill.daxoa, let uid = Auth.auth().currentUser?.uid {
+        if let _ = bill.idhoadon, let _ = bill.idbanan, let _ = bill.dathanhtoan, let _ = bill.daxoa, let uid = App.shared.staffInfo?.idnhanvien {
             db.collection("HoaDon").document(bill.idhoadon!).setData(["idhoadon": bill.idhoadon!, "idbanan": bill.idbanan!, "dathanhtoan": bill.dathanhtoan!,  "ngaytao": bill.ngaytao, "daxoa": bill.daxoa!, "idnhanvien": uid]) { err in
                 if err != nil {
                     completion(err)

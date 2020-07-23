@@ -18,9 +18,9 @@ class MainTabBarViewController: UITabBarController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
-//        self.tabBar.items?[ItemsValue.Manager.rawValue].isEnabled = false
-        
+        if App.shared.staffInfo?.quyen != 1 {
+            self.tabBar.items?[ItemsValue.Manager.rawValue].isEnabled = false
+        }
     }
     
 

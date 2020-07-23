@@ -12,6 +12,7 @@ class KitchenViewController: UIViewController {
     
     @IBOutlet weak var orderTableView: UITableView!
     @IBOutlet weak var kitchenSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var btnMenu: UIBarButtonItem!
     
     private var tableSearchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
@@ -126,7 +127,10 @@ class KitchenViewController: UIViewController {
     }
     
     private func setupViews() {
-        
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 4 {
+            btnMenu.isEnabled = false
+            btnMenu.tintColor = .lightGray
+        }
         addEndEditingTapGuesture()
         tableSearchController.searchResultsUpdater = self
         tableSearchController.obscuresBackgroundDuringPresentation = false
@@ -236,14 +240,70 @@ extension KitchenViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
-        return false
+        if App.shared.staffInfo?.quyen == 5 {
+             return false
+        }
+        return true
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if App.shared.staffInfo?.quyen == 1 || App.shared.staffInfo?.quyen == 2 || App.shared.staffInfo?.quyen == 3 || App.shared.staffInfo?.quyen == 4 {
+            let present = PresentHandler()
+            var table: BanAn?
+            if kitchenSegmentedControl.selectedSegmentIndex == 0 {
+                var addition = 0
+                if indexPath.section == 1 {
+                    addition = tableView.numberOfRows(inSection: 0)
+                }
+                let bill = billData.first(where: { $0.idhoadon == currentUncookedOrder[indexPath.item + addition].idhoadon})
+                table = tableData.first(where: { $0.idbanan == bill?.idbanan})
+                table?.bill = bill
+            } else if kitchenSegmentedControl.selectedSegmentIndex == 1 {
+                var addition = 0
+                if indexPath.section == 1 {
+                    addition = tableView.numberOfRows(inSection: 0)
+                }
+                let bill = billData.first(where: { $0.idhoadon == currentCookedOrder[indexPath.item + addition].idhoadon})
+                table = tableData.first(where: { $0.idbanan == bill?.idbanan})
+                table?.bill = bill
+            }
+            if table?.bill?.dathanhtoan == 1 {
+                present.presentBillManagerVC(self, bill: table?.bill, forBillHistory: true)
+                return
+            }
+            present.presentTableBillDetailVC(self, table: table)
+        }
+    }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 4 {
+            return nil
+        }
+        
         if indexPath.section == 0, kitchenSegmentedControl.selectedSegmentIndex == 0 {
             return nil
+        }
+        
+        if kitchenSegmentedControl.selectedSegmentIndex == 0 {
+            var addition = 0
+            if indexPath.section == 1 {
+                addition = tableView.numberOfRows(inSection: 0)
+            }
+            let bill = billData.first(where: { $0.idhoadon == currentUncookedOrder[indexPath.item + addition].idhoadon})
+            if bill?.dathanhtoan == 1 {
+                return nil
+            }
+
+        } else if kitchenSegmentedControl.selectedSegmentIndex == 1 {
+            var addition = 0
+            if indexPath.section == 1 {
+                addition = tableView.numberOfRows(inSection: 0)
+            }
+            let bill = billData.first(where: { $0.idhoadon == currentCookedOrder[indexPath.item + addition].idhoadon})
+            if bill?.dathanhtoan == 1 {
+                return nil
+            }
         }
         
         let hoantac = UITableViewRowAction(style: .default, title: "Hoàn tác") {(_, index) in

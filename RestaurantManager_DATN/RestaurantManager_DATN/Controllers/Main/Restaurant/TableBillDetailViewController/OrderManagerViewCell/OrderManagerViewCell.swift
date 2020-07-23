@@ -49,6 +49,10 @@ class OrderManagerViewCell: UITableViewCell {
                 finishDishOrderButton.setTitle(order.getState(forNextState: true), for: .normal)
             }
         }
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 && App.shared.staffInfo?.quyen != 3 {
+            finishDishOrderButton.isEnabled = false
+            finishDishOrderButton.backgroundColor = .systemGray
+        }
     }
     
     @IBAction func handleFinishDishOrder(_ sender: Any) {

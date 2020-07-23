@@ -37,19 +37,19 @@ final class App: UINavigationController {
     
     func transitionToTableView() {
         if let currentUser = Auth.auth().currentUser {
-            NhanVien.fetchData(forID: currentUser.uid) { [weak self] data, error in
+            NhanVien.fetchData(forAccountID: currentUser.uid) { [weak self] data, error in
                 if let data = data {
                     if data.quyen < 0 || data.quyen > 5 {
                         self?.transitionToLoginView()
                     }
                     self?.staffInfo = data
+                    let vc = UIStoryboard.main.MainNavigationViewController
+                    self?.changeView(vc)
                 } else {
                     self?.transitionToLoginView()
                 }
             }
         }
-        let vc = UIStoryboard.main.MainNavigationViewController
-        changeView(vc)
     }
     
      func changeView(_ rootViewController: UINavigationController) {
