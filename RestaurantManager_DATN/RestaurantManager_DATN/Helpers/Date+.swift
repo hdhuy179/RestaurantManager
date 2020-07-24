@@ -24,4 +24,25 @@ extension Date {
         dateFormatter.dateFormat = dateFormat
         return dateFormatter.date(from: date)
     }
+    
+    static func getDateArray(fromDate: Date, toDate: Date, byComponent: Calendar.Component, value: Int) -> [Date] {
+        
+        if fromDate.timeIntervalSince1970 > toDate.timeIntervalSince1970 {
+            return []
+        }
+        
+        let calender = Calendar.current
+        var tempDate = fromDate
+        var result = [tempDate]
+        
+        while tempDate.timeIntervalSince1970 < toDate.timeIntervalSince1970 {
+            if let nextDate = calender.date(byAdding: byComponent, value: value, to: tempDate) {
+                tempDate = nextDate
+                result.append(tempDate)
+            } else {
+                break
+            }
+        }
+        return result
+    }
 }

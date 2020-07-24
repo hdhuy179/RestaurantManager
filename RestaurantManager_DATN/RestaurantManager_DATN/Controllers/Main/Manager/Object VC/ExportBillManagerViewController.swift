@@ -68,7 +68,7 @@ class ExportBillManagerViewController: UIViewController {
             txtImportBill.text = importBill?.maphieu
             txtStuffName.text = importBill?.tenvatpham
             txtStuffAmount.text = String(exportBill?.soluong ?? 0)
-            txtBillCreatedDate.text = exportBill?.ngaytao?.convertToString()
+            txtBillCreatedDate.text = exportBill?.ngaytao?.convertToString(withDateFormat: "dd-MM-yyyy hh:MM:ss")
             
             swIsExported.isOn = exportBill?.trangthai == 1
             if exportBill?.daxoa == 1 {

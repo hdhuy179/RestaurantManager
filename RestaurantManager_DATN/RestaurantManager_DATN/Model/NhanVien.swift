@@ -119,7 +119,7 @@ struct NhanVien: Decodable {
         var result = NhanVien()
         let db = Firestore.firestore()
 
-        db.collection("NhanVien").whereField("idtaikhoandangnhap", isEqualTo: id).getDocuments { (snapshot, err) in
+        db.collection("NhanVien").whereField("idtaikhoandangnhap", isEqualTo: id).whereField("daxoa", isEqualTo: 0).getDocuments { (snapshot, err) in
             if err != nil {
                 
                 print("Error getting BanAn Data: \(err!.localizedDescription)")

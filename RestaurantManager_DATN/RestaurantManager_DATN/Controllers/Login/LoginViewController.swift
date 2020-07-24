@@ -51,7 +51,7 @@ class LoginViewController: UIViewController {
                 self.showErrorLabel.alpha = 1
                 self.showErrorLabel.text = error?.localizedDescription
             } else {
-                App.shared.transitionToTableView()
+                App.shared.transitionToTableView(fromVC: self)
             }
             
         }

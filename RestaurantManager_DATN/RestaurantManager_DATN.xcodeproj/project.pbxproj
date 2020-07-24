@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1DB322C9892E3319899CB158 /* Pods_RestaurantManager_DATN.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E89FA3BDFFFCFB7812D2DDFF /* Pods_RestaurantManager_DATN.framework */; };
+		562442C824CAD87C00754A76 /* Float+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 562442C724CAD87C00754A76 /* Float+.swift */; };
 		5628023524C15019007F5431 /* CreateReportManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023424C15019007F5431 /* CreateReportManagerViewController.swift */; };
 		5628023724C15039007F5431 /* ReportMenuFeatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023624C15039007F5431 /* ReportMenuFeatureViewController.swift */; };
 		5628023F24C1A16C007F5431 /* BaoCao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023E24C1A16C007F5431 /* BaoCao.swift */; };
@@ -83,6 +84,7 @@
 
 /* Begin PBXFileReference section */
 		531EBF3A93F23315527B2376 /* Pods-RestaurantManager_DATN.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantManager_DATN.release.xcconfig"; path = "Target Support Files/Pods-RestaurantManager_DATN/Pods-RestaurantManager_DATN.release.xcconfig"; sourceTree = "<group>"; };
+		562442C724CAD87C00754A76 /* Float+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+.swift"; sourceTree = "<group>"; };
 		5628023424C15019007F5431 /* CreateReportManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateReportManagerViewController.swift; sourceTree = "<group>"; };
 		5628023624C15039007F5431 /* ReportMenuFeatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportMenuFeatureViewController.swift; sourceTree = "<group>"; };
 		5628023E24C1A16C007F5431 /* BaoCao.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaoCao.swift; sourceTree = "<group>"; };
@@ -454,6 +456,7 @@
 				F7A682E324711752006D8058 /* Date+.swift */,
 				F747337924712CAD00D0E3FC /* Double+.swift */,
 				F747F9B0249BBA8400B82307 /* UITextfield+.swift */,
+				562442C724CAD87C00754A76 /* Float+.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				F7AD51D623E4158D008DFF3A /* LoginNavigationViewController.swift in Sources */,
 				F747BDDE2483617C0029B7CC /* ManagerDataViewController.swift in Sources */,
 				F7409C6023E187100037652A /* LoginViewController.swift in Sources */,
+				562442C824CAD87C00754A76 /* Float+.swift in Sources */,
 				F7409C5C23E187100037652A /* AppDelegate.swift in Sources */,
 				F747F9B1249BBA8400B82307 /* UITextfield+.swift in Sources */,
 				5628024324C1BCB9007F5431 /* ReportDetailsManagerViewController.swift in Sources */,

@@ -27,6 +27,7 @@ class CreateReportManagerViewController: UIViewController {
     weak var delegate: ManagerDataViewController?
     
     var startHeaderRow: Int?
+    lazy var yellowRow: [Int] = []
     
     var reportType: ReportType!
     
@@ -35,11 +36,17 @@ class CreateReportManagerViewController: UIViewController {
             btnSaveReport.isEnabled = true
             reportDatas.removeAll()
             let splited = report?.noidung.split { $0 == "\n"}
-            for item in splited ?? [] {
+            for (index, item) in splited?.enumerated() ?? [].enumerated() {
                 let item = String(item)
                 reportDatas.append(item.split { $0 == "\t"}.map(String.init))
+                
+                if reportType == .income {
+                    if reportDatas.last?[2] == " 0" {
+                        yellowRow.append(index)
+                    }
+                }
             }
-            lbTitleReport.text = title
+            lbTitleReport.text = report?.tieude
         }
     }
     var reportDatas: [[String]] = [] {
@@ -123,6 +130,8 @@ class CreateReportManagerViewController: UIViewController {
         
         guard let start = Date.getDate(fromString: txtStartDate.text ?? "", withDateFormat: "dd/MM/yyyy"),
         let end = Date.getDate(fromString: txtEndDate.text ?? "", withDateFormat: "dd/MM/yyyy") else { return }
+        startHeaderRow = nil
+        yellowRow.removeAll()
         fetchData(from: start, toDate: end)
     }
     
@@ -138,33 +147,54 @@ class CreateReportManagerViewController: UIViewController {
                 var totalMoney: Double = 0
                 var totalOrder = 0
                 
-                var currentDate = ""
-                
                 var billDict: [String: Bool] = [:]
                 var moneyCounter: Double = 0
                 var orderCounter: Int = 0
                 
-                currentDate = datas?.last?.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") ?? ""
-                for item in datas?.reversed() ?? [] {
-                    if currentDate == item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") {
+                let dateList = Date.getDateArray(fromDate: from, toDate: toDate, byComponent: .day, value: 1)
+                
+                for date in dateList {
+                    let dateStr = date.convertToString(withDateFormat: "dd/MM/yyyy")
+                    let orderList = datas?.filter({ ($0.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") == dateStr )})
+                    
+                    for item in orderList ?? [] {
                         orderCounter += item.soluong
                         moneyCounter += Double(item.soluong)*(item.dish?.dongia ?? 0)
                         if billDict[item.idhoadon ?? ""] == nil {
                             billDict[item.idhoadon ?? ""] = true
                         }
-                    } else {
-                        reportContent += " \(currentDate)\t \(orderCounter)\t \(billDict.count)\t \(moneyCounter.splittedByThousandUnits())\n"
-                        totalBill += billDict.count
-                        totalMoney += moneyCounter
-                        totalOrder += orderCounter
-                        currentDate = item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") ?? ""
-                        billDict.removeAll()
-                        billDict[item.idhoadon ?? ""] = true
-                        orderCounter = item.soluong
-                        moneyCounter = Double(item.soluong)*(item.dish?.dongia ?? 0)
                     }
+                    
+                    reportContent += " \(dateStr)\t \(orderCounter)\t \(billDict.count)\t \(moneyCounter.splittedByThousandUnits())\n"
+                    totalBill += billDict.count
+                    totalMoney += moneyCounter
+                    totalOrder += orderCounter
+                    billDict.removeAll()
+                    orderCounter = 0
+                    moneyCounter = 0
                 }
-                reportContent += " \(currentDate)\t \(orderCounter)\t \(billDict.count)\t \(moneyCounter.splittedByThousandUnits())\n"
+                
+//                currentDate = datas?.last?.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") ?? ""
+//                for item in datas?.reversed() ?? [] {
+//                    if currentDate == item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") {
+//                        orderCounter += item.soluong
+//                        moneyCounter += Double(item.soluong)*(item.dish?.dongia ?? 0)
+//                        if billDict[item.idhoadon ?? ""] == nil {
+//                            billDict[item.idhoadon ?? ""] = true
+//                        }
+//                    } else {
+//                        reportContent += " \(currentDate)\t \(orderCounter)\t \(billDict.count)\t \(moneyCounter.splittedByThousandUnits())\n"
+//                        totalBill += billDict.count
+//                        totalMoney += moneyCounter
+//                        totalOrder += orderCounter
+//                        currentDate = item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") ?? ""
+//                        billDict.removeAll()
+//                        billDict[item.idhoadon ?? ""] = true
+//                        orderCounter = item.soluong
+//                        moneyCounter = Double(item.soluong)*(item.dish?.dongia ?? 0)
+//                    }
+//                }
+//                reportContent += " \(currentDate)\t \(orderCounter)\t \(billDict.count)\t \(moneyCounter.splittedByThousandUnits())\n"
                 totalBill += billDict.count
                 totalMoney += moneyCounter
                 totalOrder += orderCounter
@@ -229,7 +259,6 @@ class CreateReportManagerViewController: UIViewController {
             func setupData() {
                 var reportContent = ""
                 
-                var dateDict: [String: Bool] = [:]
                 var orderDict: [String: [String]] = [:]
                 var exportDict: [String: [String]] = [:]
                 
@@ -245,7 +274,6 @@ class CreateReportManagerViewController: UIViewController {
                         allDishDict[dish] = allDishDict[dish] == nil ? item.soluong : allDishDict[dish]! + item.soluong
                     }
                     if let dateStr = item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") {
-                        dateDict[dateStr] = true
                         if currentSetDate != dateStr && dishDict.isEmpty == false {
                             for (key, value) in dishDict {
                                 if orderDict[currentSetDate] == nil {
@@ -282,13 +310,12 @@ class CreateReportManagerViewController: UIViewController {
                         allStuffDict[imp] = allStuffDict[imp] == nil ? item.soluong : allStuffDict[imp]! + item.soluong
                     }
                     if let dateStr = item.ngaytao?.convertToString(withDateFormat: "dd/MM/yyyy") {
-                        dateDict[dateStr] = true
                         if currentSetDate != dateStr && stuffDict.isEmpty == false {
                             for (key, value) in stuffDict {
                                 if exportDict[currentSetDate] == nil {
-                                    exportDict[currentSetDate] = ["\(key.tenvatpham) - \(value) \(key.donvi)"]
+                                    exportDict[currentSetDate] = ["\(key.tenvatpham) - \(value.clean) \(key.donvi)"]
                                 } else {
-                                    exportDict[currentSetDate]?.append("\(key.tenvatpham) - \(value) \(key.donvi)")
+                                    exportDict[currentSetDate]?.append("\(key.tenvatpham) - \(value.clean) \(key.donvi)")
                                 }
                             }
                             stuffDict.removeAll()
@@ -308,36 +335,42 @@ class CreateReportManagerViewController: UIViewController {
                 }
                 for (key, value) in stuffDict {
                     if exportDict[currentSetDate] == nil {
-                        exportDict[currentSetDate] = ["\(key.tenvatpham) - \(value) \(key.donvi)"]
+                        exportDict[currentSetDate] = ["\(key.tenvatpham) - \(value.clean) \(key.donvi)"]
                     } else {
-                        exportDict[currentSetDate]?.append("\(key.tenvatpham) - \(value) \(key.donvi)")
+                        exportDict[currentSetDate]?.append("\(key.tenvatpham) - \(value.clean) \(key.donvi)")
                     }
                 }
-                for (key, _) in dateDict {
-                    reportContent += "\(key)\t\(orderDict[key]?.first ?? " ")\t\(exportDict[key]?.first ?? " ")\n"
-                    if orderDict[key]?.isEmpty == false {
-                        orderDict[key]?.removeFirst()
+                
+                let dateList = Date.getDateArray(fromDate: from, toDate: toDate, byComponent: .day, value: 1)
+                for date in dateList {
+                    let dateStr = date.convertToString(withDateFormat: "dd/MM/yyyy")
+                    if orderDict[dateStr]?.first == nil && exportDict[dateStr]?.first == nil {
+                        continue
                     }
-                    if exportDict[key]?.isEmpty == false {
-                        exportDict[key]?.removeFirst()
+                    reportContent += "\(dateStr)\t\(orderDict[dateStr]?.first ?? " ")\t\(exportDict[dateStr]?.first ?? " ")\n"
+                    if orderDict[dateStr]?.isEmpty == false {
+                        orderDict[dateStr]?.removeFirst()
                     }
-                    for _ in 1..<(max(orderDict[key]?.count ?? 2, exportDict[key]?.count ?? 2)) {
-                        if orderDict[key]?.first == nil && exportDict[key]?.first == nil {
+                    if exportDict[dateStr]?.isEmpty == false {
+                        exportDict[dateStr]?.removeFirst()
+                    }
+                    for _ in 1..<(max(orderDict[dateStr]?.count ?? 2, exportDict[dateStr]?.count ?? 2)) {
+                        if orderDict[dateStr]?.first == nil && exportDict[dateStr]?.first == nil {
                             break
                         }
-                        reportContent += " \t\(orderDict[key]?.first ?? " ")\t\(exportDict[key]?.first ?? " ")\n"
-                        if orderDict[key]?.isEmpty == false {
-                            orderDict[key]?.removeFirst()
+                        reportContent += " \t\(orderDict[dateStr]?.first ?? " ")\t\(exportDict[dateStr]?.first ?? " ")\n"
+                        if orderDict[dateStr]?.isEmpty == false {
+                            orderDict[dateStr]?.removeFirst()
                         }
-                        if exportDict[key]?.isEmpty == false {
-                            exportDict[key]?.removeFirst()
+                        if exportDict[dateStr]?.isEmpty == false {
+                            exportDict[dateStr]?.removeFirst()
                         }
                     }
                 }
                 
                 let currentDishItem = allDishDict.first
                 let currentStuffItem = allStuffDict.first
-                reportContent += "Tổng\t\(currentDishItem?.key.tenmonan ?? " ") - \(currentDishItem?.value ?? 0) \(currentDishItem?.key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed ?? " ")\t\(currentStuffItem?.key.tenvatpham ?? " ") - \(currentStuffItem?.value ?? 0) \(currentStuffItem?.key.donvi ?? " ")\n"
+                reportContent += "Tổng\t\(currentDishItem?.key.tenmonan ?? " ") - \(currentDishItem?.value ?? 0) \(currentDishItem?.key.donvimonan.replacingOccurrences(of: "1", with: "").trimmed ?? " ")\t\(currentStuffItem?.key.tenvatpham ?? " ") - \(currentStuffItem?.value.clean ?? "0") \(currentStuffItem?.key.donvi ?? " ")\n"
                 if allDishDict.isEmpty == false, let currentDishItem = currentDishItem {
                     allDishDict.removeValue(forKey: currentDishItem.key)
                 }
@@ -355,7 +388,7 @@ class CreateReportManagerViewController: UIViewController {
                         reportContent += " \t "
                     }
                     if let currentStuffItem = allStuffDict.first {
-                        reportContent += "\t\(currentStuffItem.key.tenvatpham ) - \(currentStuffItem.value ) \(currentStuffItem.key.donvi )\n"
+                        reportContent += "\t\(currentStuffItem.key.tenvatpham ) - \(currentStuffItem.value.clean ) \(currentStuffItem.key.donvi )\n"
                         allStuffDict.removeValue(forKey: currentStuffItem.key)
                     } else {
                         reportContent += "\t \n"
@@ -482,6 +515,11 @@ extension CreateReportManagerViewController: SpreadsheetViewDataSource {
                 return cell
             } else {
                 let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TextCell.self), for: indexPath) as! TextCell
+                if yellowRow.contains(indexPath.row - 1) {
+                    cell.backgroundColor = .yellow
+                } else {
+                    cell.backgroundColor = .white
+                }
                 cell.label.textAlignment = .center
                 cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
                 

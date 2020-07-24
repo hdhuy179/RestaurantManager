@@ -30,6 +30,11 @@ extension UIStoryboard {
         return vc
     }
     
+    var LogoViewController: UIViewController {
+        let vc = UIStoryboard.main.instantiateViewController(withIdentifier: "LogoViewController")
+        return vc
+    }
+    
 //    var LoginViewController: LoginViewController {
 //        guard let vc = UIStoryboard.main.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else {
 //            fatalError("LoginViewController couldn't be found in Storyboard file")

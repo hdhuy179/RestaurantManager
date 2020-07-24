@@ -43,6 +43,8 @@ class KitchenViewController: UIViewController {
     var tableData: [BanAn] = []
     var billData: [HoaDon] = []
     
+    var autoFetchTimer: Timer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,7 +52,7 @@ class KitchenViewController: UIViewController {
         setupViews()
         fetchData()
         
-        Timer.scheduledTimer(withTimeInterval: 60, repeats: true) {_ in
+        autoFetchTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) {_ in
             self.fetchData()
         }
     }
@@ -63,11 +65,15 @@ class KitchenViewController: UIViewController {
     
     func orderStateUpdated() {
         
+        autoFetchTimer?.invalidate()
         lastUpdateTimer?.invalidate()
         
         lastUpdateTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) {_ in
             self.fetchData()
             self.lastUpdateTimer = nil
+            self.autoFetchTimer = Timer.scheduledTimer(withTimeInterval: 30, repeats: true) {_ in
+                self.fetchData()
+            }
         }
     }
     
@@ -124,6 +130,20 @@ class KitchenViewController: UIViewController {
     func setupData() {
         tableRefreshControl.endRefreshing()
         orderTableView.reloadData()
+        checkBadgeValue()
+    }
+    
+    func checkBadgeValue() {
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 4 {
+            return
+        }
+        
+        let badgeValue = uncookedOrder.filter({ $0.trangthai == 0 }).count
+        if badgeValue == 0 {
+            self.tabBarController?.tabBar.items?[1].badgeValue = nil
+            return
+        }
+        self.tabBarController?.tabBar.items?[1].badgeValue = String(badgeValue)
     }
     
     private func setupViews() {
@@ -324,7 +344,7 @@ extension KitchenViewController: UITableViewDelegate {
                 
                 order = self.currentUncookedOrder[indexPath.item + addition]
             }
-            if var order = order, order.trangthai >= 0{
+            if var order = order, order.trangthai >= 0 {
                 order.trangthai = order.trangthai - 1
                 order.updateOrder(forOrder: order) { error in
                 }

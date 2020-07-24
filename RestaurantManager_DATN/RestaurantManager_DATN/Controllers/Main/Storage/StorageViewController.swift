@@ -66,6 +66,13 @@ class StorageViewController: UIViewController {
         storageTableView.dataSource = self
         storageTableView.delegate = self
         
+        if App.shared.staffInfo?.quyen != 5 && App.shared.staffInfo?.quyen != 1 {
+            storageSegmentedControl.removeSegment(at: 2, animated: false)
+            if App.shared.staffInfo?.quyen != 4 && App.shared.staffInfo?.quyen != 1 {
+                storageSegmentedControl.removeSegment(at: 1, animated: false)
+            }
+        }
+        
         storageTableView.register(UINib(nibName: tableViewProperties.rowNibName, bundle: nil), forCellReuseIdentifier: tableViewProperties.rowID)
     }
     
@@ -164,8 +171,24 @@ class StorageViewController: UIViewController {
             }
         }
         currentStuffLeft = stuffLeft
-        
+        checkBadgeValue()
         storageTableView.reloadData()
+    }
+    
+    func checkBadgeValue() {
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 5 {
+            return
+        }
+        
+        var badgeValue = 0
+        for list in exportBill {
+            badgeValue += list.filter({ $0.trangthai == 0}).count
+        }
+        if badgeValue == 0 {
+            self.tabBarController?.tabBar.items?[2].badgeValue = nil
+            return
+        }
+        self.tabBarController?.tabBar.items?[2].badgeValue = String(badgeValue)
     }
     
     deinit {
@@ -262,6 +285,13 @@ extension StorageViewController: UITableViewDelegate {
         return tableViewProperties.rowHeight
     }
     
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        if App.shared.staffInfo?.quyen != 5 && App.shared.staffInfo?.quyen != 1 {
+            return false
+        }
+        return true
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if storageSegmentedControl.selectedSegmentIndex == 0 {
             let presentHandler = PresentHandler()
@@ -301,6 +331,9 @@ extension StorageViewController: UITableViewDelegate {
         
         switch state {
         case 0:
+            if App.shared.staffInfo?.quyen != 4 && App.shared.staffInfo?.quyen != 1 {
+                return nil
+            }
             let xuatKho = UITableViewRowAction(style: .normal, title: "Xuất kho") { (_, index) in
                 let alert = UIAlertController(title: "Xuất " + self.currentStuffLeft[indexPath.section][indexPath.item].tenvatpham, message: "Số lượng (\(self.currentStuffLeft[indexPath.section][indexPath.item].donvi)): ", preferredStyle: .alert)
                 alert.addTextField { (textField) in
@@ -328,7 +361,9 @@ extension StorageViewController: UITableViewDelegate {
             xuatKho.backgroundColor = .systemGreen
             return [xuatKho]
         case 1:
-            
+            if App.shared.staffInfo?.quyen != 5 && App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 4 {
+                return nil
+            }
             let lbHuy = currentExportBill[indexPath.section][indexPath.item].trangthai == 1 ? "Xóa" : "Hủy"
             
             let huy = UITableViewRowAction(style: .default, title: lbHuy) {(_, index) in
@@ -374,10 +409,19 @@ extension StorageViewController: UITableViewDelegate {
             }
             
             if currentExportBill[indexPath.section][indexPath.item].trangthai == 1 {
+                if App.shared.staffInfo?.quyen != 5 && App.shared.staffInfo?.quyen != 1 {
+                    return nil
+                }
                 return [huy, traDu]
+            }
+            if App.shared.staffInfo?.quyen == 4 {
+                return [huy]
             }
             return [huy, xacnhan]
         case 2:
+            if App.shared.staffInfo?.quyen != 5 && App.shared.staffInfo?.quyen != 1 {
+                return nil
+            }
             let xoa = UITableViewRowAction(style: .default, title: "Xóa") {(_, index) in
                 PhieuNhap.deleteExportBill(data: self.currentImportBill[indexPath.section][indexPath.item]) { [weak self](err) in
                     self?.fetchData()

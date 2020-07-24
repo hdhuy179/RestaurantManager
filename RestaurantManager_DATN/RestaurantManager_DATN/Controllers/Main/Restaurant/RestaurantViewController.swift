@@ -61,6 +61,10 @@ class RestaurantViewController: UIViewController {
         setupViews()
         
         fetchData()
+        
+        Timer.scheduledTimer(withTimeInterval: 30, repeats: true) {_ in
+            self.fetchData()
+        }
     }
     
     private func setupViews() {
@@ -131,18 +135,25 @@ class RestaurantViewController: UIViewController {
         currentTableData = tableData
         self.tableCollectionView.reloadData()
         
-//        sendCoockedAlert()
+        checkBadgeValue()
     }
     
-//    func sendCoockedAlert() {
-//        for table in tableData {
-//            if let cookedList = table.bill?.orderList?.filter({ $0.trangthai == 2}) {
-//                for order in cookedList {
-//                    self.showAlert(title: "Thông báo", message: "Order \(order.dish?.tenmonan ?? "") của Bàn \(table.sobanan ?? "") đã nấu xong")
-//                }
-//            }
-//        }
-//    }
+    func checkBadgeValue() {
+        if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 && App.shared.staffInfo?.quyen != 3 {
+            return
+        }
+        var readyCounter = 0
+        for table in tableData {
+            if let cookedList = table.bill?.orderList?.filter({ $0.trangthai == 2}) {
+                readyCounter += cookedList.count
+            }
+        }
+        if readyCounter == 0 {
+            self.tabBarController?.tabBar.items?[0].badgeValue = nil
+            return
+        }
+        self.tabBarController?.tabBar.items?[0].badgeValue = String(readyCounter)
+    }
     
     @IBAction func billHistoryButtonTapped(_ sender: Any) {
 //        self.performSegue(withIdentifier: segueProperties.toTakeawayVCSegue.rawValue, sender: self)

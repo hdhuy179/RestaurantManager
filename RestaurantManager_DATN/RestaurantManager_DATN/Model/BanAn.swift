@@ -65,6 +65,10 @@ struct BanAn: Decodable {
     }
     
     static func fetchData(ofID id: String, completion: @escaping (BanAn?, Error?) -> Void) {
+        if id == "" {
+            completion(nil,nil)
+            return
+        }
         var banan: BanAn?
         let db = Firestore.firestore()
 

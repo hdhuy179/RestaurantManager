@@ -18,6 +18,8 @@ class ReportDetailsManagerViewController: UIViewController {
     
     var startHeaderRow: Int?
     
+    lazy var yellowRow: [Int] = []
+    
     var reportType: ReportType?
     
     var report: BaoCao!
@@ -64,9 +66,15 @@ class ReportDetailsManagerViewController: UIViewController {
         }
         let reportContent = report.noidung.replacingOccurrences(of: "\\n", with: "\n").replacingOccurrences(of: "\\t", with: "\t")
         let splited = reportContent.split { $0 == "\n"}
-        for item in splited {
+        for (index, item) in splited.enumerated() {
             let item = String(item)
             reportDatas.append(item.split { $0 == "\t"}.map(String.init))
+            
+            if reportType == .income {
+                if reportDatas.last?[2] == " 0" {
+                    yellowRow.append(index)
+                }
+            }
         }
 //        switch reportType {
 //        case .income:
@@ -217,6 +225,11 @@ extension ReportDetailsManagerViewController: SpreadsheetViewDataSource {
                 return cell
             } else {
                 let cell = spreadsheetView.dequeueReusableCell(withReuseIdentifier: String(describing: TextCell.self), for: indexPath) as! TextCell
+                if yellowRow.contains(indexPath.row - 1) {
+                    cell.backgroundColor = .yellow
+                } else {
+                    cell.backgroundColor = .white
+                }
                 cell.label.textAlignment = .center
                 cell.label.text = reportDatas[indexPath.row - 1][indexPath.column]
                 

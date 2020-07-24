@@ -182,7 +182,10 @@ struct HoaDon: Decodable {
     }
     
     static func fetchData(ofBillID id: String, completion: @escaping (HoaDon?, Error?) -> Void) {
-        
+        if id == "" {
+            completion(nil,nil)
+            return
+        }
         let db = Firestore.firestore()
         
         db.collection("HoaDon").document(id).getDocument { (snapshot, err) in
