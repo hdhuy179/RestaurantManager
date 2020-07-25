@@ -52,6 +52,9 @@ final class DishTableViewCell: UITableViewCell {
     }
 
     @IBAction func handlePlusButtonTapped(_ sender: Any) {
+        if amount >= 99 {
+            return
+        }
         amount += 1
         delegate?.changeOrderAmount(dish: dish, amount: amount)
         updateView()

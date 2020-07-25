@@ -181,9 +181,14 @@ extension TableBillDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70
     }
-    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         if App.shared.staffInfo?.quyen != 1 && App.shared.staffInfo?.quyen != 2 && App.shared.staffInfo?.quyen != 3 {
+            return nil
+        }
+        if table?.bill?.orderList?[indexPath.item].trangthai != 0 {
             return nil
         }
         let xoa = UITableViewRowAction(style: .default, title: "Xóa") { (_, index) in

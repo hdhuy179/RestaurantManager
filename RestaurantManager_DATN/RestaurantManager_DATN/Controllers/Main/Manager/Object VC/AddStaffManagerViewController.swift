@@ -90,11 +90,16 @@ class AddStaffManagerViewController: UIViewController {
             return
         }
         
+        let originalUser = Auth.auth().currentUser
         Auth.auth().createUser(withEmail: txtEmail.text!, password: txtPassword.text!) { [weak self] (data, error) in
             if let uid = data?.user.uid {
                 db.collection("NhanVien").document(uid).setData(["daxoa": 0, "diachi": staffAddress, "email": self!.txtEmail.text!, "idnhanvien": uid, "idtaikhoandangnhap": uid, "quyen": author!, "sodienthoai": staffPhone, "tennhanvien": staffName]) {[weak self] error in
                     
                     if error == nil {
+                        if let originalUser = originalUser {
+                            Auth.auth().updateCurrentUser(originalUser, completion: nil)
+                        }
+                        
                         self?.dismiss(animated: true)
                     }
                 }

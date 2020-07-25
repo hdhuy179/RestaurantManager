@@ -17,7 +17,8 @@ class StaffManagerViewController: UIViewController {
     @IBOutlet weak var swStaffAuthority2: UISegmentedControl!
     @IBOutlet weak var txtStaffPhone: UITextField!
     @IBOutlet weak var txtStaffAddress: UITextField!
-    @IBOutlet weak var btnDelete: UIButton!
+    @IBOutlet weak var btnDelete: RaisedButton!
+    @IBOutlet weak var btnResetPassword: RaisedButton!
     
     var staff: NhanVien?
     var forStaffDetail = false
@@ -70,6 +71,7 @@ class StaffManagerViewController: UIViewController {
             txtStaffName.isDividerHidden = true
             swStaffAuthority.isEnabled = false
             swStaffAuthority2.isEnabled = false
+            btnResetPassword.setTitle("Đổi mật khẩu", for: .normal)
             btnDelete.setTitle("Huỷ", for: .normal)
         }
     }
@@ -85,7 +87,7 @@ class StaffManagerViewController: UIViewController {
     @IBAction func btnResetPasswordTapped(_ sender: Any) {
         Auth.auth().sendPasswordReset(withEmail: staff?.email ?? "") { [weak self](error) in
             if error == nil {
-                self?.showAlert(title: "Reset mật khẩu thành công", message: "Vui lòng kiếm tra email.")
+                self?.showAlert(title: "Đổi mật khẩu", message: "Vui lòng truy cập đến hòm thư \"\(self?.staff?.email ?? "")\" để đổi mật khẩu.")
             }
         }
     }

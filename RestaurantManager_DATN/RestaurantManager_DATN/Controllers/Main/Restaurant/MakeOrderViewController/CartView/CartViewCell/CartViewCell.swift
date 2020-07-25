@@ -35,6 +35,9 @@ final class CartViewCell: UITableViewCell {
     }
     
     @IBAction func plusButtonTapped(_ sender: Any) {
+        if amount >= 99 {
+            return
+        }
         amount += 1
         dishAmountLabel.text = String(amount)
         delegate?.changeOrderAmount(dish: order.dish!, amount: amount)

@@ -51,7 +51,7 @@ final class CartViewController: UIViewController {
         
         totalPaymentLabel.text = ""
         
-        self.view.layer.cornerRadius = 12
+//        self.view.layer.cornerRadius = 12
         
         cartTableView.register(UINib(nibName: "CartViewCell", bundle: nil), forCellReuseIdentifier: cartCellID)
         

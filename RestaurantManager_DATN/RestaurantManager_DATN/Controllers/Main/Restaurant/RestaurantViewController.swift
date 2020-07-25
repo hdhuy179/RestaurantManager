@@ -232,6 +232,18 @@ extension RestaurantViewController: UISearchResultsUpdating {
         guard var text = searchController.searchBar.text else { return }
         tableCollectionView.refreshControl = tableRefreshControl
         text = text.lowercased()
+        if let _ = text.lowercased().range(of: "size") {
+            text = text.replacingOccurrences(of: "size", with: "")
+            text = text.trimmed
+            if text.isEmpty == false {
+                tableCollectionView.refreshControl = nil
+                currentTableData = tableData.filter { String($0.soluongghe ?? 0).range(of: text) != nil}
+            } else {
+                currentTableData = tableData
+            }
+            tableCollectionView.reloadData()
+            return
+        }
         if let _ = text.lowercased().range(of: "bàn") {
             text = text.replacingOccurrences(of: "bàn", with: "")
         } else if let  _ = text.lowercased().range(of: "ban") {

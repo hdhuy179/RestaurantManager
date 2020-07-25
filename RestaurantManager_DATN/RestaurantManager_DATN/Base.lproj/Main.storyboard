@@ -24,9 +24,9 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="hwR-RZ-tdq">
-                                <rect key="frame" x="40" y="284" width="334" height="201.5"/>
+                                <rect key="frame" x="40" y="284" width="334" height="241.5"/>
                                 <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="624-Vn-NWO" customClass="TextField" customModule="Material">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nhập tài khoản" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="624-Vn-NWO" customClass="TextField" customModule="Material">
                                         <rect key="frame" x="0.0" y="0.0" width="334" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -35,24 +35,43 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czB-Xj-58C" customClass="TextField" customModule="Material">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nhập mật khẩu" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="czB-Xj-58C" customClass="TextField" customModule="Material">
                                         <rect key="frame" x="0.0" y="60" width="334" height="40"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                     </textField>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vig-WR-qZW">
+                                        <rect key="frame" x="0.0" y="120" width="334" height="20"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THf-Hr-et0" customClass="RaisedButton" customModule="Material">
+                                                <rect key="frame" x="236" y="-2" width="78" height="24"/>
+                                                <fontDescription key="fontDescription" type="italicSystem" pointSize="10"/>
+                                                <state key="normal" title="Quên mật khẩu?"/>
+                                                <connections>
+                                                    <action selector="resetPasswordButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qi2-al-etk"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="QHi-1r-5WZ"/>
+                                            <constraint firstItem="THf-Hr-et0" firstAttribute="centerY" secondItem="Vig-WR-qZW" secondAttribute="centerY" id="eh5-Ud-l2G"/>
+                                            <constraint firstAttribute="trailing" secondItem="THf-Hr-et0" secondAttribute="trailing" constant="20" id="qCB-3M-Efn"/>
+                                        </constraints>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EIL-z6-ES1" customClass="RaisedButton" customModule="Material">
-                                        <rect key="frame" x="0.0" y="120" width="334" height="40"/>
+                                        <rect key="frame" x="0.0" y="160" width="334" height="40"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Login">
+                                        <state key="normal" title="Đăng nhập">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="LoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4dU-aF-kWp"/>
+                                            <action selector="loginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4dU-aF-kWp"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b80-rD-KYj">
-                                        <rect key="frame" x="0.0" y="180" width="334" height="21.5"/>
+                                        <rect key="frame" x="0.0" y="220" width="334" height="21.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -77,6 +96,7 @@
                     <navigationItem key="navigationItem" id="vT7-0w-OHM"/>
                     <connections>
                         <outlet property="btnLogin" destination="EIL-z6-ES1" id="BG8-TS-BIH"/>
+                        <outlet property="btnResetPassword" destination="THf-Hr-et0" id="GmJ-HX-cJ7"/>
                         <outlet property="passwordTextField" destination="czB-Xj-58C" id="sPC-ok-KNk"/>
                         <outlet property="showErrorLabel" destination="b80-rD-KYj" id="Hz3-ZI-SQN"/>
                         <outlet property="usernameTextField" destination="624-Vn-NWO" id="Hlm-gj-2h7"/>
@@ -437,9 +457,6 @@
                         <viewLayoutGuide key="safeArea" id="jba-6e-PRP"/>
                     </view>
                     <navigationItem key="navigationItem" title="Nhà hàng" id="PMY-P3-SH6">
-                        <barButtonItem key="leftBarButtonItem" image="reload" id="jAw-yr-fvf">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Lịch sử" id="WbF-XS-K9k">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -1731,7 +1748,7 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qa9-iI-YaQ" customClass="RaisedButton" customModule="Material">
                                                         <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
-                                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Thông tin cá nhân" image="folder" catalog="system">
@@ -1773,6 +1790,7 @@
                                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Hỗ trợ" image="exclamationmark.triangle.fill" catalog="system">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="color" keyPath="pulseColor">
@@ -1785,6 +1803,7 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tgP-ue-5eO" customClass="RaisedButton" customModule="Material">
                                                         <rect key="frame" x="0.0" y="150" width="394" height="50"/>
+                                                        <color key="tintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <state key="normal" title="Cài đặt máy in" image="printer" catalog="system">
@@ -1822,7 +1841,7 @@
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAv-Np-IQf" customClass="RaisedButton" customModule="Material">
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <state key="normal" title="Đăng Xuất" image="square.and.arrow.up" catalog="system">
@@ -2512,7 +2531,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="H2u-hH-K4H">
-                                <rect key="frame" x="20" y="208" width="384" height="205"/>
+                                <rect key="frame" x="20" y="313.5" width="384" height="205"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="j9e-cl-anf">
                                         <rect key="frame" x="0.0" y="0.0" width="71" height="205"/>
@@ -2625,7 +2644,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzJ-Qb-NEf" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="40" y="473" width="162" height="35"/>
+                                <rect key="frame" x="40" y="578.5" width="162" height="35"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="sTw-0J-ZEA"/>
@@ -2641,7 +2660,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tIm-gj-x0V" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="212" y="472.5" width="162" height="36"/>
+                                <rect key="frame" x="212" y="578" width="162" height="36"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Xóa">
@@ -2653,7 +2672,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpe-FA-vuG" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="244" y="423" width="140" height="30"/>
+                                <rect key="frame" x="244" y="528.5" width="140" height="30"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="140" id="bwe-fv-2Vx"/>
@@ -2667,19 +2686,29 @@
                                     <action selector="btnResetPasswordTapped:" destination="9i8-8d-e5L" eventType="touchUpInside" id="2tO-HA-Ky2"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="XIa-12-jFd">
+                                <rect key="frame" x="124" y="118" width="166" height="165.5"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="XIa-12-jFd" secondAttribute="height" multiplier="1:1" id="Dxf-Zs-raj"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="tIm-gj-x0V" firstAttribute="width" secondItem="zzJ-Qb-NEf" secondAttribute="width" id="6q4-iB-4mP"/>
                             <constraint firstItem="H2u-hH-K4H" firstAttribute="leading" secondItem="YLQ-wO-XJD" secondAttribute="leading" constant="20" id="CBT-ao-WCh"/>
                             <constraint firstItem="YLQ-wO-XJD" firstAttribute="trailing" secondItem="Mpe-FA-vuG" secondAttribute="trailing" constant="30" id="D3F-Oa-j7s"/>
-                            <constraint firstItem="H2u-hH-K4H" firstAttribute="top" secondItem="wRS-jo-0uT" secondAttribute="bottom" constant="120" id="D7z-Sd-hdB"/>
+                            <constraint firstItem="XIa-12-jFd" firstAttribute="top" secondItem="wRS-jo-0uT" secondAttribute="bottom" constant="30" id="G7c-qP-CBE"/>
                             <constraint firstAttribute="trailing" secondItem="H2u-hH-K4H" secondAttribute="trailing" constant="10" id="JFd-ak-eDb"/>
                             <constraint firstItem="tIm-gj-x0V" firstAttribute="leading" secondItem="zzJ-Qb-NEf" secondAttribute="trailing" constant="10" id="VQ5-tI-3Ib"/>
+                            <constraint firstItem="H2u-hH-K4H" firstAttribute="top" secondItem="XIa-12-jFd" secondAttribute="bottom" constant="30" id="ZrY-XP-IWt"/>
                             <constraint firstItem="wRS-jo-0uT" firstAttribute="trailing" secondItem="YLQ-wO-XJD" secondAttribute="trailing" id="d8C-yO-5qe"/>
                             <constraint firstItem="tIm-gj-x0V" firstAttribute="centerY" secondItem="zzJ-Qb-NEf" secondAttribute="centerY" id="eIy-Qs-bbl"/>
                             <constraint firstItem="YLQ-wO-XJD" firstAttribute="trailing" secondItem="tIm-gj-x0V" secondAttribute="trailing" constant="40" id="ea2-4p-GNA"/>
                             <constraint firstItem="Mpe-FA-vuG" firstAttribute="top" secondItem="H2u-hH-K4H" secondAttribute="bottom" constant="10" id="iaP-Px-uJv"/>
+                            <constraint firstItem="XIa-12-jFd" firstAttribute="width" secondItem="Dj5-Sb-k4n" secondAttribute="width" multiplier="1:2.5" id="imh-bL-sIq"/>
+                            <constraint firstItem="XIa-12-jFd" firstAttribute="centerX" secondItem="Dj5-Sb-k4n" secondAttribute="centerX" id="jkZ-ur-xLL"/>
                             <constraint firstItem="tIm-gj-x0V" firstAttribute="height" secondItem="zzJ-Qb-NEf" secondAttribute="height" constant="1" id="qqB-Jm-h4O"/>
                             <constraint firstItem="wRS-jo-0uT" firstAttribute="leading" secondItem="YLQ-wO-XJD" secondAttribute="leading" id="r15-jS-By9"/>
                             <constraint firstItem="zzJ-Qb-NEf" firstAttribute="leading" secondItem="YLQ-wO-XJD" secondAttribute="leading" constant="40" id="uMn-hG-Msv"/>
@@ -2690,6 +2719,7 @@
                     </view>
                     <connections>
                         <outlet property="btnDelete" destination="tIm-gj-x0V" id="GbS-uu-QR6"/>
+                        <outlet property="btnResetPassword" destination="Mpe-FA-vuG" id="72p-Eb-RM6"/>
                         <outlet property="lbTitle" destination="oHf-Bf-ICh" id="e31-Mb-ni7"/>
                         <outlet property="swStaffAuthority" destination="wgI-2D-W9s" id="2S1-9M-3dB"/>
                         <outlet property="swStaffAuthority2" destination="pfS-tB-0Tp" id="d7Z-7A-kOr"/>
@@ -2745,7 +2775,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x96-9w-mFq">
-                                <rect key="frame" x="20" y="208" width="384" height="295"/>
+                                <rect key="frame" x="20" y="188" width="384" height="295"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="3jx-lm-Xkt">
                                         <rect key="frame" x="0.0" y="0.0" width="80" height="295"/>
@@ -2886,7 +2916,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="746-zX-I54" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="40" y="553" width="162" height="35"/>
+                                <rect key="frame" x="40" y="533" width="162" height="35"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="Rn1-Dp-Zcv"/>
@@ -2902,7 +2932,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KfZ-xB-cr5" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="212" y="552.5" width="162" height="36"/>
+                                <rect key="frame" x="212" y="532.5" width="162" height="36"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Hủy">
@@ -2924,7 +2954,7 @@
                             <constraint firstItem="x96-9w-mFq" firstAttribute="leading" secondItem="qfx-TC-3eC" secondAttribute="leading" constant="20" id="LDR-5k-2sY"/>
                             <constraint firstItem="KfZ-xB-cr5" firstAttribute="leading" secondItem="746-zX-I54" secondAttribute="trailing" constant="10" id="SLt-OI-9Bx"/>
                             <constraint firstItem="JU9-TS-ZZF" firstAttribute="leading" secondItem="qfx-TC-3eC" secondAttribute="leading" id="aWD-fR-agw"/>
-                            <constraint firstItem="x96-9w-mFq" firstAttribute="top" secondItem="JU9-TS-ZZF" secondAttribute="bottom" constant="120" id="b3q-RW-9wI"/>
+                            <constraint firstItem="x96-9w-mFq" firstAttribute="top" secondItem="JU9-TS-ZZF" secondAttribute="bottom" constant="100" id="b3q-RW-9wI"/>
                             <constraint firstItem="746-zX-I54" firstAttribute="top" secondItem="x96-9w-mFq" secondAttribute="bottom" constant="50" id="qbG-d4-CCa"/>
                             <constraint firstItem="KfZ-xB-cr5" firstAttribute="centerY" secondItem="746-zX-I54" secondAttribute="centerY" id="r2s-ip-hR3"/>
                             <constraint firstAttribute="trailing" secondItem="x96-9w-mFq" secondAttribute="trailing" constant="10" id="s5v-lx-q7P"/>
@@ -4119,7 +4149,6 @@
         <image name="phone" catalog="system" width="64" height="56"/>
         <image name="plus" catalog="system" width="64" height="56"/>
         <image name="printer" catalog="system" width="64" height="54"/>
-        <image name="reload" width="32" height="32"/>
         <image name="ribbon-button" width="637" height="151"/>
         <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
         <image name="square.stack.fill" catalog="system" width="56" height="64"/>

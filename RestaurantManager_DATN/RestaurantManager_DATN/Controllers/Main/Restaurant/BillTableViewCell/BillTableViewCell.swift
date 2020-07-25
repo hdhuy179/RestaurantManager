@@ -23,7 +23,7 @@ class BillTableViewCell: UITableViewCell {
     func setupView() {
         lbTotalPay.text = bill?.getTotalPayment().splittedByThousandUnits() ?? ""
         lbStaffName.text = bill?.staff?.tennhanvien ?? ""
-        lbCreateTime.text = String(bill?.ngaytao.convertToString().dropFirst(11) ?? "")
+        lbCreateTime.text = String(bill?.ngaytao.convertToString(withDateFormat: "hh:MM:ss") ?? "")
     }
     
 }

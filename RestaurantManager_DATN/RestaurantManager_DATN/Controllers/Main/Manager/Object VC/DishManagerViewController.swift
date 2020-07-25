@@ -64,7 +64,9 @@ class DishManagerViewController : UIViewController {
                 }
             }
             if dish.diachianh.isEmpty == false {
-                btnAddImage.isHidden = true
+                btnAddImage.setImage(nil, for: .normal)
+                btnAddImage.setBackgroundImage(nil, for: .normal)
+                btnAddImage.backgroundColor = .clear
             }
             imvDishImage.kf.setImage(with: URL(string: dish.diachianh))
             txtDishName.text = dish.tenmonan
@@ -197,7 +199,9 @@ extension DishManagerViewController: UINavigationControllerDelegate {
 extension DishManagerViewController: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         let type = info[.mediaType] as? String
-        btnAddImage.isHidden = true
+        btnAddImage.setImage(nil, for: .normal)
+        btnAddImage.setBackgroundImage(nil, for: .normal)
+        btnAddImage.backgroundColor = .clear
         if type == "public.image",
             let image = info[.originalImage] as? UIImage,
             let data = image.jpegData(compressionQuality: 1.0) as NSData? {

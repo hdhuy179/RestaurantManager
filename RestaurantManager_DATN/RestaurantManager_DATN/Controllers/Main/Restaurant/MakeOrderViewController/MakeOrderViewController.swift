@@ -351,7 +351,7 @@ extension MakeOrderViewController: OrderViewControllerDelegate {
                 bottomConstraintDishTableView.constant = 0
             } else {
                 cartViewController.view.isHidden = false
-                bottomConstraintDishTableView.constant = cartViewController.handleArea.frame.height + 15
+                bottomConstraintDishTableView.constant = cartViewController.handleArea.frame.height + 20
             }
         }
         dishTableView.reloadData()

@@ -27,37 +27,23 @@ final class TableCollectionViewCell: UICollectionViewCell {
             numberLabel.text = number
             sizeLabel.text = "\(size)"
             
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-//                //        setupHexagonImageView(imageView: imvTable,sides: 4)
-//                if size <= 2 {
-//                    return
-//                }
-//                self.setupHexagonImageView(imageView: self.imvTable,sides: size)
-//                // Flip imageView vertical.
-//                self.imvTable.transform = CGAffineTransform(scaleX: 1, y: -1)
-//            }
+            if size <= 4 {
+                imvTable.image = UIImage(named: "table-4")
+            } else if size <= 6 {
+                imvTable.image = UIImage(named: "table-6")
+            } else {
+                imvTable.image = UIImage(named: "table-10")
+            }
         }
         switch state {
         case .empty:
-//            stateLabel.text = "Trống"
-//            stateLabel.backgroundColor =  UIColor.green
             imvState.image = nil
             vState.backgroundColor = .systemGreen
         case .waiting:
-//            stateLabel.text = "Đang đợi món"
-//            stateLabel.backgroundColor = UIColor.orange
             imvState.image = UIImage(named: "wait")
             imvState.tintColor = .systemRed
             vState.backgroundColor = .systemRed
-//            for item in data.bill?.orderList ?? [] {
-//                if item.trangthai == 2 {
-//                    imvState.tintColor = .systemOrange
-//                    vState.backgroundColor = .systemOrange
-//                }
-//            }
         case .inUsed:
-//            stateLabel.text = "Đang sử dụng"
-//            stateLabel.backgroundColor = UIColor.yellow
             imvState.image = UIImage(named: "used")
             imvState.tintColor = .systemYellow
             vState.backgroundColor = .systemYellow
@@ -67,19 +53,19 @@ final class TableCollectionViewCell: UICollectionViewCell {
     
     func setupHexagonImageView(imageView: UIImageView, sides : Int) {
         let lineWidth: CGFloat = 5
-        let path = self.roundedPolygonPath(rect: imageView.bounds, lineWidth: lineWidth, sides: sides, cornerRadius: 10, rotationOffset: CGFloat(Double.pi / 2.0))
+        let path = self.roundedPolygonPath(rect: imageView.bounds, lineWidth: lineWidth, sides: sides, cornerRadius: 2, rotationOffset: CGFloat(Double.pi / 2.0))
 
         let mask = CAShapeLayer()
         mask.path = path.cgPath
         mask.lineWidth = lineWidth
         mask.strokeColor = UIColor.clear.cgColor
-        mask.fillColor = UIColor.white.cgColor
+        mask.fillColor = UIColor.black.cgColor
         imageView.layer.mask = mask
 
         let border = CAShapeLayer()
         border.path = path.cgPath
         border.lineWidth = lineWidth
-        border.strokeColor = UIColor.white.cgColor
+        border.strokeColor = UIColor.black.cgColor
         border.fillColor = UIColor.clear.cgColor
         imageView.layer.addSublayer(border)
     }

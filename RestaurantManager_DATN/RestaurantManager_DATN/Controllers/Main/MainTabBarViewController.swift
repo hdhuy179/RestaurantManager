@@ -21,6 +21,15 @@ class MainTabBarViewController: UITabBarController {
         if App.shared.staffInfo?.quyen != 1 {
             self.tabBar.items?[ItemsValue.Manager.rawValue].isEnabled = false
         }
+        
+        if App.shared.staffInfo?.quyen == 2 || App.shared.staffInfo?.quyen == 3 {
+            self.tabBar.items?[ItemsValue.Storage.rawValue].isEnabled = false
+        }
+        
+        if App.shared.staffInfo?.quyen == 5 {
+            self.tabBar.items?[ItemsValue.Restaurant.rawValue].isEnabled = false
+            self.tabBar.items?[ItemsValue.Kitchen.rawValue].isEnabled = false
+        }
     }
     
 
