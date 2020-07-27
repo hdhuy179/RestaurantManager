@@ -242,12 +242,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJY-qv-gZH">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="CBK-uC-LxF"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -510,12 +510,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDw-JO-g2S">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="S8P-AW-wTp"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -661,12 +661,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2W-TR-xgI">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="jKk-KM-JSW"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -768,12 +768,12 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VVr-AA-OQB">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="rda-ZV-aam"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -859,12 +859,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wK5-2f-KHQ">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="E5T-Jq-sAO"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -1223,12 +1223,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hzh-ev-q05">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="lUI-hS-sb5"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -1419,12 +1419,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p98-0s-uWh">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="all-Kl-LhI"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -1469,10 +1469,10 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="I2I-kn-x39">
-                                <rect key="frame" x="20" y="303.5" width="384" height="305"/>
+                                <rect key="frame" x="20" y="303.5" width="384" height="283"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="t7C-5b-82B">
-                                        <rect key="frame" x="0.0" y="0.0" width="71" height="305"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="71" height="283"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tên món:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQG-ab-juC">
                                                 <rect key="frame" x="0.0" y="0.0" width="71" height="35"/>
@@ -1529,10 +1529,10 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDy-Nm-wPx">
-                                                <rect key="frame" x="0.0" y="270" width="71" height="35"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jji-zR-luU">
+                                                <rect key="frame" x="0.0" y="270" width="71" height="13"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="5TN-yb-9Tu"/>
+                                                    <constraint firstAttribute="height" constant="13" id="7P6-zj-wD1"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -1541,7 +1541,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="A4w-2p-jeG">
-                                        <rect key="frame" x="81" y="0.0" width="303" height="305"/>
+                                        <rect key="frame" x="81" y="0.0" width="303" height="283"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nhập tên món ăn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1YH-27-hxH" customClass="TextField" customModule="Material">
                                                 <rect key="frame" x="0.0" y="0.0" width="303" height="35"/>
@@ -1552,7 +1552,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Đơn giá" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gcP-iH-HxZ" customClass="TextField" customModule="Material">
-                                                <rect key="frame" x="0.0" y="47.5" width="303" height="35"/>
+                                                <rect key="frame" x="0.0" y="46.5" width="303" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="3t6-Kw-gVW"/>
                                                 </constraints>
@@ -1560,7 +1560,7 @@
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Đơn vị món" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ujK-nL-3We" customClass="TextField" customModule="Material">
-                                                <rect key="frame" x="0.0" y="95" width="303" height="35"/>
+                                                <rect key="frame" x="0.0" y="93" width="303" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="srE-Hx-hcZ"/>
                                                 </constraints>
@@ -1568,7 +1568,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Thể loại" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Ch-5y-1bn" customClass="TextField" customModule="Material">
-                                                <rect key="frame" x="0.0" y="142.5" width="303" height="35"/>
+                                                <rect key="frame" x="0.0" y="139" width="303" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="uTc-Dd-WcP"/>
                                                 </constraints>
@@ -1576,10 +1576,10 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPj-zL-qqN">
-                                                <rect key="frame" x="0.0" y="190" width="303" height="115"/>
+                                                <rect key="frame" x="0.0" y="185.5" width="303" height="97.5"/>
                                                 <subviews>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xQd-bi-pfS" customClass="TextView" customModule="Material">
-                                                        <rect key="frame" x="1.5" y="1.5" width="300" height="112"/>
+                                                        <rect key="frame" x="1.5" y="1.5" width="300" height="94.5"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -1602,13 +1602,13 @@
                                             </view>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="ZPj-zL-qqN" firstAttribute="height" secondItem="1YH-27-hxH" secondAttribute="height" multiplier="3" constant="10" id="Rlv-cc-9JE"/>
+                                            <constraint firstItem="ZPj-zL-qqN" firstAttribute="height" secondItem="1YH-27-hxH" secondAttribute="height" multiplier="2.5" constant="10" id="Rlv-cc-9JE"/>
                                         </constraints>
                                     </stackView>
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kme-qa-yBn">
-                                <rect key="frame" x="20" y="618.5" width="384" height="35"/>
+                                <rect key="frame" x="20" y="596.5" width="384" height="35"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Có trong thực đơn" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IvM-Bm-0vO">
                                         <rect key="frame" x="155" y="7.5" width="140" height="20.5"/>
@@ -1631,7 +1631,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KrJ-hN-CaA" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="40" y="673.5" width="162" height="35"/>
+                                <rect key="frame" x="40" y="651.5" width="162" height="35"/>
                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="bkA-bZ-kcL"/>
@@ -1647,7 +1647,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EYY-Bz-JiH" customClass="RaisedButton" customModule="Material">
-                                <rect key="frame" x="212" y="673" width="162" height="36"/>
+                                <rect key="frame" x="212" y="651" width="162" height="36"/>
                                 <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Xóa">
@@ -1842,7 +1842,7 @@
                                                         <color key="tintColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" title="Thông tin cá nhân" image="folder" catalog="system">
+                                                        <state key="normal" title="Thông tin cá nhân" image="document">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -1862,7 +1862,7 @@
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" title="Gọi người quản lý" image="phone" catalog="system">
+                                                        <state key="normal" title="Gọi người quản lý" image="phone">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -1879,7 +1879,7 @@
                                                         <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" title="Hỗ trợ" image="exclamationmark.triangle.fill" catalog="system">
+                                                        <state key="normal" title="Hỗ trợ" image="error">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="black"/>
                                                         </state>
@@ -1897,7 +1897,7 @@
                                                         <color key="tintColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                         <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                        <state key="normal" title="Cài đặt máy in" image="printer" catalog="system">
+                                                        <state key="normal" title="Cài đặt máy in" image="print">
                                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <userDefinedRuntimeAttributes>
@@ -1930,12 +1930,13 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ipX-d9-gMO">
                                         <rect key="frame" x="10" y="709" width="394" height="50"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAv-Np-IQf" customClass="RaisedButton" customModule="Material">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAv-Np-IQf" customClass="RaisedButton" customModule="Material">
                                                 <rect key="frame" x="0.0" y="0.0" width="394" height="50"/>
                                                 <color key="tintColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <inset key="titleEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                                <state key="normal" title="Đăng Xuất" image="square.and.arrow.up" catalog="system">
+                                                <state key="normal" title="Đăng Xuất" image="logout">
+                                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -1982,7 +1983,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="hln-F0-w4S"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Thêm" image="ellipsis" catalog="system" id="UDf-Pm-B2N"/>
+                    <tabBarItem key="tabBarItem" title="Thêm" image="more" id="UDf-Pm-B2N"/>
                     <connections>
                         <outlet property="genaralView" destination="cXH-ow-5li" id="f0u-4p-Z5y"/>
                         <outlet property="staffAvatarImageView" destination="aHF-60-Bji" id="r0s-mr-4WL"/>
@@ -1998,7 +1999,7 @@
         <scene sceneID="UZN-xL-kZ0">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Uq0-It-mtP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Nhà hàng" image="square.stack.fill" catalog="system" id="qf3-fg-gNQ"/>
+                    <tabBarItem key="tabBarItem" title="Nhà hàng" image="food" id="qf3-fg-gNQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="326-0R-doj">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -2017,7 +2018,7 @@
         <scene sceneID="TpG-p6-gTf">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Cgx-AC-USP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Nhà Bếp" image="flame" catalog="system" id="QKO-bR-k32"/>
+                    <tabBarItem key="tabBarItem" title="Nhà Bếp" image="flame" id="QKO-bR-k32"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4La-cs-gDG">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -2036,7 +2037,7 @@
         <scene sceneID="ffR-Pe-Rar">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="x5Q-bM-gcM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Kho" image="briefcase" catalog="system" id="J0K-cd-ROi"/>
+                    <tabBarItem key="tabBarItem" title="Kho" image="storage" id="J0K-cd-ROi"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QeI-pL-ACY">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -2055,8 +2056,9 @@
         <scene sceneID="tcD-CD-dFy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5Wy-ey-4tS" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Manager" image="eyeglasses" catalog="system" id="3FX-lP-l5Q">
+                    <tabBarItem key="tabBarItem" title="Manager" image="manager" id="3FX-lP-l5Q">
                         <inset key="imageInsets" minX="0.0" minY="20" maxX="0.0" maxY="0.0"/>
+                        <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9ge-TE-Tg2">
@@ -2097,12 +2099,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tD2-GU-9jo">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="rQH-3e-eWk"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -2133,6 +2135,9 @@
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tên thể loại:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bne-CU-Wms">
                                 <rect key="frame" x="20" y="295" width="93" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="93" id="ww1-Dt-hL9"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -2212,12 +2217,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lYk-Lt-g8Z">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="UhT-Wc-bQz"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -2259,6 +2264,9 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Số ghế:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBO-cg-2ak">
                                                 <rect key="frame" x="0.0" y="40" width="58.5" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="58.5" id="A2Y-Qr-hY2"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -2361,12 +2369,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YwE-SX-cGq">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="HRL-bY-udE"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -2417,6 +2425,9 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu ngân:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="15J-b2-tMu">
                                                 <rect key="frame" x="0.0" y="0.0" width="77" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="77" id="zFP-qE-Qrh"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -2588,12 +2599,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2DV-wf-S2e">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="W8c-fZ-kyU"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -2630,6 +2641,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tên NV:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35t-zB-Ktd">
                                                 <rect key="frame" x="0.0" y="0.0" width="71" height="41"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="71" id="0a5-QU-Opk"/>
                                                     <constraint firstAttribute="width" constant="71" id="Cyr-YJ-828"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -2842,12 +2854,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bxz-kf-P4G">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="1hH-Wm-6hX"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -2874,6 +2886,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tài khoản:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HPo-fX-6XR">
                                                 <rect key="frame" x="0.0" y="0.0" width="80" height="42"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="jze-bp-enA"/>
                                                     <constraint firstAttribute="width" constant="80" id="xip-xq-Plu"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -3086,12 +3099,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S4h-Bc-eAU">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="YjD-Sj-OY4"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -3281,12 +3294,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ooc-2d-7wC">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="fVI-mL-E1h"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -3533,12 +3546,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fni-La-vdI">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="MhU-dN-Fl6"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -3595,6 +3608,9 @@
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ngày tạo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipL-Ws-9US">
                                                 <rect key="frame" x="0.0" y="135" width="75" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="75" id="2tu-DK-VAr"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -3895,12 +3911,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jnr-0s-AHj">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="YOG-Ai-5Vw"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -4117,12 +4133,12 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-Pm-xyk">
-                                        <rect key="frame" x="0.0" y="11" width="40" height="22"/>
+                                        <rect key="frame" x="0.0" y="6" width="40" height="32"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="t3h-P9-WNz"/>
                                         </constraints>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <state key="normal" image="arrow.left" catalog="system">
+                                        <state key="normal" image="back arrow">
                                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large"/>
                                         </state>
                                         <connections>
@@ -4228,20 +4244,20 @@
     </scenes>
     <resources>
         <image name="Logo" width="111" height="104"/>
-        <image name="arrow.left" catalog="system" width="64" height="48"/>
-        <image name="briefcase" catalog="system" width="64" height="50"/>
+        <image name="back arrow" width="32" height="32"/>
         <image name="cart.badge.plus" catalog="system" width="64" height="48"/>
-        <image name="ellipsis" catalog="system" width="64" height="18"/>
-        <image name="exclamationmark.triangle.fill" catalog="system" width="64" height="56"/>
-        <image name="eyeglasses" catalog="system" width="64" height="26"/>
-        <image name="flame" catalog="system" width="54" height="64"/>
-        <image name="folder" catalog="system" width="64" height="46"/>
+        <image name="document" width="16" height="16"/>
+        <image name="error" width="16" height="16"/>
+        <image name="flame" width="32" height="32"/>
+        <image name="food" width="32" height="32"/>
+        <image name="logout" width="16" height="16"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
-        <image name="phone" catalog="system" width="64" height="56"/>
+        <image name="manager" width="64" height="64"/>
+        <image name="more" width="32" height="32"/>
+        <image name="phone" width="16" height="16"/>
         <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="printer" catalog="system" width="64" height="54"/>
+        <image name="print" width="16" height="16"/>
         <image name="ribbon-button" width="637" height="151"/>
-        <image name="square.and.arrow.up" catalog="system" width="56" height="64"/>
-        <image name="square.stack.fill" catalog="system" width="56" height="64"/>
+        <image name="storage" width="32" height="32"/>
     </resources>
 </document>

@@ -40,11 +40,11 @@ struct NhanVien: Decodable {
     static func fetchAllDataAvailable(completion: @escaping ([NhanVien]?, Error?) -> Void) {
         var datas = [NhanVien]()
         let db = Firestore.firestore()
-
+        
         db.collection("NhanVien").whereField("daxoa", isEqualTo: 0).order(by: "tennhanvien").getDocuments { (snapshot, err) in
             if err != nil {
                 
-//                print("Error getting BanAn Data: \(err!.localizedDescription)")
+                //                print("Error getting BanAn Data: \(err!.localizedDescription)")
                 completion(nil, err)
                 
             } else if let snapshot = snapshot, !snapshot.documents.isEmpty {
@@ -61,29 +61,29 @@ struct NhanVien: Decodable {
         }
     }
     
-     static func fetchAllData(completion: @escaping ([NhanVien]?, Error?) -> Void) {
-            var datas = [NhanVien]()
-            let db = Firestore.firestore()
-
-            db.collection("NhanVien").order(by: "tennhanvien").getDocuments { (snapshot, err) in
-                if err != nil {
-                    
-    //                print("Error getting BanAn Data: \(err!.localizedDescription)")
-                    completion(nil, err)
-                    
-                } else if let snapshot = snapshot, !snapshot.documents.isEmpty {
-                    
-                    snapshot.documents.forEach({ (document) in
-                        if let data = NhanVien(JSON: document.data()) {
-                            datas.append(data)
-                        }
-                    })
-                    completion(datas, nil)
-                } else {
-                    completion(datas, nil)
-                }
+    static func fetchAllData(completion: @escaping ([NhanVien]?, Error?) -> Void) {
+        var datas = [NhanVien]()
+        let db = Firestore.firestore()
+        
+        db.collection("NhanVien").order(by: "tennhanvien").getDocuments { (snapshot, err) in
+            if err != nil {
+                
+                //                print("Error getting BanAn Data: \(err!.localizedDescription)")
+                completion(nil, err)
+                
+            } else if let snapshot = snapshot, !snapshot.documents.isEmpty {
+                
+                snapshot.documents.forEach({ (document) in
+                    if let data = NhanVien(JSON: document.data()) {
+                        datas.append(data)
+                    }
+                })
+                completion(datas, nil)
+            } else {
+                completion(datas, nil)
             }
         }
+    }
     
     static func fetchData(forID id: String, completion: @escaping (NhanVien?, Error?) -> Void) {
         if id == "" {
@@ -92,7 +92,7 @@ struct NhanVien: Decodable {
         }
         var result = NhanVien()
         let db = Firestore.firestore()
-
+        
         db.collection("NhanVien").document(id).getDocument { (snapshot, err) in
             if err != nil {
                 
@@ -118,7 +118,7 @@ struct NhanVien: Decodable {
         }
         var result = NhanVien()
         let db = Firestore.firestore()
-
+        
         db.collection("NhanVien").whereField("idtaikhoandangnhap", isEqualTo: id).whereField("daxoa", isEqualTo: 0).getDocuments { (snapshot, err) in
             if err != nil {
                 
@@ -133,6 +133,30 @@ struct NhanVien: Decodable {
                 completion(result, nil)
             } else {
                 completion(nil, nil)
+            }
+        }
+    }
+    
+    static func fetchAllManagerData(completion: @escaping ([NhanVien]?, Error?) -> Void) {
+        var datas = [NhanVien]()
+        let db = Firestore.firestore()
+        
+        db.collection("NhanVien").whereField("quyen", in: [1,4,5]).whereField("daxoa", isEqualTo: 0).order(by: "tennhanvien").getDocuments { (snapshot, err) in
+            if err != nil {
+                
+                //                print("Error getting BanAn Data: \(err!.localizedDescription)")
+                completion(nil, err)
+                
+            } else if let snapshot = snapshot, !snapshot.documents.isEmpty {
+                
+                snapshot.documents.forEach({ (document) in
+                    if let data = NhanVien(JSON: document.data()) {
+                        datas.append(data)
+                    }
+                })
+                completion(datas, nil)
+            } else {
+                completion(datas, nil)
             }
         }
     }
