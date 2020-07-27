@@ -13,6 +13,7 @@ final class CartViewCell: UITableViewCell {
     @IBOutlet weak var dishNameLabel: UILabel!
     @IBOutlet weak var dishPriceLabel: UILabel!
     @IBOutlet weak var dishAmountLabel: UILabel!
+    @IBOutlet weak var txtNote: TextField!
     
     weak var delegate: OrderViewControllerDelegate?
     
@@ -32,6 +33,8 @@ final class CartViewCell: UITableViewCell {
         }
         amount = order.soluong
         dishAmountLabel.text = String(order.soluong)
+//        txtNote.delegate = self
+        txtNote.isEnabled = false
     }
     
     @IBAction func plusButtonTapped(_ sender: Any) {
@@ -50,4 +53,9 @@ final class CartViewCell: UITableViewCell {
         dishAmountLabel.text = String(amount)
         delegate?.changeOrderAmount(dish: order.dish!, amount: amount)
     }
+}
+extension CartViewCell: UITextFieldDelegate {
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        delegate?.changeOrderAmount(dish: order.dish!, amount: amount)
+//    }
 }

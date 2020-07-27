@@ -57,11 +57,11 @@ class OrderManagerViewCell: UITableViewCell {
     
     @IBAction func handleFinishDishOrder(_ sender: Any) {
         order.trangthai = 3
-        order.updateOrder(forOrder: order) { (error) in
+        order.updateOrder(forOrder: order) { [weak self] (error) in
             if error != nil {
                 print(error ?? "")
             }
+            self?.delegate?.fetchBillData()
         }
-        delegate?.fetchBillData()
     }
 }

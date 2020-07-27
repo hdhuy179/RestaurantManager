@@ -76,6 +76,7 @@ class LoginViewController: UIViewController {
                 self?.btnResetPassword.isEnabled = true
             }
         }))
+        alert.addAction(UIAlertAction(title: "Huỷ", style: .default, handler: { _ in self.btnResetPassword.isEnabled = true }))
         self.present(alert, animated: true)
 
     }

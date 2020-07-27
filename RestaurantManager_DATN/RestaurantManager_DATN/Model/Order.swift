@@ -15,6 +15,7 @@ struct Order: Decodable {
     var soluong: Int = 1
     var trangthai: Int = 0
     var idmonan: String? = ""
+//    var ghichu: String? = ""
     var ngaytao: Date?
     var daxoa: Int? = 0
     
@@ -276,6 +277,7 @@ extension Order: Mappable {
         idhoadon <- map["idhoadon"]
         soluong <- map["soluong"]
         trangthai <- map["trangthai"]
+//        ghichu <- map["ghichu"]
         var timestamp: Timestamp?
         timestamp <- map["ngaytao"]
         ngaytao = timestamp?.dateValue().getDateFormatted()

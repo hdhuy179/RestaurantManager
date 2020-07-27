@@ -9,27 +9,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="71" id="KGk-i7-Jjw" customClass="CartViewCell" customModule="RestaurantManager_DATN" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="388" height="71"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="87" id="KGk-i7-Jjw" customClass="CartViewCell" customModule="RestaurantManager_DATN" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="388" height="87"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="388" height="71"/>
+                <rect key="frame" x="0.0" y="0.0" width="388" height="87"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cơm rang dưa bò" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-NR-QPN">
-                        <rect key="frame" x="10" y="11" width="194" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Cơm rang dưa bò" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmC-NR-QPN">
+                        <rect key="frame" x="10" y="5" width="133.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20.000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPp-Cu-HK5">
-                        <rect key="frame" x="10" y="36.5" width="97" height="18"/>
+                        <rect key="frame" x="10" y="30.5" width="67" height="31.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Uvf-FI-jkF">
-                        <rect key="frame" x="305" y="24.5" width="73" height="22"/>
+                        <rect key="frame" x="305" y="32.5" width="73" height="22"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3B-XZ-THq">
                                 <rect key="frame" x="0.0" y="0.0" width="21" height="22"/>
@@ -61,28 +61,54 @@
                             </button>
                         </subviews>
                     </stackView>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Note" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k20-ub-On8" customClass="TextField" customModule="Material">
+                        <rect key="frame" x="35" y="62" width="214" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="Uf5-Jb-KSV"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="isDividerHidden" value="YES"/>
+                        </userDefinedRuntimeAttributes>
+                    </textField>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square.and.pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="54d-La-t6i">
+                        <rect key="frame" x="10" y="64" width="15" height="14"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="tmT-r0-05o"/>
+                            <constraint firstAttribute="width" secondItem="54d-La-t6i" secondAttribute="height" id="wZn-zp-38I"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstAttribute="bottom" secondItem="k20-ub-On8" secondAttribute="bottom" constant="5" id="0YT-yN-SwI"/>
+                    <constraint firstItem="hmC-NR-QPN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="0gI-T7-bHs"/>
                     <constraint firstItem="hmC-NR-QPN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="7eQ-vX-vyj"/>
                     <constraint firstItem="pPp-Cu-HK5" firstAttribute="width" secondItem="hmC-NR-QPN" secondAttribute="width" multiplier="1:2" id="OTe-YE-Rsw"/>
-                    <constraint firstItem="pPp-Cu-HK5" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="10" id="WIU-1U-F4k"/>
+                    <constraint firstItem="k20-ub-On8" firstAttribute="top" secondItem="pPp-Cu-HK5" secondAttribute="bottom" id="RMl-3t-bBo"/>
+                    <constraint firstItem="k20-ub-On8" firstAttribute="leading" secondItem="54d-La-t6i" secondAttribute="trailing" constant="10" id="WnQ-hL-0ab"/>
                     <constraint firstAttribute="trailing" secondItem="Uvf-FI-jkF" secondAttribute="trailing" constant="10" id="X2r-mD-SEW"/>
-                    <constraint firstItem="hmC-NR-QPN" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1:2" id="ZDd-GL-1VN"/>
                     <constraint firstItem="pPp-Cu-HK5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="abF-ip-xra"/>
+                    <constraint firstItem="54d-La-t6i" firstAttribute="centerY" secondItem="k20-ub-On8" secondAttribute="centerY" id="eQU-4U-A8V"/>
                     <constraint firstItem="Uvf-FI-jkF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="iML-j1-uVO"/>
+                    <constraint firstItem="k20-ub-On8" firstAttribute="width" secondItem="H2p-sc-9uM" secondAttribute="width" multiplier="1:2" constant="20" id="mzo-hG-v8b"/>
                     <constraint firstItem="pPp-Cu-HK5" firstAttribute="top" secondItem="hmC-NR-QPN" secondAttribute="bottom" constant="5" id="v7h-1R-ued"/>
+                    <constraint firstItem="54d-La-t6i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="zpQ-XC-DP0"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="dishAmountLabel" destination="ACB-lo-3vT" id="KRk-Ij-F46"/>
                 <outlet property="dishNameLabel" destination="hmC-NR-QPN" id="sPH-nE-2so"/>
                 <outlet property="dishPriceLabel" destination="pPp-Cu-HK5" id="ABt-nb-BAV"/>
+                <outlet property="txtNote" destination="k20-ub-On8" id="aW3-Up-hAY"/>
             </connections>
-            <point key="canvasLocation" x="-107.24637681159422" y="64.620535714285708"/>
+            <point key="canvasLocation" x="-110.14492753623189" y="79.352678571428569"/>
         </tableViewCell>
     </objects>
     <resources>
         <image name="minus.circle" catalog="system" width="64" height="60"/>
         <image name="plus.circle.fill" catalog="system" width="64" height="60"/>
+        <image name="square.and.pencil" catalog="system" width="64" height="58"/>
     </resources>
 </document>

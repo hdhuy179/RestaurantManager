@@ -86,6 +86,7 @@ class MakeOrderViewController: UIViewController {
     }
     
     private func setupViews() {
+        addEndEditingTapGuesture()
         if let sobanan = table?.sobanan {
             lbTitle.text = "Bàn " + sobanan
         }
@@ -355,6 +356,12 @@ extension MakeOrderViewController: OrderViewControllerDelegate {
             }
         }
         dishTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let presenter = PresentHandler()
+        presenter.presentDishDetailsVC(self, data: currentDishData[indexPath.section][indexPath.item])
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 

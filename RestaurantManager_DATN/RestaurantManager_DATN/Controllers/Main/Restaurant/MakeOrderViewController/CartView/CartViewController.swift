@@ -17,7 +17,7 @@ final class CartViewController: UIViewController {
     
     weak var delegate: MakeOrderViewController?
     
-    let cartCellHeight: CGFloat = 70.0
+    let cartCellHeight: CGFloat = 90.0
     let cartCellID = "CartViewCell"
     var totalPayment: Double = 0
     
@@ -115,5 +115,9 @@ extension CartViewController: UITableViewDataSource {
 extension CartViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return cartCellHeight
+    }
+    
+    func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
 }

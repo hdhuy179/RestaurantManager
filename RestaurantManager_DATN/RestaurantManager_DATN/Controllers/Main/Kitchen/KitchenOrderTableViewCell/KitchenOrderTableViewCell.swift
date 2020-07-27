@@ -23,7 +23,7 @@ class KitchenOrderTableViewCell: UITableViewCell {
     func configView(order: Order, table: BanAn?) {
         self.table = table
         self.order = order
-        lbDishName.text = "\(order.dish?.tenmonan ?? "") (Bàn \(table?.sobanan ?? "nil") )"
+        lbDishName.text = "\(order.dish?.tenmonan ?? "") (Bàn \(table?.sobanan ?? "nil"))"
         lbOrderAmount.text = String(order.soluong)
         lbWaitTime.text = ""
         if let ngaytao = order.ngaytao {

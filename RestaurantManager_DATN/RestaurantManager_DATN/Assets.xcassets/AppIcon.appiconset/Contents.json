@@ -28,17 +28,12 @@
     {
       "idiom" : "iphone",
       "size" : "40x40",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "40x40",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "1500976703_8d16c6a3792d3e7fca40ad1b79248ec4--hh-logo-h-monogram-logo-3 (1).png",
+      "filename" : "1500976703_8d16c6a3792d3e7fca40ad1b79248ec4--hh-logo-h-monogram-logo-3 (1)-2.png",
       "scale" : "2x"
     },
     {
@@ -95,6 +90,12 @@
       "idiom" : "ios-marketing",
       "size" : "1024x1024",
       "scale" : "1x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "iphone",
+      "unassigned" : true,
+      "scale" : "2x"
     }
   ],
   "info" : {

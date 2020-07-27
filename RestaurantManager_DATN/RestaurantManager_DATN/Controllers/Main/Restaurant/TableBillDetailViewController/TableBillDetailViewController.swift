@@ -69,7 +69,6 @@ class TableBillDetailViewController: UIViewController {
     }
     
     func setupData() {
-        orderTableView.reloadData()
         
         totalPaymentLabel.text = table?.bill?.getTotalPayment().splittedByThousandUnits()
         if table?.bill?.dathanhtoan != 0 {
@@ -77,6 +76,25 @@ class TableBillDetailViewController: UIViewController {
             paymentButton.backgroundColor = .systemGray
             guestMoneyTextField.isEnabled = false
         }
+        
+//        var dishDict: [String: Int] = [:]
+        var orderList: [Order] = []
+
+        for item in table?.bill?.orderList ?? [] {
+            if item.trangthai == 3 {
+                if let index = orderList.firstIndex(where: { $0.trangthai == 3 && $0.idmonan == item.idmonan }) {
+                    orderList[index].soluong += item.soluong
+                } else {
+                    orderList.append(item)
+                }
+            } else {
+                orderList.append(item)
+            }
+        }
+        
+        table?.bill?.orderList = orderList
+        
+        orderTableView.reloadData()
     }
     
     @objc func changeGuestMoneyTextField(_ textField: UITextField) {
@@ -170,7 +188,7 @@ extension TableBillDetailViewController: UITableViewDataSource {
             fatalError("MakeOrderViewController: Can't dequeue for DishTableViewCell")
         }
         cell.order = table?.bill?.orderList?[indexPath.item]
-        
+        cell.delegate = self
         return cell
     }
     

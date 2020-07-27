@@ -29,6 +29,10 @@ class MainTabBarViewController: UITabBarController {
         if App.shared.staffInfo?.quyen == 5 {
             self.tabBar.items?[ItemsValue.Restaurant.rawValue].isEnabled = false
             self.tabBar.items?[ItemsValue.Kitchen.rawValue].isEnabled = false
+            self.selectedIndex = ItemsValue.Storage.rawValue
+        }
+        if App.shared.staffInfo?.quyen == 4 {
+            self.selectedIndex = ItemsValue.Kitchen.rawValue
         }
     }
     

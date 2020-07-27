@@ -293,6 +293,7 @@ extension KitchenViewController: UITableViewDelegate {
             }
             present.presentTableBillDetailVC(self, table: table)
         }
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {

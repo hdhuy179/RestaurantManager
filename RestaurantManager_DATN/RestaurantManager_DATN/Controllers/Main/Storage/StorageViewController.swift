@@ -317,6 +317,8 @@ extension StorageViewController: UITableViewDelegate {
             let presentHandler = PresentHandler()
             presentHandler.presentImportBillManagerVC(self, data: self.currentImportBill[indexPath.section][indexPath.item], forDetail: true)
         }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -356,6 +358,8 @@ extension StorageViewController: UITableViewDelegate {
                         self.present(subAlert, animated: true, completion: nil)
                     }
                 }))
+                
+                alert.addAction(UIAlertAction(title: "Huỷ", style: .default, handler: nil))
                 self.present(alert, animated: true)
             }
             xuatKho.backgroundColor = .systemGreen
@@ -367,8 +371,10 @@ extension StorageViewController: UITableViewDelegate {
             let lbHuy = currentExportBill[indexPath.section][indexPath.item].trangthai == 1 ? "Xóa" : "Hủy"
             
             let huy = UITableViewRowAction(style: .default, title: lbHuy) {(_, index) in
-                PhieuXuat.deleteExportBill(data: self.currentExportBill[indexPath.section][indexPath.item]) { [weak self] (err) in
-                    self?.fetchData()
+                self.showConfirmAlert(title: "Thông báo", message: "Bạn có chắc muốn \(lbHuy.lowercased()) thông tin phiếu xuất này không?") {
+                    PhieuXuat.deleteExportBill(data: self.currentExportBill[indexPath.section][indexPath.item]) { [weak self] (err) in
+                        self?.fetchData()
+                    }
                 }
             }
             let xacnhan = UITableViewRowAction(style: .normal, title: "Xác nhận") { (_, index) in
@@ -405,6 +411,7 @@ extension StorageViewController: UITableViewDelegate {
                         self.present(subAlert, animated: true, completion: nil)
                     }
                 }))
+                alert.addAction(UIAlertAction(title: "Huỷ", style: .default, handler: nil))
                 self.present(alert, animated: true)
             }
             
@@ -423,8 +430,10 @@ extension StorageViewController: UITableViewDelegate {
                 return nil
             }
             let xoa = UITableViewRowAction(style: .default, title: "Xóa") {(_, index) in
-                PhieuNhap.deleteExportBill(data: self.currentImportBill[indexPath.section][indexPath.item]) { [weak self](err) in
-                    self?.fetchData()
+                self.showConfirmAlert(title: "Thông báo", message: "Mọi thông tin phiếu xuất liên quan cũng sẽ bị xoá. Bạn có chắc muốn xoá thông tin phiếu nhập này không?") {
+                    PhieuNhap.deleteExportBill(data: self.currentImportBill[indexPath.section][indexPath.item]) { [weak self](err) in
+                        self?.fetchData()
+                    }
                 }
             }
             let sua = UITableViewRowAction(style: .normal, title: "Sửa") { (_, index) in

@@ -50,6 +50,13 @@ class PresentHandler {
         rootVC.presentInFullScreen(vc, animated: true)
     }
     
+    func presentDishDetailsVC(_ rootVC: UIViewController, data: MonAn) {
+        let vc = storyboard.instantiateViewController(withIdentifier: "DishDetailsViewController") as! DishDetailsViewController
+        vc.dish = data
+//        vc.modalPresentationStyle = .
+        rootVC.present(vc, animated: true)
+    }
+    
     func presentMenuVC(_ rootVC: UIViewController) {
         let vc = storyboard.instantiateViewController(withIdentifier: "MenuViewController") as! MenuViewController
         rootVC.presentInFullScreen(vc, animated: true)
