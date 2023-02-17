@@ -19,10 +19,11 @@
 		5628023F24C1A16C007F5431 /* BaoCao.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628023E24C1A16C007F5431 /* BaoCao.swift */; };
 		5628024324C1BCB9007F5431 /* ReportDetailsManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5628024224C1BCB9007F5431 /* ReportDetailsManagerViewController.swift */; };
 		5629C4A224C29E5000006F4D /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5629C4A124C29E5000006F4D /* Cell.swift */; };
+		8441DB05299B2D5100165FBB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8441DB04299B2D5100165FBB /* GoogleService-Info.plist */; };
+		8441DB06299B442F00165FBB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7409C5F23E187100037652A /* LoginViewController.swift */; };
 		F72806C524A253280016083D /* PhieuXuat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F72806C424A253280016083D /* PhieuXuat.swift */; };
 		F738CFC524894E1B003F8295 /* TableBillDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F738CFC424894E1B003F8295 /* TableBillDetailViewController.swift */; };
 		F73D0E4C23E2D1D6006D8A30 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73D0E4B23E2D1D6006D8A30 /* UIViewController+.swift */; };
-		F73D0E4E23E2D884006D8A30 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F73D0E4D23E2D884006D8A30 /* GoogleService-Info.plist */; };
 		F73D0E5023E2E51A006D8A30 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73D0E4F23E2E51A006D8A30 /* App.swift */; };
 		F73D0E5223E2E725006D8A30 /* UIStoryboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73D0E5123E2E725006D8A30 /* UIStoryboard+.swift */; };
 		F73E2DFD23EAC7B500D7E02B /* TableCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F73E2DFB23EAC7B500D7E02B /* TableCollectionViewCell.xib */; };
@@ -32,7 +33,6 @@
 		F73F011123EDA5AF000CF829 /* RestaurantViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F73F011023EDA5AF000CF829 /* RestaurantViewController.swift */; };
 		F7409C5C23E187100037652A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7409C5B23E187100037652A /* AppDelegate.swift */; };
 		F7409C5E23E187100037652A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7409C5D23E187100037652A /* SceneDelegate.swift */; };
-		F7409C6023E187100037652A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7409C5F23E187100037652A /* LoginViewController.swift */; };
 		F7409C6323E187100037652A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7409C6123E187100037652A /* Main.storyboard */; };
 		F7409C6823E187120037652A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7409C6623E187120037652A /* LaunchScreen.storyboard */; };
 		F7409C7023E196070037652A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F7409C6F23E196070037652A /* Assets.xcassets */; };
@@ -101,11 +101,11 @@
 		5628024224C1BCB9007F5431 /* ReportDetailsManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailsManagerViewController.swift; sourceTree = "<group>"; };
 		5629C4A124C29E5000006F4D /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		7E3E9228B1AABE7F753B9E11 /* Pods-RestaurantManager_DATN.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RestaurantManager_DATN.debug.xcconfig"; path = "Target Support Files/Pods-RestaurantManager_DATN/Pods-RestaurantManager_DATN.debug.xcconfig"; sourceTree = "<group>"; };
+		8441DB04299B2D5100165FBB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E89FA3BDFFFCFB7812D2DDFF /* Pods_RestaurantManager_DATN.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RestaurantManager_DATN.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F72806C424A253280016083D /* PhieuXuat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhieuXuat.swift; sourceTree = "<group>"; };
 		F738CFC424894E1B003F8295 /* TableBillDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableBillDetailViewController.swift; sourceTree = "<group>"; };
 		F73D0E4B23E2D1D6006D8A30 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
-		F73D0E4D23E2D884006D8A30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F73D0E4F23E2E51A006D8A30 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		F73D0E5123E2E725006D8A30 /* UIStoryboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+.swift"; sourceTree = "<group>"; };
 		F73E2DFB23EAC7B500D7E02B /* TableCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TableCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 				F7409C6623E187120037652A /* LaunchScreen.storyboard */,
 				F7409C6F23E196070037652A /* Assets.xcassets */,
 				F7409C6923E187120037652A /* Info.plist */,
-				F73D0E4D23E2D884006D8A30 /* GoogleService-Info.plist */,
+				8441DB04299B2D5100165FBB /* GoogleService-Info.plist */,
 				F744DFD32470EC020086753F /* RestaurantManager_DATN-Bridging-Header.h */,
 				F747BDE024836D4D0029B7CC /* PresentHandler.swift */,
 			);
@@ -594,8 +594,8 @@
 				F7BD2D7624869A3400FC4F28 /* CartViewController.xib in Resources */,
 				F7409C7023E196070037652A /* Assets.xcassets in Resources */,
 				F747BDEB24839B050029B7CC /* ManagerDataTableViewCell.xib in Resources */,
+				8441DB05299B2D5100165FBB /* GoogleService-Info.plist in Resources */,
 				F75287B023EEAA60007A9621 /* DishTableViewCell.xib in Resources */,
-				F73D0E4E23E2D884006D8A30 /* GoogleService-Info.plist in Resources */,
 				F750F61724912128008C5604 /* MenuDishTableViewCell.xib in Resources */,
 				F7BD2D7424869A3400FC4F28 /* CartViewCell.xib in Resources */,
 				F7409C6323E187100037652A /* Main.storyboard in Resources */,
@@ -662,7 +662,6 @@
 				F7A682E2247114E9006D8058 /* HoaDon.swift in Sources */,
 				F7AD51D623E4158D008DFF3A /* LoginNavigationViewController.swift in Sources */,
 				F747BDDE2483617C0029B7CC /* ManagerDataViewController.swift in Sources */,
-				F7409C6023E187100037652A /* LoginViewController.swift in Sources */,
 				562442C824CAD87C00754A76 /* Float+.swift in Sources */,
 				F7409C5C23E187100037652A /* AppDelegate.swift in Sources */,
 				5625F16324CECF1C00AAA65E /* CallManagerView.swift in Sources */,
@@ -700,6 +699,7 @@
 				F747337A24712CAD00D0E3FC /* Double+.swift in Sources */,
 				F75287A423EEA0E7007A9621 /* BillHistoryViewController.swift in Sources */,
 				F747BDF1248400CE0029B7CC /* NhanVien.swift in Sources */,
+				8441DB06299B442F00165FBB /* LoginViewController.swift in Sources */,
 				F75287B223EEBFFA007A9621 /* MainTabBarViewController.swift in Sources */,
 				F797881E24BB4C2B006FE58A /* ExportBillManagerViewController.swift in Sources */,
 				F7BD2D7524869A3400FC4F28 /* CartViewCell.swift in Sources */,
